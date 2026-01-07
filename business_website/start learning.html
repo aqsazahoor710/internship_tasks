@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus PRO | Course Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020202; color: white; overflow-x: hidden; }
+        
+        /* old Glass Effect */
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card:hover { border-color: #3b82f6; transform: translateY(-5px); transition: all 0.2s ease; }
+        
+        /* old Gradient Text */
+        .text-gradient { background: linear-gradient(90deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-blue { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); }
+        
+        /* Image Loading Placeholder */
+        .img-container { background: #0a0a0a; }
+    </style>
+</head>
+<body x-data="{ filter: 'all' }">
+
+    <nav class="fixed w-full z-50 glass py-4 px-6 border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter italic">NEXUS<span class="text-blue-500 underline">PRO</span></div>
+            <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="#" class="text-white">Courses</a>
+                <a href="#" class="hover:text-blue-500 transition">My Learning</a>
+                <a href="#" class="hover:text-blue-500 transition">Resources</a>
+            </div>
+            <div class="w-10 h-10 rounded-full border border-blue-500/50 flex items-center justify-center text-xs font-bold">JD</div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            
+            <section data-aos="fade-down" class="glass rounded-[2.5rem] p-8 md:p-12 mb-16 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <div class="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-4">AI Recommendation</div>
+                        <h2 class="text-4xl font-extrabold mb-4">Master <span class="text-gradient">Cyber Security</span> First.</h2>
+                        <p class="text-gray-400 max-w-lg mb-6">Based on your interests in Networking, we recommend starting with the Penetration Testing path.</p>
+                        <button class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition shadow-lg shadow-blue-600/20">Resume Learning</button>
+                    </div>
+                    <div class="hidden lg:block w-72 h-44 glass rounded-3xl border-white/10 p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] font-bold text-gray-500">NEXT UP</span>
+                            <span class="text-[10px] font-bold text-blue-500">60% Done</span>
+                        </div>
+                        <h4 class="font-bold text-sm mb-4">Linux File Permissions</h4>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full"><div class="bg-blue-600 h-full w-[60%]"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex flex-wrap gap-4 mb-12">
+                <button @click="filter = 'all'" :class="filter === 'all' ? 'bg-blue-600 text-white' : 'glass text-gray-400'" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition">All Courses</button>
+                <button @click="filter = 'cyber'" :class="filter === 'cyber' ? 'bg-blue-600 text-white' : 'glass text-gray-400'" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition">Cyber Security</button>
+                <button @click="filter = 'cloud'" :class="filter === 'cloud' ? 'bg-blue-600 text-white' : 'glass text-gray-400'" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition">Cloud Computing</button>
+                <button @click="filter = 'ai'" :class="filter === 'ai' ? 'bg-blue-600 text-white' : 'glass text-gray-400'" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition">Artificial Intelligence</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <template x-for="course in [
+                    {title: 'Ethical Hacking 101', cat: 'cyber', price: '$89', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80'},
+                    {title: 'AWS Architect Pro', cat: 'cloud', price: '$129', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80'},
+                    {title: 'Deep Learning AI', cat: 'ai', price: '$199', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80'},
+                    {title: 'Kubernetes Master', cat: 'cloud', price: '$149', img: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400&q=80'},
+                    {title: 'Python for Hackers', cat: 'cyber', price: '$79', img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80'},
+                    {title: 'Azure Cloud Expert', cat: 'cloud', price: '$119', img: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&q=80'},
+                    {title: 'Prompt Engineering', cat: 'ai', price: '$49', img: 'https://images.unsplash.com/photo-1620712943543-bcc4638ef80b?w=400&q=80'},
+                    {title: 'Network Security Plus', cat: 'cyber', price: '$99', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80'},
+                    {title: 'Docker Containers', cat: 'cloud', price: '$69', img: 'https://images.unsplash.com/photo-1605745341112-85968b193ef5?w=400&q=80'},
+                    {title: 'Machine Learning', cat: 'ai', price: '$159', img: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&q=80'},
+                    {title: 'Social Engineering', cat: 'cyber', price: '$59', img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80'},
+                    {title: 'Fullstack Next.js', cat: 'dev', price: '$139', img: 'https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=400&q=80'}
+                ]">
+                    <div 
+                        x-show="filter === 'all' || filter === course.cat"
+                        data-aos="fade-up" 
+                        class="glass glass-card rounded-3xl p-5 group flex flex-col">
+                        <div class="relative h-44 rounded-2xl overflow-hidden mb-6 img-container">
+                            <img :src="course.img" loading="eager" class="w-full h-full object-cover group-hover:scale-110 transition duration-300 opacity-80 group-hover:opacity-100">
+                            <div class="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold" x-text="course.cat.toUpperCase()"></div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition" x-text="course.title"></h3>
+                        <p class="text-xs text-gray-500 mb-6 leading-relaxed">Comprehensive roadmap designed for 2026 industry standards.</p>
+                        <div class="mt-auto flex justify-between items-center border-t border-white/5 pt-4">
+                            <span class="text-xl font-black italic" x-text="course.price"></span>
+                            <button class="bg-blue-600/10 hover:bg-blue-600 text-blue-500 hover:text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase transition-all tracking-widest">Start Now</button>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center border-t border-white/5">
+        <p class="text-gray-600 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 Nexus Pro Academy - Security First</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ 
+            duration: 200, // Reduced from 800 to 200 for speed
+            once: true,
+            offset: 0     // Elements trigger immediately on scroll
+        });
+    </script>
+</body>
+</html>
