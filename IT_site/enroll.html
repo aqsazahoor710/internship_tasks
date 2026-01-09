@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Enrollment | DEVSKILL+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020202; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; }
+        
+        .checkout-card { background: #080808; border: 1px solid rgba(255,255,255,0.05); border-radius: 32px; overflow: hidden; width: 100%; max-width: 900px; }
+        .payment-option { border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer; }
+        .payment-option:hover, .payment-option.active { border-color: #6366f1; background: rgba(99, 102, 241, 0.05); }
+        
+        input { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        input:focus { border-color: #6366f1; outline: none; }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="checkout-card grid md:grid-cols-2 shadow-2xl">
+        
+        <div class="p-8 md:p-12 border-r border-white/5 bg-[#0a0a0a]">
+            <button onclick="window.history.back()" class="text-[10px] font-black uppercase text-slate-500 hover:text-white mb-10 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Go Back
+            </button>
+            
+            <span class="bg-indigo-600/10 text-indigo-400 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Premium Enrollment</span>
+            <h1 class="text-3xl font-black mt-4 mb-2 tracking-tighter">Secure Checkout</h1>
+            <p class="text-slate-500 text-xs font-medium mb-10">You're about to unlock lifetime access to the masterclass.</p>
+
+            <div class="flex items-center gap-5 p-4 bg-white/5 rounded-2xl border border-white/5">
+                <div class="w-16 h-16 bg-indigo-600 rounded-xl flex items-center justify-center text-xl font-black italic">DS</div>
+                <div>
+                    <h3 class="text-sm font-black">Rust Backend Engineering</h3>
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 italic">Professional Series</p>
+                </div>
+            </div>
+
+            <div class="mt-10 space-y-3">
+                <div class="flex justify-between text-xs font-bold text-slate-500">
+                    <span>Course Price</span>
+                    <span>$199.00</span>
+                </div>
+                <div class="flex justify-between text-xs font-bold text-slate-500">
+                    <span>Digital Taxes (5%)</span>
+                    <span>$9.95</span>
+                </div>
+                <div class="pt-4 border-t border-white/5 flex justify-between items-end">
+                    <span class="text-[10px] font-black uppercase tracking-widest">Total Amount</span>
+                    <span class="text-3xl font-black tracking-tighter text-indigo-500">$208.95</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8 md:p-12">
+            <h2 class="text-sm font-black uppercase tracking-widest mb-6">Payment Method</h2>
+            
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="payment-option active p-4 rounded-xl text-center">
+                    <i class="fa-solid fa-credit-card text-xl mb-2"></i>
+                    <p class="text-[9px] font-black uppercase tracking-widest">Card</p>
+                </div>
+                <div class="payment-option p-4 rounded-xl text-center">
+                    <i class="fa-brands fa-paypal text-xl mb-2"></i>
+                    <p class="text-[9px] font-black uppercase tracking-widest">PayPal</p>
+                </div>
+            </div>
+
+            <form class="space-y-4">
+                <div>
+                    <label class="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-2 block">Cardholder Name</label>
+                    <input type="text" placeholder="John Wick" class="w-full px-5 py-3 rounded-xl text-xs font-bold text-white">
+                </div>
+                <div>
+                    <label class="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-2 block">Card Number</label>
+                    <div class="relative">
+                        <input type="text" placeholder="xxxx xxxx xxxx xxxx" class="w-full px-5 py-3 rounded-xl text-xs font-bold text-white">
+                        <i class="fa-brands fa-cc-visa absolute right-4 top-3.5 text-slate-600"></i>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-2 block">Expiry</label>
+                        <input type="text" placeholder="MM / YY" class="w-full px-5 py-3 rounded-xl text-xs font-bold text-white">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-2 block">CVC</label>
+                        <input type="text" placeholder="***" class="w-full px-5 py-3 rounded-xl text-xs font-bold text-white">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl shadow-indigo-600/30 transition-all mt-6">
+                    Confirm & Enroll Now
+                </button>
+            </form>
+
+            <div class="mt-8 flex items-center justify-center gap-3 opacity-30">
+                <i class="fa-solid fa-shield-halved text-xs"></i>
+                <p class="text-[8px] font-black uppercase tracking-[0.2em]">Encrypted SSL Payment Session</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVSKILL+ | Elite Tech Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020202; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+        .glass-header { background: rgba(2, 2, 2, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .hero-image-glow { position: relative; box-shadow: 0 0 60px -20px rgba(99, 102, 241, 0.4); border: 1px solid rgba(255,255,255,0.1); }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal-on-scroll { animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .logos-slide { display: flex; animation: slide 25s linear infinite; }
+        .logos-slide a { transition: all 0.3s ease; text-decoration: none; color: inherit; }
+        .logos-slide a:hover { color: #6366f1; opacity: 1 !important; transform: scale(1.1); }
+
+        .premium-card { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+        .premium-card:hover { border-color: #6366f1; transform: translateY(-10px); background: #111; }
+        
+        .pricing-card { background: #0f0f0f; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .pricing-card:hover { border-color: rgba(99, 102, 241, 0.5); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020202; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ currentTab: 'home' }">
+
+    <header class="fixed top-0 w-full z-[100] glass-header">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-10">
+                <span class="text-2xl font-black tracking-tighter cursor-pointer" @click="currentTab = 'home'">DEVSKILL<span class="text-indigo-500">+</span></span>
+                <nav class="hidden lg:flex gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
+                    <a href="#" @click="currentTab = 'home'" class="hover:text-white transition">Home</a>
+                    <a href="#courses" @click="currentTab = 'home'" class="hover:text-white transition">Courses</a>
+                    <a href="student_portal.html" @click="currentTab = 'student'" class="hover:text-white transition">Student Portal</a>
+                    <a href="instructor_portal.html" @click="currentTab = 'instructor'" class="hover:text-white transition">Instructor Studio</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="sigin.html" class="inline-block bg-white text-black px-8 py-4 rounded-xl font-black text-[10px] uppercase hover:bg-indigo-600 hover:text-white transition-all">signup</a>
+            </div>
+        </div>
+    </header>
+
+    <main x-show="currentTab === 'home'" x-cloak x-transition>
+        <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center reveal-on-scroll">
+            <div>
+                <span class="inline-block px-4 py-1.5 bg-indigo-500/10 text-indigo-500 text-[10px] font-black uppercase tracking-[0.2em] rounded-lg mb-6">World Class Education</span>
+                <h1 class="text-6xl md:text-7xl font-black leading-[0.85] tracking-tighter mb-8">MASTER THE <br><span class="text-indigo-500">ENGINEERING.</span></h1>
+                <p class="text-slate-400 text-base mb-10 max-w-md leading-relaxed">Zero fluff. Only production-grade systems. Build architectures that scale to millions of users worldwide.</p>
+                <div class="flex gap-4"><a href="free_triall.html" class="inline-block bg-white text-black px-8 py-4 rounded-xl font-black text-[10px] uppercase hover:bg-indigo-600 hover:text-white transition-all">Start Free Trial</a></div>
+            </div>
+            <div class="flex justify-center lg:justify-end">
+                <div class="hero-image-glow rounded-[2rem] overflow-hidden bg-black aspect-video w-full max-w-md relative group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrTG3xScamVyfSix9Lrgq7UmtrmttV8eS7mQ&s" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10 border-y border-white/5 bg-black/50 overflow-hidden">
+            <div class="logos-slide flex items-center gap-16 whitespace-nowrap">
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">TYPESCRIPT</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">PYTHON</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">GOLANG</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">RUST</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">DOCKER</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">AWS</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">KUBERNETES</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">REACT</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">TYPESCRIPT</a>
+                <a href="banner_course.html" class="text-2xl font-black opacity-20 hover:opacity-100 transition">PYTHON</a>
+            </div>
+        </section>
+
+        <section id="courses" class="py-20 px-6 max-w-7xl mx-auto reveal-on-scroll">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-4xl font-black tracking-tight">Our Premium courses</h2>
+                    <p class="text-slate-500 mt-2 uppercase text-[10px] font-bold tracking-widest">Industry Vetted Curriculums</p>
+                </div>
+                <a href="50+.html" class="mt-8 md:mt-0 inline-block text-indigo-400 text-sm font-bold hover:text-white transition"> View all 50+ courses &rarr;</a>
+            </div>
+            <div id="premium-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section class="py-20 px-6 bg-[#030303] border-y border-white/5 reveal-on-scroll">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 text-center">
+                    <h2 class="text-4xl font-black mb-4 tracking-tight">Community Foundations</h2>
+                    <p class="text-slate-500 text-sm">16 fundamental modules to jumpstart your career for $0.</p>
+                </div>
+                <div id="free-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <section class="py-20 px-6 max-w-4xl mx-auto reveal-on-scroll">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-black mb-4 tracking-tight">Pricing Plans</h2>
+                <p class="text-slate-500 text-sm uppercase tracking-widest font-bold">Choose your path to mastery</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 justify-items-center">
+                <div class="pricing-card p-8 rounded-[2rem] w-full max-w-sm">
+                    <h3 class="text-lg font-bold mb-3">Monthly Access</h3>
+                    <div class="text-5xl font-black mb-6">$39<span class="text-sm text-slate-500 font-normal">/mo</span></div>
+                    <ul class="space-y-3 mb-8 text-slate-400 text-xs font-medium">
+                        <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> Access to all 16 free courses</li>
+                        <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> 2 Premium courses per month</li>
+                        <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> Weekly Discord group call</li>
+                    </ul>
+                    <button class="w-full py-4 border border-white/10 rounded-xl font-black text-[10px] uppercase hover:bg-white hover:text-black transition">Get Started</button>
+                </div>
+                <div class="pricing-card p-8 rounded-[2rem] bg-indigo-600/5 border-indigo-500/40 relative overflow-hidden w-full max-w-sm">
+                    <div class="absolute top-6 right-[-30px] bg-indigo-600 text-white text-[8px] font-black px-8 py-1 rotate-45 uppercase">Best Value</div>
+                    <h3 class="text-lg font-bold mb-3 text-indigo-400">Lifetime Elite</h3>
+                    <div class="text-5xl font-black mb-6">$499<span class="text-sm text-slate-500 font-normal">/once</span></div>
+                    <ul class="space-y-3 mb-8 text-xs font-medium">
+                        <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Lifetime access to everything</li>
+                        <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Priority support & reviews</li>
+                        <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> All future course updates</li>
+                    </ul>
+                    <button class="w-full py-4 bg-indigo-600 text-white rounded-xl font-black text-[10px] uppercase hover:bg-indigo-700 transition shadow-xl shadow-indigo-500/20">Go Lifetime</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section class="py-20 px-6 max-w-5xl mx-auto reveal-on-scroll">
+            
+            <div class="grid md:grid-cols-2 gap-8">
+               
+                <div class="p-8 bg-white/5 rounded-[2rem] border border-white/10 max-w-md mx-auto">
+                    <div class="flex gap-1 text-amber-500 mb-4 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-base font-medium leading-relaxed mb-8">"The content here is light years ahead of YouTube tutorials. I learned how to actually manage Kubernetes in production."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.pravatar.cc/100?u=1" class="w-10 h-10 rounded-full border border-indigo-500/30">
+                        <div><p class="text-sm font-bold">Marcus Thorne</p><p class="text-[10px] text-slate-500 uppercase">Cloud Architect @ Vercel</p></div>
+                    </div>
+                </div>
+                <div class="p-8 bg-white/5 rounded-[2rem] border border-white/10 max-w-md mx-auto">
+                    <div class="flex gap-1 text-emerald-500 mb-4 text-[10px] font-black uppercase tracking-widest">Instructor Verified</div>
+                    <p class="text-base font-medium leading-relaxed mb-8">"As an instructor, I love the focus on quality. We don't just teach code; we teach the philosophy of building durable systems."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.pravatar.cc/100?u=2" class="w-10 h-10 rounded-full border border-indigo-500/30">
+                        <div><p class="text-sm font-bold">Elena Rodriguez</p><p class="text-[10px] text-slate-500 uppercase">Principal Engineer @ Stripe</p></div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+
+<section class="py-24 px-6 max-w-7xl mx-auto reveal-on-scroll">
+    <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 uppercase">
+            TRUSTED BY THE <span class="text-indigo-500">BEST.</span>
+        </h2>
+        <div class="flex items-center justify-center gap-4">
+            <span class="h-[1px] w-12 bg-indigo-500/30"></span>
+            <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">Voices from world-class tech teams</p>
+            <span class="h-[1px] w-12 bg-indigo-500/30"></span>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+        
+        <div class="p-8 bg-white/5 rounded-[2.5rem] border border-white/10 hover:border-indigo-500/40 transition-all duration-500 group">
+            <div class="flex gap-1 text-amber-500 mb-6 text-[10px]">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-base font-medium leading-relaxed mb-8 text-slate-300">
+                "The content here is light years ahead of YouTube tutorials. I learned how to actually manage Kubernetes in production, not just hello-world."
+            </p>
+            <div class="flex items-center gap-4">
+                <img src="https://i.pravatar.cc/100?u=1" class="w-12 h-12 rounded-2xl border border-indigo-500/30 group-hover:scale-110 transition">
+                <div>
+                    <p class="text-sm font-black tracking-tight">Marcus Thorne</p>
+                    <p class="text-[9px] text-indigo-400 font-bold uppercase tracking-widest">Cloud Architect @ Vercel</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8 bg-indigo-600/5 rounded-[2.5rem] border border-indigo-500/20 hover:border-indigo-500/60 transition-all duration-500 group relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4">
+                <i class="fa-solid fa-shield-check text-indigo-500/20 text-4xl"></i>
+            </div>
+            <div class="flex gap-1 text-emerald-500 mb-6 text-[10px] font-black uppercase tracking-widest italic">
+                <i class="fa-solid fa-circle-check mr-1"></i> Instructor Verified
+            </div>
+            <p class="text-base font-medium leading-relaxed mb-8 text-slate-300">
+                "We don't just teach code; we teach the philosophy of building durable systems. Quality is our only metric for success."
+            </p>
+            <div class="flex items-center gap-4">
+                <img src="https://i.pravatar.cc/100?u=2" class="w-12 h-12 rounded-2xl border border-indigo-500/30 group-hover:scale-110 transition">
+                <div>
+                    <p class="text-sm font-black tracking-tight">Elena Rodriguez</p>
+                    <p class="text-[9px] text-indigo-400 font-bold uppercase tracking-widest">Principal Engineer @ Stripe</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8 bg-white/5 rounded-[2.5rem] border border-white/10 hover:border-indigo-500/40 transition-all duration-500 group">
+            <div class="mb-6">
+                <span class="px-3 py-1 bg-white/5 text-white text-[9px] font-black uppercase rounded-lg border border-white/10">Recent Placement</span>
+            </div>
+            <p class="text-base font-medium leading-relaxed mb-8 text-slate-300">
+                "Coming from a non-tech background, the roadmap guided me to my first Senior Role in 14 months. The system design module was the key."
+            </p>
+            <div class="flex items-center gap-4">
+                <img src="https://i.pravatar.cc/100?u=3" class="w-12 h-12 rounded-2xl border border-indigo-500/30 group-hover:scale-110 transition">
+                <div>
+                    <p class="text-sm font-black tracking-tight">Sarah Jenkins</p>
+                    <p class="text-[9px] text-indigo-400 font-bold uppercase tracking-widest">Software Engineer @ Google</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-20 pt-10 border-t border-white/5">
+        <p class="text-center text-[9px] font-black uppercase tracking-[0.3em] text-slate-600 mb-10">Our Alumni & Instructors Work At</p>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+            <a href="https://about.google" target="_blank" class="transition-all duration-300 hover:scale-110">
+                <i class="fa-brands fa-google text-3xl" style="color: #4285F4;"></i>
+            </a>
+            <a href="https://www.aboutamazon.com" target="_blank" class="transition-all duration-300 hover:scale-110">
+                <i class="fa-brands fa-amazon text-3xl" style="color: #FF9900;"></i>
+            </a>
+            <a href="https://www.microsoft.com" target="_blank" class="transition-all duration-300 hover:scale-110">
+                <i class="fa-brands fa-microsoft text-3xl" style="color: #00A4EF;"></i>
+            </a>
+            <a href="https://about.meta.com" target="_blank" class="transition-all duration-300 hover:scale-110">
+                <i class="fa-brands fa-meta text-3xl" style="color: #0668E1;"></i>
+            </a>
+            <a href="https://www.apple.com" target="_blank" class="transition-all duration-300 hover:scale-110">
+                <i class="fa-brands fa-apple text-3xl" style="color: #FFFFFF;"></i>
+            </a>
+            <a href="https://stripe.com" target="_blank" class="transition-all duration-300 hover:scale-110">
+                <i class="fa-brands fa-stripe text-4xl" style="color: #635BFF;"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+        
+    </main>
+
+    <footer class="bg-[#020202] border-t border-white/5 pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-2">
+                <span class="text-2xl font-black mb-6 block uppercase tracking-tighter">DEVSKILL<span class="text-indigo-500">+</span></span>
+                <p class="text-slate-500 max-w-sm leading-relaxed">The premier choice for senior-level engineering education.</p>
+            </div>
+            <div>
+                <h4 class="text-[10px] font-black uppercase text-indigo-500 mb-8 tracking-widest">Platform</h4>
+                <ul class="text-sm text-slate-500 space-y-4 font-bold">
+                    <li class="hover:text-white cursor-pointer transition">Browse All</li>
+                    <li class="hover:text-white cursor-pointer transition"><a href="certificate.html">Certifications</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-[10px] text-slate-800 font-bold uppercase tracking-[0.5em] pt-10 border-t border-white/5">© 2026 DEVSKILL+ TECHNOLOGIES</div>
+    </footer>
+
+    <script>
+        const PREMIUM = [
+            { title: "K8s Microservices", price: 199, icon: "fa-cubes" },
+            { title: "Rust Backend Pro", price: 249, icon: "fa-microchip" },
+            { title: "Next.js 15 Mastery", price: 149, icon: "fa-rocket" },
+            { title: "Kafka Event-Driven", price: 179, icon: "fa-bolt" },
+            { title: "AI Agentic Workflows", price: 299, icon: "fa-robot" },
+            { title: "Database Internals", price: 159, icon: "fa-database" },
+            { title: "System Design Elite", price: 349, icon: "fa-server" },
+            { title: "Stripe Payment Arch", price: 129, icon: "fa-credit-card" }
+        ];
+
+        const FREE = [
+            { title: "Git Fundamentals", icon: "fa-code-branch", cat: "Web" },
+            { title: "Clean Code JS", icon: "fa-wand-sparkles", cat: "Code" },
+            { title: "TypeScript Intro", icon: "fa-terminal", cat: "Code" },
+            { title: "CSS Flex & Grid", icon: "fa-layer-group", cat: "Design" },
+            { title: "Markdown Pro", icon: "fa-file-lines", cat: "Basics" },
+            { title: "Regex for Humans", icon: "fa-search", cat: "Code" },
+            { title: "Docker Basics", icon: "fa-anchor", cat: "Cloud" },
+            { title: "Terminal Expert", icon: "fa-terminal", cat: "Cloud" },
+            { title: "API Basics", icon: "fa-plug", cat: "Web" },
+            { title: "Nginx Setup 101", icon: "fa-server", cat: "Cloud" },
+            { title: "Postman Mastery", icon: "fa-envelope", cat: "Web" },
+            { title: "YAML for K8s", icon: "fa-file-code", cat: "Cloud" },
+            { title: "SQL Foundations", icon: "fa-table", cat: "Data" },
+            { title: "Figma for Devs", icon: "fa-figma", cat: "Design" },
+            { title: "JSON Structure", icon: "fa-brackets-curly", cat: "Data" },
+            { title: "UI Color Theory", icon: "fa-palette", cat: "Design" }
+        ];
+
+        function render() {
+            // Render Premium with enroll.html
+            document.getElementById('premium-grid').innerHTML = PREMIUM.map(c => `
+                <div class="premium-card p-6 rounded-[1.5rem] flex flex-col h-[220px]">
+                    <div class="w-10 h-10 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fa-solid ${c.icon} text-indigo-500 text-base"></i>
+                    </div>
+                    <h3 class="font-black text-xs mb-1 leading-tight">${c.title}</h3>
+                    <div class="mt-auto flex justify-between items-center">
+                        <span class="text-lg font-black">$${c.price}</span>
+                        <a href="enroll.html" class="bg-indigo-600 hover:bg-white hover:text-black px-4 py-2 rounded-lg text-[9px] font-black uppercase transition-all duration-300">Enroll</a>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Free with free.html
+            document.getElementById('free-grid').innerHTML = FREE.map(c => `
+                <a href="free.html" class="bg-white/5 border border-white/5 p-5 rounded-3xl flex items-center gap-5 hover:bg-white/10 transition-all cursor-pointer group">
+                    <div class="w-12 h-12 bg-black rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 transition duration-500 shadow-xl">
+                        <i class="fa-solid ${c.icon} text-sm"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-black mb-1">${c.title}</h4>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[8px] bg-indigo-500 text-white px-1.5 py-0.5 rounded font-black uppercase">Free</span>
+                            <span class="text-[8px] text-slate-500 font-bold uppercase tracking-widest">${c.cat}</span>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+        window.onload = render;
+    </script>
+</body>
+</html>

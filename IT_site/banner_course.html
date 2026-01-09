@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Engineering Roadmaps | DEVSKILL+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020202; color: #fff; scroll-behavior: smooth; }
+        .roadmap-line::before {
+            content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(180deg, #6366f1 0%, #1a1a1a 100%);
+            z-index: 0;
+        }
+        .step-node { position: relative; z-index: 10; transition: 0.5s; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); backdrop-filter: blur(20px); }
+        .active-node { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); border-color: #6366f1 !important; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body x-data="roadmapApp()">
+
+    <header class="border-b border-white/5 bg-black/80 sticky top-0 z-[100] backdrop-blur-md px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black tracking-tighter">DEVSKILL<span class="text-indigo-500">+</span></a>
+            <div class="flex gap-4 items-center">
+                <span class="text-[9px] font-black uppercase tracking-widest text-slate-500">Curated by Architects</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-12 gap-12">
+        
+        <div class="lg:col-span-3 space-y-3">
+            <h2 class="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-500 mb-6">Select Track</h2>
+            <div class="flex flex-col gap-2">
+                <template x-for="tech in techList">
+                    <button @click="selectTech(tech)" 
+                            :class="activeTech.name === tech.name ? 'bg-indigo-600 border-indigo-400' : 'bg-white/5 border-white/5 hover:bg-white/10'"
+                            class="flex items-center gap-3 p-4 rounded-xl border transition-all text-left group">
+                        <i :class="tech.icon" class="w-5 text-center group-hover:scale-110 transition"></i>
+                        <span class="text-[11px] font-bold uppercase tracking-widest" x-text="tech.name"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+
+        <div class="lg:col-span-9">
+            <div class="mb-16 border-l-4 border-indigo-500 pl-8">
+                <h1 class="text-6xl font-black tracking-tighter mb-4" x-text="activeTech.name"></h1>
+                <p class="text-slate-400 text-lg max-w-2xl leading-relaxed" x-text="activeTech.desc"></p>
+            </div>
+
+            
+
+            <div class="roadmap-line relative pl-12 space-y-16">
+                <template x-for="(step, index) in activeTech.steps" :key="index">
+                    <div class="step-node group">
+                        <div class="absolute left-[-52px] top-2 w-10 h-10 rounded-full bg-black border-2 border-white/10 flex items-center justify-center group-hover:border-indigo-500 transition-all duration-500 z-20">
+                            <span class="text-[10px] font-black group-hover:text-indigo-500" x-text="index + 1"></span>
+                        </div>
+                        
+                        <div class="glass-card p-10 rounded-[2.5rem] hover:bg-white/[0.04] transition-all">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="text-[9px] font-black uppercase tracking-widest px-3 py-1 bg-indigo-500/10 text-indigo-500 rounded-full" x-text="step.level"></span>
+                                <h3 class="text-2xl font-black tracking-tight" x-text="step.title"></h3>
+                            </div>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-8" x-text="step.details"></p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <template x-for="topic in step.topics">
+                                    <div class="flex items-center gap-3 p-4 bg-black/40 rounded-xl border border-white/5">
+                                        <i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i>
+                                        <span class="text-xs font-bold text-slate-200 uppercase tracking-tighter" x-text="topic"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function roadmapApp() {
+            return {
+                techList: [
+                    { 
+                        name: "TypeScript", icon: "fa-brands fa-js-square", 
+                        desc: "Moving beyond basic JavaScript to build enterprise-grade, type-safe applications.",
+                        steps: [
+                            { level: "Level 1: Foundations", title: "Structural Typing", details: "Learn how TS handles object shapes and the differences between interfaces and types.", topics: ["Interfaces", "Type Aliases", "Strict Mode"] },
+                            { level: "Level 2: Logic", title: "Narrowing & Control Flow", details: "Master type guards and union types to write safer runtime logic.", topics: ["Typeof/In guards", "Discriminated Unions", "Truthiness"] },
+                            { level: "Level 3: Reusability", title: "Advanced Generics", details: "Build functions and classes that work with any data type without losing safety.", topics: ["Generic Constraints", "Utility Types", "Partial/Required"] },
+                            { level: "Level 4: Architecture", title: "Modular Systems", details: "Managing large scale projects with namespaces and declaration files.", topics: ["Namespaces", "Ambient Modules", "Decorators"] },
+                            { level: "Level 5: Fullstack", title: "Server-side TS", details: "Integrating with Node.js and building type-safe APIs with tRPC.", topics: ["tRPC", "Zod Validation", "ORM Typing"] }
+                        ]
+                    },
+                    { 
+                        name: "Python", icon: "fa-brands fa-python", 
+                        desc: "From automation scripts to building large-scale AI and Backend systems.",
+                        steps: [
+                            { level: "Level 1: Core", title: "Pythonic Logic", details: "Mastering lists, dictionaries, and comprehension syntax.", topics: ["List Comprehensions", "Generators", "Decorators"] },
+                            { level: "Level 2: Backend", title: "Asynchronous Python", details: "Learning AsyncIO to handle thousands of concurrent requests.", topics: ["Async/Await", "Event Loops", "FastAPI"] },
+                            { level: "Level 3: Data", title: "Data Engineering", details: "Managing complex data structures and high-performance computation.", topics: ["Pandas", "NumPy", "Pydantic"] },
+                            { level: "Level 4: Production", title: "Tooling & Testing", details: "Building robust environments for production deployments.", topics: ["PyTest", "Poetry", "Virtualenvs"] },
+                            { level: "Level 5: AI Integration", title: "Agentic Workflows", details: "Building LLM-backed applications with LangChain.", topics: ["LangChain", "Vector DBs", "OpenAI API"] }
+                        ]
+                    },
+                    { 
+                        name: "Golang", icon: "fa-solid fa-code", 
+                        desc: "The language of the cloud. Fast, efficient, and built for concurrency.",
+                        steps: [
+                            { level: "Level 1: Syntax", title: "Strictly Procedural", details: "Pointers, Structs, and Go's unique error handling approach.", topics: ["Pointers", "Error as Value", "Slices"] },
+                            { level: "Level 2: Concurrency", title: "Goroutines & Channels", details: "Mastering Go's most powerful feature: CSP concurrency.", topics: ["Goroutines", "Buffered Channels", "Select"] },
+                            { level: "Level 3: Microservices", title: "Standard Library", details: "Building high-performance HTTP servers without external frameworks.", topics: ["net/http", "JSON Marshalling", "Context"] },
+                            { level: "Level 4: Enterprise", title: "GORM & Persistence", details: "Connecting to SQL databases and managing migrations.", topics: ["SQLx", "Migrations", "Interfaces"] },
+                            { level: "Level 5: Cloud Native", title: "gRPC & Protobuf", details: "Building lightning-fast inter-service communication.", topics: ["Protobuf", "gRPC Stream", "Middlewares"] }
+                        ]
+                    },
+                    { 
+                        name: "Docker", icon: "fa-brands fa-docker", 
+                        desc: "Isolation, environment parity, and the start of the DevOps journey.",
+                        steps: [
+                            { level: "Level 1: Basics", title: "The Engine", details: "Understanding the Docker Engine and the lifecycle of a container.", topics: ["Images", "Containers", "CLI"] },
+                            { level: "Level 2: Optimization", title: "Multi-Stage Builds", details: "Reducing image sizes from GBs to MBs for fast deployment.", topics: ["Distroless", "Alpine", "Buildkit"] },
+                            { level: "Level 3: Networking", title: "Internal Comms", details: "Creating private networks for containers to talk to each other.", topics: ["Bridge", "Overlay", "DNS Resolving"] },
+                            { level: "Level 4: Orchestration", title: "Docker Compose", details: "Managing multi-service stacks (Web + API + DB).", topics: ["YAML Syntax", "Healthchecks", "Build Context"] },
+                            { level: "Level 5: Security", title: "Hardening", details: "Running as non-root and scanning for vulnerabilities.", topics: ["Trivy", "Non-root users", "Secrets"] }
+                        ]
+                    },
+                    { 
+                        name: "AWS", icon: "fa-brands fa-aws", 
+                        desc: "Building reliable global infrastructure on the world's leading cloud.",
+                        steps: [
+                            { level: "Level 1: Compute", title: "EC2 & Lambda", details: "Deciding between serverless and virtual machine computing.", topics: ["EC2", "Lambda", "IAM Roles"] },
+                            { level: "Level 2: Storage", title: "S3 & CloudFront", details: "Serving static content globally with low latency.", topics: ["S3 Buckets", "CDN", "OAI"] },
+                            { level: "Level 3: Database", title: "RDS & DynamoDB", details: "Choosing between SQL and NoSQL for cloud workloads.", topics: ["RDS", "DynamoDB", "DAX"] },
+                            { level: "Level 4: Network", title: "VPC & Security", details: "Designing private clouds and secure subnets.", topics: ["Subnets", "NAT Gateways", "ALB"] },
+                            { level: "Level 5: IaC", title: "Terraform/CDK", details: "Writing infrastructure as code to automate everything.", topics: ["Terraform", "CloudFormation", "HCL"] }
+                        ]
+                    },
+                    { 
+                        name: "Kubernetes", icon: "fa-solid fa-dharmachakra", 
+                        desc: "Mastering the operating system of the modern data center.",
+                        steps: [
+                            { level: "Level 1: Objects", title: "Pods & Deployments", details: "How to run and scale applications on a cluster.", topics: ["Pods", "ReplicaSets", "Rolling Updates"] },
+                            { level: "Level 2: Traffic", title: "Services & Ingress", details: "Exposing your apps to the internet and load balancing.", topics: ["ClusterIP", "NodePort", "Ingress Nginx"] },
+                            { level: "Level 3: Storage", title: "PV & PVC", details: "Managing persistent state in a stateless environment.", topics: ["Storage Classes", "Dynamic Provisioning", "EBS"] },
+                            { level: "Level 4: Config", title: "Secrets & ConfigMaps", details: "Injecting configuration without rebuilding images.", topics: ["Env Injection", "Mounting Files", "RBAC"] },
+                            { level: "Level 5: GitOps", title: "ArgoCD & Helm", details: "Automated deployments using Helm charts and GitOps.", topics: ["Helm Charts", "ArgoCD", "Flux"] }
+                        ]
+                    },
+                    { 
+                        name: "React", icon: "fa-brands fa-react", 
+                        desc: "Advanced UI engineering and state management for web apps.",
+                        steps: [
+                            { level: "Level 1: Core", title: "Modern Hooks", details: "Mastering functional components and the lifecycle.", topics: ["useState", "useEffect", "useMemo"] },
+                            { level: "Level 2: State", title: "State Orchestration", details: "Managing complex data flow across the application.", topics: ["Zustand", "Context API", "React Query"] },
+                            { level: "Level 3: Performance", title: "Rendering Optimization", details: "Understanding virtual DOM and preventing re-renders.", topics: ["Code Splitting", "Suspense", "Memoization"] },
+                            { level: "Level 4: Patterns", title: "Compound Components", details: "Building reusable UI libraries for design systems.", topics: ["Render Props", "HOCs", "Slots"] },
+                            { level: "Level 5: Framework", title: "Next.js 15 Arch", details: "Server Components and Server Actions in modern React.", topics: ["RSC", "Streaming", "App Router"] }
+                        ]
+                    },
+                    { 
+                        name: "Rust", icon: "fa-solid fa-gears", 
+                        desc: "Fastest performance with guaranteed memory safety.",
+                        steps: [
+                            { level: "Level 1: Memory", title: "Ownership & Borrowing", details: "The core of Rust's safety: Move semantics and borrowing.", topics: ["Ownership", "References", "Lifetimes"] },
+                            { level: "Level 2: Logic", title: "Pattern Matching", details: "Handling errors and enums with total safety.", topics: ["Match", "Option/Result", "Enums"] },
+                            { level: "Level 3: Traits", title: "Shared Behavior", details: "Defining interfaces and polymorphic code without objects.", topics: ["Trait Bounds", "Derive", "Generics"] },
+                            { level: "Level 4: Systems", title: "Smart Pointers", details: "Managing heap memory safely with Box, Rc, and Arc.", topics: ["Box<T>", "Arc/Mutex", "Cell/RefCell"] },
+                            { level: "Level 5: Performance", title: "WASM & FFI", details: "Running Rust in the browser or calling C code.", topics: ["WASM-bindgen", "Unsafe Rust", "Macros"] }
+                        ]
+                    }
+                ],
+                activeTech: null,
+                init() { this.activeTech = this.techList[0]; },
+                selectTech(tech) {
+                    this.activeTech = tech;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

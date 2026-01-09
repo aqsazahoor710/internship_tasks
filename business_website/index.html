@@ -9,26 +9,16 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020202; color: white; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020202; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .gradient-text { background: linear-gradient(90deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .step-card:hover { border-color: #3b82f6; transform: translateY(-5px); transition: all 0.3s ease; }
-
-
-/* 
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020202; color: white; overflow-x: hidden; scroll-behavior: smooth; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .gradient-blue { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); }
-        .text-gradient { background: linear-gradient(90deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .instructor-card:hover img { transform: scale(1.1); transition: all 0.5s ease; } */
         
-        /* Custom Animation for Marquee */
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        .animate-marquee { animation: scroll 30s linear infinite; }
+        .animate-marquee { display: flex; animation: scroll 30s linear infinite; }
     </style>
 </head>
 <body x-data="{ mobileMenu: false }">
@@ -36,155 +26,137 @@
     <nav class="fixed w-full z-50 glass py-4 px-6 border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="text-2xl font-black tracking-tighter italic">NEXUS<span class="text-blue-500 underline">PRO</span></div>
+            
             <div class="hidden md:flex space-x-10 text-xs font-bold uppercase tracking-widest text-gray-400">
                 <a href="#stats" class="hover:text-blue-500 transition">Impact</a>
                 <a href="#pricing" class="hover:text-blue-500 transition">Pricing</a>
-                
             </div>
-            <div class="flex items-center gap-6">
-                <!-- <a href="SignUp_LogIn_Form.html" class="hidden sm:block text-sm font-semibold">Sign In</a> -->
-                 <a href="SignUp_LogIn_Form.html" class="bg-blue-600 hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] text-white px-6 py-2.5 rounded-lg text-sm font-bold transition">Sign In</a>
 
-                <!-- <button class="bg-blue-600 hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] text-white px-6 py-2.5 rounded-lg text-sm font-bold transition">Join for Free</button> -->
+            <div class="flex items-center gap-4 md:gap-6">
+                 <a href="SignUp_LogIn_Form.html" class="bg-blue-600 hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg text-sm font-bold transition">Sign In</a>
+                 
+                 <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                 </button>
             </div>
+        </div>
+
+        <div x-show="mobileMenu" x-transition class="md:hidden absolute top-full left-0 w-full glass border-b border-white/10 p-6 flex flex-col space-y-4 text-center font-bold uppercase tracking-widest text-xs">
+            <a @click="mobileMenu = false" href="#stats" class="text-gray-400 hover:text-blue-500">Impact</a>
+            <a @click="mobileMenu = false" href="#pricing" class="text-gray-400 hover:text-blue-500">Pricing</a>
         </div>
     </nav>
 
-    <header class="relative pt-48 pb-32 px-6">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full"></div>
+    <header class="relative pt-32 md:pt-48 pb-20 md:pb-32 px-6">
+        <div class="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-600/10 blur-[100px] md:blur-[150px] rounded-full"></div>
         <div class="max-w-7xl mx-auto text-center">
-            <div data-aos="fade-down" class="inline-block px-4 py-1.5 mb-6 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest uppercase">
+            <div data-aos="fade-down" class="inline-block px-4 py-1.5 mb-6 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">
                 Now Enrolling: Q1 2026 Bootcamps
             </div>
-            <h1 data-aos="fade-up" class="text-6xl md:text-8xl font-extrabold mb-8 tracking-tighter">
+            <h1 data-aos="fade-up" class="text-4xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-tight">
                 The Lab for <span class="gradient-text">Future Engineers.</span>
             </h1>
-            <p data-aos="fade-up" data-aos-delay="100" class="text-gray-400 text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p data-aos="fade-up" data-aos-delay="100" class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
                 Move beyond tutorials. Build real infrastructure, hack production-grade systems, and deploy AI models at scale.
             </p>
-            <div data-aos="fade-up" data-aos-delay="200" class="flex flex-wrap justify-center gap-4">
-                <a href="start learning.html"
-                <button class="bg-white text-black px-10 py-4 rounded-2xl font-bold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300">Start Learning</button></a>
-                <!-- <button class="glass px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/5 transition">Watch Demo</button> -->
-                 <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank">
-  <button class="glass px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/5 transition">
-    Watch Demo
-  </button>
-</a>
-
+            <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="start learning.html" class="w-full sm:w-auto">
+                    <button class="w-full bg-white text-black px-10 py-4 rounded-2xl font-bold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300">Start Learning</button>
+                </a>
+                <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" class="w-full sm:w-auto">
+                    <button class="w-full glass px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/5 transition">Watch Demo</button>
+                </a>
             </div>
         </div>
     </header>
 
-    <section class="py-12 border-y border-white/5 bg-white/[0.01]">
+    <section class="py-10 border-y border-white/5 bg-white/[0.01]">
         <div class="max-w-7xl mx-auto px-6">
-            <p class="text-center text-gray-500 text-xs font-bold uppercase tracking-[0.3em] mb-10">Our Graduates Work At</p>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 opacity-40 grayscale contrast-125">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="h-6 mx-auto" alt="Google">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" class="h-6 mx-auto invert" alt="Amazon">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" class="h-6 mx-auto" alt="Netflix">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" class="h-6 mx-auto" alt="Microsoft">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Slack_Technologies_Logo.svg" class="h-6 mx-auto" alt="Slack">
+            <p class="text-center text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-10">Our Graduates Work At</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center opacity-80">
+                <a href="https://about.google/" target="_blank" class="flex justify-center hover:scale-110 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="h-5 md:h-7" alt="Google">
+                </a>
+                <a href="https://www.aboutamazon.com/" target="_blank" class="flex justify-center hover:scale-110 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" class="h-5 md:h-7" alt="Amazon">
+                </a>
+                <a href="https://about.netflix.com/" target="_blank" class="flex justify-center hover:scale-110 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" class="h-5 md:h-7" alt="Netflix">
+                </a>
+                <a href="https://www.microsoft.com/" target="_blank" class="flex justify-center hover:scale-110 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" class="h-5 md:h-7" alt="Microsoft">
+                </a>
+                <a href="https://slack.com/" target="_blank" class="flex justify-center hover:scale-110 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Slack_Technologies_Logo.svg" class="h-5 md:h-7" alt="Slack">
+                </a>
             </div>
         </div>
     </section>
 
-    <section id="stats" class="py-24 px-6 bg-[#050505]">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+    <section id="stats" class="py-16 md:py-24 px-6 bg-[#050505]">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             <div data-aos="zoom-in" class="text-center">
-                <div class="text-5xl font-black mb-2 text-blue-500">94%</div>
-                <div class="text-gray-400 uppercase text-xs tracking-widest font-bold">Hiring Rate</div>
+                <div class="text-3xl md:text-5xl font-black mb-2 text-blue-500">94%</div>
+                <div class="text-gray-400 uppercase text-[10px] md:text-xs tracking-widest font-bold">Hiring Rate</div>
             </div>
             <div data-aos="zoom-in" data-aos-delay="100" class="text-center">
-                <div class="text-5xl font-black mb-2 text-purple-500">120+</div>
-                <div class="text-gray-400 uppercase text-xs tracking-widest font-bold">Countries</div>
+                <div class="text-3xl md:text-5xl font-black mb-2 text-purple-500">120+</div>
+                <div class="text-gray-400 uppercase text-[10px] md:text-xs tracking-widest font-bold">Countries</div>
             </div>
             <div data-aos="zoom-in" data-aos-delay="200" class="text-center">
-                <div class="text-5xl font-black mb-2 text-blue-500">45k</div>
-                <div class="text-gray-400 uppercase text-xs tracking-widest font-bold">Students</div>
+                <div class="text-3xl md:text-5xl font-black mb-2 text-blue-500">45k</div>
+                <div class="text-gray-400 uppercase text-[10px] md:text-xs tracking-widest font-bold">Students</div>
             </div>
             <div data-aos="zoom-in" data-aos-delay="300" class="text-center">
-                <div class="text-5xl font-black mb-2 text-purple-500">$12k</div>
-                <div class="text-gray-400 uppercase text-xs tracking-widest font-bold">Avg. Salary Bump</div>
+                <div class="text-3xl md:text-5xl font-black mb-2 text-purple-500">$12k</div>
+                <div class="text-gray-400 uppercase text-[10px] md:text-xs tracking-widest font-bold">Avg. Salary</div>
             </div>
         </div>
     </section>
 
-    <section class="py-32 px-6">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+    <section class="py-20 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
             <div data-aos="fade-right">
-                <h2 class="text-4xl font-bold mb-6">Learn by <span class="text-blue-500 italic">Deploying.</span></h2>
-                <p class="text-gray-400 mb-10 leading-relaxed">Most platforms just show you videos. We provide automated cloud sandboxes that spin up as you start a lesson. Learn Kubernetes by actually scaling a cluster.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Learn by <span class="text-blue-500 italic">Deploying.</span></h2>
+                <p class="text-gray-400 mb-10 leading-relaxed text-sm md:text-base">Most platforms just show you videos. We provide automated cloud sandboxes that spin up as you start a lesson. Learn Kubernetes by actually scaling a cluster.</p>
                 <ul class="space-y-6">
                     <li class="flex items-start gap-4">
                         <div class="bg-blue-500/20 p-2 rounded-lg text-blue-500">✓</div>
-                        <div><strong class="block">Live Mentorship</strong> <span class="text-sm text-gray-500">Weekly calls with Senior Devs.</span></div>
+                        <div><strong class="block text-sm md:text-base">Live Mentorship</strong> <span class="text-xs md:text-sm text-gray-500">Weekly calls with Senior Devs.</span></div>
                     </li>
                     <li class="flex items-start gap-4">
                         <div class="bg-blue-500/20 p-2 rounded-lg text-blue-500">✓</div>
-                        <div><strong class="block">Project Reviews</strong> <span class="text-sm text-gray-500">Human feedback on every PR.</span></div>
+                        <div><strong class="block text-sm md:text-base">Project Reviews</strong> <span class="text-xs md:text-sm text-gray-500">Human feedback on every PR.</span></div>
                     </li>
                 </ul>
             </div>
-            <div data-aos="fade-left" class="glass rounded-[3rem] p-4 relative">
-                <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1000&q=80" class="rounded-[2.5rem] grayscale hover:grayscale-0 transition duration-700" alt="Code Editor">
+            <div data-aos="fade-left" class="glass rounded-[2rem] md:rounded-[3rem] p-3 md:p-4 relative">
+                <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1000&q=80" class="rounded-[1.5rem] md:rounded-[2.5rem] grayscale hover:grayscale-0 transition duration-700 w-full h-auto" alt="Code Editor">
             </div>
         </div>
     </section>
 
-    <!-- <section id="pricing" class="py-32 px-6 bg-white/[0.02]">
-        <div class="max-w-7xl mx-auto text-center mb-20">
-            <h2 class="text-5xl font-black mb-4">pricing plan<span class="text-blue-500">for learners</span></h2>
-            <p class="text-gray-400 italic">Invest in the most valuable asset: Yourself.</p>
-        </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div data-aos="fade-up" class="glass p-10 rounded-3xl border-white/5 hover:border-blue-500/50 transition duration-500">
-                <h3 class="text-2xl font-bold mb-2">Self-Paced</h3>
-                <p class="text-gray-500 text-sm mb-6">Perfect for solo learners.</p>
-                <div class="text-5xl font-black mb-8">$29<span class="text-lg text-gray-500">/mo</span></div>
-                <ul class="space-y-4 mb-10 text-left text-gray-400">
-                    <li>• Access to 100+ Courses</li>
-                    <li>• Community Discord</li>
-                    <li>• Project Templates</li>
-                    <li>• Course Certificates</li>
-                </ul>
-                <button class="w-full border border-white/20 py-4 rounded-xl font-bold hover:bg-white/5 transition">Choose Plan</button>
-            </div>
-            <div data-aos="fade-up" data-aos-delay="100" class="glass p-10 rounded-3xl border-blue-500/50 relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] px-6 py-1 font-black uppercase rotate-45 translate-x-6 translate-y-4">Popular</div>
-                <h3 class="text-2xl font-bold mb-2">Nexus Pro</h3>
-                <p class="text-gray-500 text-sm mb-6">For the serious career-changer.</p>
-                <div class="text-5xl font-black mb-8">$89<span class="text-lg text-gray-500">/mo</span></div>
-                <ul class="space-y-4 mb-10 text-left text-gray-300">
-                    <li>• Everything in Self-Paced</li>
-                    <li>• 1-on-1 Mentorship Session</li>
-                    <li>• Job Placement Guarantee</li>
-                    <li>• Private GitHub Repos</li>
-                </ul>
-                <button class="w-full bg-blue-600 py-4 rounded-xl font-bold hover:bg-blue-500 shadow-xl transition">Start Free Trial</button>
-            </div>
-        </div>
-    </section> -->
-
-    <section id="faq" class="py-32 px-6">
+    <section id="faq" class="py-20 md:py-32 px-6">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-black text-center mb-16">Questions? <span class="text-gray-500 italic">Answered.</span></h2>
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-12">Questions? <span class="text-gray-500 italic">Answered.</span></h2>
             <div class="space-y-4" x-data="{ selected: 1 }">
-                <div class="glass rounded-2xl overflow-hidden">
+                <div class="glass rounded-2xl overflow-hidden text-sm md:text-base">
                     <button @click="selected !== 1 ? selected = 1 : selected = null" class="w-full text-left p-6 font-bold flex justify-between items-center">
                         Is there a job guarantee?
                         <span :class="selected === 1 ? 'rotate-180' : ''" class="transition-transform">↓</span>
                     </button>
-                    <div x-show="selected === 1" class="p-6 pt-0 text-gray-400 text-sm">
+                    <div x-show="selected === 1" class="p-6 pt-0 text-gray-400 text-xs md:text-sm">
                         Yes! Our Nexus Pro plan includes a 6-month job placement guarantee. If you don't find a role within 6 months of graduating, we refund 100% of your tuition fees.
                     </div>
                 </div>
-                <div class="glass rounded-2xl overflow-hidden">
+                <div class="glass rounded-2xl overflow-hidden text-sm md:text-base">
                     <button @click="selected !== 2 ? selected = 2 : selected = null" class="w-full text-left p-6 font-bold flex justify-between items-center">
                         Can I cancel my subscription anytime?
                         <span :class="selected === 2 ? 'rotate-180' : ''" class="transition-transform">↓</span>
                     </button>
-                    <div x-show="selected === 2" class="p-6 pt-0 text-gray-400 text-sm">
+                    <div x-show="selected === 2" class="p-6 pt-0 text-gray-400 text-xs md:text-sm">
                         Absolutely. There are no long-term contracts. You can pause or cancel your subscription at any time with a single click.
                     </div>
                 </div>
@@ -192,42 +164,34 @@
         </div>
     </section>
 
-
-<div class="py-10 bg-white/[0.02] border-y border-white/5 overflow-hidden whitespace-nowrap">
-        <div class="flex animate-marquee space-x-12 items-center">
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Kubernetes</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">AWS Cloud</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Python</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Terraform</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Docker</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">React.js</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Cybersecurity</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Kubernetes</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">AWS Cloud</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Python</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Terraform</span>
-            <span class="text-2xl font-bold text-gray-600 uppercase tracking-widest">Docker</span>
+    <div class="py-10 bg-white/[0.02] border-y border-white/5 overflow-hidden whitespace-nowrap">
+        <div class="animate-marquee space-x-8 md:space-x-12 items-center">
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">Kubernetes</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">AWS Cloud</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">Python</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">Terraform</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">Docker</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">React.js</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">Cybersecurity</span>
+            <span class="text-xl md:text-2xl font-bold text-gray-600 uppercase tracking-widest">Kubernetes</span>
         </div>
     </div>
-    <!-- ................................................. -->
 
-
-    
-    <section id="mentors" class="py-32 px-6">
+    <section id="mentors" class="py-20 md:py-32 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-20 text-center">
-                <h2 class="text-5xl font-extrabold mb-4" data-aos="fade-up">Learn from the <span class="text-blue-500 italic">Architects.</span></h2>
-                <p class="text-gray-500" data-aos="fade-up" data-aos-delay="100">Our mentors aren't teachers; they're lead engineers from the world's tech giants.</p>
+            <div class="mb-12 md:mb-20 text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4" data-aos="fade-up">Learn from the <span class="text-blue-500 italic">Architects.</span></h2>
+                <p class="text-gray-500 text-sm md:text-base" data-aos="fade-up" data-aos-delay="100">Our mentors aren't teachers; they're lead engineers from the world's tech giants.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div data-aos="fade-up" class="instructor-card glass p-6 rounded-[2rem] group cursor-pointer transition-all hover:border-blue-500/30">
                     <div class="overflow-hidden rounded-2xl mb-6 aspect-square bg-gray-900">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
                     </div>
                     <h3 class="text-2xl font-bold italic">Marcus Chen</h3>
                     <p class="text-blue-500 font-bold text-sm mb-4 uppercase tracking-tighter">Ex-Netflix Cloud Architect</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Mastering distributed systems and microservices at planetary scale.</p>
-                    <div class="flex gap-2">
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Mastering distributed systems at planetary scale.</p>
+                    <div class="flex flex-wrap gap-2">
                         <span class="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400 uppercase">Kubernetes</span>
                         <span class="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400 uppercase">Go Lang</span>
                     </div>
@@ -239,8 +203,8 @@
                     </div>
                     <h3 class="text-2xl font-bold italic">Sarah Jenkins</h3>
                     <p class="text-purple-500 font-bold text-sm mb-4 uppercase tracking-tighter">Senior AI Researcher</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Deep dive into Neural Networks, LLMs, and Generative AI patterns.</p>
-                    <div class="flex gap-2">
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Deep dive into Neural Networks and LLM patterns.</p>
+                    <div class="flex flex-wrap gap-2">
                         <span class="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400 uppercase">PyTorch</span>
                         <span class="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400 uppercase">NLP</span>
                     </div>
@@ -252,8 +216,8 @@
                     </div>
                     <h3 class="text-2xl font-bold italic">David Varkey</h3>
                     <p class="text-emerald-500 font-bold text-sm mb-4 uppercase tracking-tighter">Cybersecurity Specialist</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Advanced threat detection and offensive security protocols.</p>
-                    <div class="flex gap-2">
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Advanced threat detection and offensive security.</p>
+                    <div class="flex flex-wrap gap-2">
                         <span class="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400 uppercase">Penetration</span>
                         <span class="text-[10px] font-bold bg-white/5 px-3 py-1 rounded-full text-gray-400 uppercase">Kali Linux</span>
                     </div>
@@ -261,110 +225,56 @@
             </div>
         </div>
     </section>
-     
 
-    <!-- ..section bad mn remove krna -->
-
-
-
-    <section id="portfolio" class="py-32 px-6 bg-white/[0.01]">
+    <section id="portfolio" class="py-20 md:py-32 px-6 bg-white/[0.01]">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-16 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 text-center md:text-left">
                 <div>
-                    <h2 class="text-5xl font-black mb-2" data-aos="fade-right">Student <span class="text-blue-500 italic">Impact.</span></h2>
-                    <p class="text-gray-500" data-aos="fade-right" data-aos-delay="100">See what our graduates are deploying to production.</p>
+                    <h2 class="text-3xl md:text-5xl font-black mb-2" data-aos="fade-right">Student <span class="text-blue-500 italic">Impact.</span></h2>
+                    <p class="text-gray-500 text-sm md:text-base" data-aos="fade-right" data-aos-delay="100">See what our graduates are deploying.</p>
                 </div>
-                <button class="mt-8 md:mt-0 glass px-8 py-3 rounded-xl font-bold hover:bg-white hover:text-black transition">Full Gallery &rarr;</button>
+                <button class="mt-8 md:mt-0 glass px-8 py-3 rounded-xl font-bold hover:bg-white hover:text-black transition text-sm">Full Gallery &rarr;</button>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div data-aos="zoom-in" class="group relative overflow-hidden rounded-[2rem] glass aspect-[4/5] cursor-pointer">
                     <img src="https://images.ctfassets.net/lzny33ho1g45/6eeGs9L6ZzNxYackEk5Rgd/3758d4008628254a75b9632a1547229c/free-ai-tools-00-hero.jpg?fm=jpg&q=31&fit=thumb&w=1520&h=760" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-6 md:p-8 flex flex-col justify-end">
                         <span class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-2">AI Software</span>
-                        <h4 class="text-2xl font-bold">Sentinel Dashboard</h4>
-                        <p class="text-gray-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition duration-500">Real-time threat detection interface built with React.</p>
+                        <h4 class="text-xl md:text-2xl font-bold">Sentinel Dashboard</h4>
+                        <p class="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-500">Real-time threat detection built with React.</p>
                     </div>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="100" class="group relative overflow-hidden rounded-[2rem] glass aspect-[4/5] cursor-pointer">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-6 md:p-8 flex flex-col justify-end">
                         <span class="text-purple-400 text-xs font-bold uppercase tracking-widest mb-2">Cloud Infrastructure</span>
-                        <h4 class="text-2xl font-bold">Nexus Cloud-Sync</h4>
-                        <p class="text-gray-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition duration-500">High-availability storage cluster using AWS S3 & Lambda.</p>
+                        <h4 class="text-xl md:text-2xl font-bold">Nexus Cloud-Sync</h4>
+                        <p class="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-500">High-availability storage cluster.</p>
                     </div>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="200" class="group relative overflow-hidden rounded-[2rem] glass aspect-[4/5] cursor-pointer">
                     <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-6 md:p-8 flex flex-col justify-end">
                         <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">Web3 / Fintech</span>
-                        <h4 class="text-2xl font-bold">Vault Protocol</h4>
-                        <p class="text-gray-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition duration-500">Decentralized asset management system with Solidity.</p>
+                        <h4 class="text-xl md:text-2xl font-bold">Vault Protocol</h4>
+                        <p class="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-500">Decentralized asset management system.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
-
-
-
-<!-- <section id="portfolio" class="py-32 px-6 bg-white/[0.01]">
-    <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-16 text-center md:text-left">
-            <div>
-                <h2 class="text-5xl font-black mb-2" data-aos="fade-right" data-aos-duration="400">Student <span class="text-blue-500 italic">Impact.</span></h2>
-                <p class="text-gray-500" data-aos="fade-right" data-aos-delay="50">See what our graduates are deploying to production.</p>
-            </div>
-            <button class="mt-8 md:mt-0 glass px-8 py-3 rounded-xl font-bold hover:bg-white hover:text-black transition">Full Gallery &rarr;</button>
+    <section id="pricing" class="py-20 md:py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto text-center mb-12 md:mb-20">
+            <h2 class="text-3xl md:text-5xl font-black mb-4">pricing plan <span class="text-blue-500">for learners</span></h2>
+            <p class="text-gray-400 italic text-sm md:text-base">Invest in the most valuable asset: Yourself.</p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div data-aos="zoom-in" data-aos-duration="300" class="group relative overflow-hidden rounded-[2rem] glass aspect-video cursor-pointer">
-                <img src="https://images.ctfassets.net/lzny33ho1g45/6eeGs9L6ZzNxYackEk5Rgd/3758d4008628254a75b9632a1547229c/free-ai-tools-00-hero.jpg?fm=jpg&q=31&fit=thumb&w=1520&h=760" loading="eager" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end">
-                    <span class="text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-1">AI Software</span>
-                    <h4 class="text-xl font-bold">Sentinel Dashboard</h4>
-                    <p class="text-gray-400 text-xs mt-1 opacity-0 group-hover:opacity-100 transition duration-500">Real-time threat detection interface.</p>
-                </div>
-            </div>
-
-            <div data-aos="zoom-in" data-aos-duration="300" data-aos-delay="50" class="group relative overflow-hidden rounded-[2rem] glass aspect-video cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" loading="eager" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end">
-                    <span class="text-purple-400 text-[10px] font-bold uppercase tracking-widest mb-1">Cloud Infrastructure</span>
-                    <h4 class="text-xl font-bold">Nexus Cloud-Sync</h4>
-                    <p class="text-gray-400 text-xs mt-1 opacity-0 group-hover:opacity-100 transition duration-500">High-availability storage cluster.</p>
-                </div>
-            </div>
-
-            <div data-aos="zoom-in" data-aos-duration="300" data-aos-delay="100" class="group relative overflow-hidden rounded-[2rem] glass aspect-video cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" loading="eager" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end">
-                    <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-1">Web3 / Fintech</span>
-                    <h4 class="text-xl font-bold">Vault Protocol</h4>
-                    <p class="text-gray-400 text-xs mt-1 opacity-0 group-hover:opacity-100 transition duration-500">Decentralized asset management.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-
-
-
-     <section id="pricing" class="py-32 px-6 bg-white/[0.02]">
-        <div class="max-w-7xl mx-auto text-center mb-20">
-            <h2 class="text-5xl font-black mb-4">pricing plan<span class="text-blue-500">for learners</span></h2>
-            <p class="text-gray-400 italic">Invest in the most valuable asset: Yourself.</p>
-        </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div data-aos="fade-up" class="glass p-10 rounded-3xl border-white/5 hover:border-blue-500/50 transition duration-500">
-                <h3 class="text-2xl font-bold mb-2">Self-Paced</h3>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div data-aos="fade-up" class="glass p-8 md:p-10 rounded-3xl border-white/5 hover:border-blue-500/50 transition duration-500">
+                <h3 class="text-xl md:text-2xl font-bold mb-2">Self-Paced</h3>
                 <p class="text-gray-500 text-sm mb-6">Perfect for solo learners.</p>
-                <div class="text-5xl font-black mb-8">$29<span class="text-lg text-gray-500">/mo</span></div>
-                <ul class="space-y-4 mb-10 text-left text-gray-400">
+                <div class="text-4xl md:text-5xl font-black mb-8">$29<span class="text-lg text-gray-500">/mo</span></div>
+                <ul class="space-y-4 mb-10 text-left text-gray-400 text-sm">
                     <li>• Access to 100+ Courses</li>
                     <li>• Community Discord</li>
                     <li>• Project Templates</li>
@@ -372,12 +282,12 @@
                 </ul>
                 <button class="w-full border border-white/20 py-4 rounded-xl font-bold hover:bg-white/5 transition">Choose Plan</button>
             </div>
-            <div data-aos="fade-up" data-aos-delay="100" class="glass p-10 rounded-3xl border-blue-500/50 relative overflow-hidden">
+            <div data-aos="fade-up" data-aos-delay="100" class="glass p-8 md:p-10 rounded-3xl border-blue-500/50 relative overflow-hidden">
                 <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] px-6 py-1 font-black uppercase rotate-45 translate-x-6 translate-y-4">Popular</div>
-                <h3 class="text-2xl font-bold mb-2">Nexus Pro</h3>
+                <h3 class="text-xl md:text-2xl font-bold mb-2">Nexus Pro</h3>
                 <p class="text-gray-500 text-sm mb-6">For the serious career-changer.</p>
-                <div class="text-5xl font-black mb-8">$89<span class="text-lg text-gray-500">/mo</span></div>
-                <ul class="space-y-4 mb-10 text-left text-gray-300">
+                <div class="text-4xl md:text-5xl font-black mb-8">$89<span class="text-lg text-gray-500">/mo</span></div>
+                <ul class="space-y-4 mb-10 text-left text-gray-300 text-sm">
                     <li>• Everything in Self-Paced</li>
                     <li>• 1-on-1 Mentorship Session</li>
                     <li>• Job Placement Guarantee</li>
@@ -388,12 +298,10 @@
         </div>
     </section>
 
-
-
-    <footer class="bg-black pt-20 pb-10 border-t border-white/5 px-6">
+    <footer class="bg-black pt-16 md:pt-20 pb-10 border-t border-white/5 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-12 mb-20">
-                <div class="col-span-2 md:col-span-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-16 md:mb-20">
+                <div class="sm:col-span-2 md:col-span-1">
                     <div class="text-2xl font-black italic mb-6">NEXUS<span class="text-blue-500">.</span></div>
                     <p class="text-gray-500 text-sm leading-relaxed">Forging the next generation of technical leaders. Based in Silicon Valley, accessible globally.</p>
                 </div>
