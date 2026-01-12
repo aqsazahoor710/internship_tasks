@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCK_PULSE | Bitcoin Network Terminal</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="auth-overlay" class="auth-container">
+        <div class="auth-card">
+            <div class="sidebar-logo" style="padding:0 0 1.5rem 0; text-align:center;">Bit-Coin</div>
+            
+            <div class="auth-tabs">
+                <button id="login-tab" class="auth-tab active" onclick="toggleAuth('login')">Login</button>
+                <button id="signup-tab" class="auth-tab" onclick="toggleAuth('signup')">Sign Up</button>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <div class="input-group">
+                    <label class="stat-label">Terminal ID</label>
+                    <input type="text" placeholder="Enter ID..." class="mono">
+                </div>
+                <div class="input-group">
+                    <label class="stat-label">Access Key</label>
+                    <input type="password" placeholder="••••••••" style="width:100%; background:#000; border:1px solid var(--border); padding:12px; color:var(--text); border-radius:6px; outline:none;">
+                </div>
+                <button type="button" class="save-btn" onclick="completeAuth()">Authorize Access</button>
+            </form>
+
+            <form id="signup-form" class="auth-form">
+                <div class="input-group">
+                    <label class="stat-label">Full Name</label>
+                    <input type="text" placeholder="Your Name..." class="mono">
+                </div>
+                <div class="input-group">
+                    <label class="stat-label">Email</label>
+                    <input type="text" placeholder="email@domain.com" class="mono">
+                </div>
+                <button type="button" class="save-btn" onclick="completeAuth()">Initialize Terminal</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">Bit-coin</div>
+            <nav id="nav-list">
+                <div class="nav-link active" onclick="switchTab('home')"><i data-lucide="home"></i> Home</div>
+                <div class="nav-link" onclick="switchTab('dashboard')"><i data-lucide="layout-dashboard"></i> Dashboard</div>
+                <div class="nav-link" onclick="switchTab('analytics')"><i data-lucide="bar-chart-3"></i> Analytics</div>
+                <div class="nav-link" onclick="switchTab('campaigns')"><i data-lucide="megaphone"></i> Campaigns</div>
+                <div class="nav-link" onclick="switchTab('transactions')"><i data-lucide="arrow-left-right"></i> Transactions</div>
+                <div class="nav-link" onclick="switchTab('settings')"><i data-lucide="settings"></i> Settings</div>
+            </nav>
+        </aside>
+
+        <main class="main-view">
+            
+            <div class="price-ticker mono">
+                <div class="ticker-item">BTC/USD: <span id="live-btc-price" style="color:var(--success)">$96,432.10</span></div>
+                <div class="ticker-item">24H VOL: <span style="color:var(--primary)">42.1B</span></div>
+                <div class="ticker-item">DOMINANCE: <span style="color:var(--primary)">54.2%</span></div>
+            </div>
+
+            <section id="view-home" class="view active">
+                <div class="view-header">
+                    <div>
+                        <p class="mono sub-heading">BITCOIN CORE METRICS: LIVE</p>
+                        <h1 class="main-title">Network <span style="color:var(--primary)">Pulse</span></h1>
+                    </div>
+                    <div class="mono clock-container">
+                        <div style="color: var(--text-muted); font-size: 0.7rem;">LIVE TIME (UTC)</div>
+                        <div id="live-clock" style="color: var(--text); font-weight: bold;">00:00:00</div>
+                    </div>
+                </div>
+
+                <div class="grid-4" style="margin-bottom: 1.5rem;">
+                    <div class="card" style="border-top: 2px solid var(--primary);">
+                        <div class="stat-label">Network Hashrate</div>
+                        <div class="stat-value mono" id="live-hash">645.2 EH/s</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-label">Total Active Nodes</div>
+                        <div class="stat-value mono" id="live-nodes">18,402</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-label">Mempool Weight</div>
+                        <div class="stat-value mono" id="live-mempool">42.8 vMB</div>
+                    </div>
+                    <div class="card">
+                        <div class="stat-label">Avg Block Fee</div>
+                        <div class="stat-value mono" id="live-fee">14 sats/vB</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card chart-card-large">
+                        <div class="card-header-flex">
+                            <h4 class="stat-label">Live Hashrate Flow (EH/s)</h4>
+                            <span class="status-pill">STREAMING</span>
+                        </div>
+                        <div style="flex:1;"><canvas id="homePulseChart"></canvas></div>
+                    </div>
+                    
+                    <div class="flex-column-gap">
+                        <div class="card" style="margin-bottom:0; flex: 1;">
+                            <h4 class="stat-label">Security & Peer Logs</h4>
+                            <div class="log-container mono" id="system-logs">
+                                <div>[SYS] Terminal Initialized...</div>
+                            </div>
+                        </div>
+                        <div class="card" style="margin-bottom:0; flex: 1;">
+                            <h4 class="stat-label">Node Geo-Distribution</h4>
+                            <div style="height: 150px;"><canvas id="nodeGeoChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card">
+                        <h4 class="stat-label">Whale Activity Tracker</h4>
+                        <div style="height: 180px; margin-top: 1rem;"><canvas id="whaleTrackerChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <h4 class="stat-label">Mempool Health Radar</h4>
+                        <div style="height: 180px; margin-top: 1rem;"><canvas id="mempoolRadarChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <h4 class="stat-label">Security Hash Strength</h4>
+                        <div style="height: 180px; margin-top: 1rem;"><canvas id="securityStrengthChart"></canvas></div>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card">
+                        <h4 class="stat-label">Node Latency (Global)</h4>
+                        <div style="height: 180px; margin-top: 1rem;"><canvas id="latencyChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <h4 class="stat-label">Order Flow (Buy vs Sell)</h4>
+                        <div style="height: 180px; margin-top: 1rem;"><canvas id="flowChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <h4 class="stat-label">Network Saturation</h4>
+                        <div style="height: 180px; margin-top: 1rem;"><canvas id="saturationChart"></canvas></div>
+                    </div>
+                </div>
+                <div style="height: 50px;"></div>
+            </section>
+
+            <section id="view-dashboard" class="view">
+                <h1 class="mono" style="font-size: 3rem; letter-spacing: -2px;">$94,120.47 <span style="color:var(--success); font-size:1rem;">▲ 0.68%</span></h1>
+                <div class="card chart-main"><canvas id="dashChart"></canvas></div>
+                <div class="grid-4">
+                    <div class="card"><div class="stat-label">24H HIGH</div><div class="stat-value mono">$94,988.36</div></div>
+                    <div class="card"><div class="stat-label">24H LOW</div><div class="stat-value mono">$93,430.05</div></div>
+                    <div class="card"><div class="stat-label">MARKET CAP</div><div class="stat-value mono">$1.84T</div></div>
+                    <div class="card"><div class="stat-label">BTC DOMINANCE</div><div class="stat-value mono">53.9%</div></div>
+                </div>
+            </section>
+
+            <section id="view-analytics" class="view">
+                <h2>Intelligence Analytics</h2>
+                <div class="card" style="height:400px; margin-top:1rem;">
+                    <h4 class="stat-label">Hashrate Forecast</h4>
+                    <canvas id="campaignReachChart"></canvas>
+                </div>
+                <div class="grid-2">
+                    <div class="card" style="height:350px;"><h4 class="stat-label">Wallet Growth</h4><canvas id="userGrowthChart"></canvas></div>
+                    <div class="card" style="height:350px;"><h4 class="stat-label">Exchange Intensity</h4><canvas id="sourceChart"></canvas></div>
+                </div>
+            </section>
+
+            <section id="view-campaigns" class="view">
+                <h2>Operational Tasks</h2>
+                <div class="grid-2" style="margin-top:1rem;">
+                    <div class="card" style="height:350px;"><h4 class="stat-label">Resource Allocation</h4><canvas id="campaignBubbleChart"></canvas></div>
+                    <div class="card" style="height:350px;"><h4 class="stat-label">Efficiency Multiplier</h4><canvas id="campaignRadarChart"></canvas></div>
+                </div>
+                <div id="drag-list">
+                    <div class="card">Institutional Whale Tracker <span class="status-pill">Active</span></div>
+                    <div class="card">Mempool Congestion Alert <span class="status-pill">Standby</span></div>
+                </div>
+            </section>
+
+            <section id="view-transactions" class="view">
+                <h2>Network Ledger (Live)</h2>
+                <div class="grid-3" style="margin-top:1.5rem;">
+                    <div class="card" style="height:250px;"><h4 class="stat-label">Confirmation Velocity</h4><canvas id="txStatusChart"></canvas></div>
+                    <div class="card" style="height:250px;"><h4 class="stat-label">Fee Density</h4><canvas id="txFeeChart"></canvas></div>
+                    <div class="card" style="height:250px;"><h4 class="stat-label">Asset Mix</h4><canvas id="txAssetChart"></canvas></div>
+                </div>
+                <div class="card" style="padding:0; overflow:auto;">
+                    <table>
+                        <thead><tr><th>Tx Hash</th><th>Amount (BTC)</th><th>Fee</th><th>Status</th></tr></thead>
+                        <tbody class="mono">
+                            <tr><td style="color:var(--primary)">bc1q...9v2z</td><td>1.402</td><td>42 sats</td><td><span class="status-pill">Confirmed</span></td></tr>
+                            <tr><td style="color:var(--primary)">3J98...t7w1</td><td>0.054</td><td>18 sats</td><td><span class="status-pill">Pending</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="view-settings" class="view">
+                <h2>Terminal Configuration</h2>
+                <div class="grid-2" style="margin-top:1.5rem;">
+                    <div class="settings-column">
+                        <div class="card">
+                            <h4 class="stat-label">User Profile</h4>
+                            <div style="display:flex; gap:20px; align-items:center; margin-top:1rem;">
+                                <div id="avatar-circle">BP</div>
+                                <input type="text" id="username-input" class="mono" placeholder="Admin_Satoshi">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-column">
+                        <div class="card">
+                            <h4 class="stat-label">Appearance</h4>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:1rem;">
+                                <button onclick="updateTheme('dark')" class="theme-btn dark-btn">Terminal Dark</button>
+                                <button onclick="updateTheme('light')" class="theme-btn light-btn">Classic Light</button>
+                            </div>
+                        </div>
+                        <button onclick="saveSettings()" class="save-btn">Update Terminal Settings</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
