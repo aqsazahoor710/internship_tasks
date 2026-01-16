@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireMe - Professional Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* PREMIUM THEME: Charcoal & Champagne Gold */
+            --bg-primary: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            --bg-secondary: rgba(212, 175, 55, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #d4af37; /* Metallic Gold */
+            --shadow: rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(25, 25, 25, 0.7);
+            --glass-border: rgba(212, 175, 55, 0.2);
+        }
+
+        body.light-mode {
+            /* PREMIUM LIGHT: Ivory & Slate Gold */
+            --bg-primary: linear-gradient(135deg, #fdfcf0 0%, #e5e5e5 100%);
+            --bg-secondary: rgba(0, 0, 0, 0.05);
+            --text-primary: #1a1a1a;
+            --text-secondary: #5a5a5a;
+            --accent: #b8860b; /* Dark Goldenrod */
+            --shadow: rgba(0, 0, 0, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(184, 134, 11, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(212,175,55,0.03)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #theme-toggle {
+            display: none;
+        }
+
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .theme-switch label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switch label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .theme-icon {
+            font-size: 20px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--shadow);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+            letter-spacing: 1px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            margin-bottom: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* ANIMATION FOR CARDS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.15);
+            border-color: var(--accent);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--glass-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37.5px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .timeline-item .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            background: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-top: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #0a0a0a;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            section { padding: 2rem 1rem; }
+            .timeline { padding-left: 30px; }
+            .timeline::before { left: 10px; }
+            .timeline-item::before { left: -27px; }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </label>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <img 
+            src="https://img.freepik.com/premium-photo/cute-animated-character-hijab-working-laptop_1286777-27030.jpg?semt=ais_hybrid&w=740&q=80" 
+            alt="Profile" 
+            class="profile-img">
+
+        <h1>Aqsa Zahoor</h1>
+        <p>Frontend Developer & UI/UX Designer</p>
+    </section>
+
+    <section id="about">
+        <h2>Education</h2>
+        <div class="glass-card reveal">
+            <p><b style="color: var(--accent);">Bachelor of Science in Computer Science (BSCS)</b><br>
+            Government College University Faisalabad — 2025
+            <br><br>
+            <b style="color: var(--accent);">Intermediate (FSc Pre-Engineering)</b><br>
+            Punjab College, Kasur — 2022</p>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="glass-card reveal">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Senior Frontend Developer</h3>
+                    <p class="date">2022 - Present</p>
+                    <p>Leading frontend development team, implementing modern React applications with TypeScript, mentoring junior developers, and architecting scalable solutions.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Junior Web Developer</h3>
+                    <p class="date">2019 - 2020</p>
+                    <p>Started career building responsive websites, learning modern web technologies, and contributing to open-source projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-item reveal">
+                <div class="skill-name">
+                    <span>HTML/CSS</span>
+                    <span>95%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 95%"></div>
+                </div>
+            </div>
+            <div class="skill-item reveal">
+                <div class="skill-name">
+                    <span>JavaScript</span>
+                    <span>90%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-item reveal">
+                <div class="skill-name">
+                    <span>React</span>
+                    <span>88%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 88%"></div>
+                </div>
+            </div>
+            <div class="skill-item reveal">
+                <div class="skill-name">
+                    <span>Node.js</span>
+                    <span>85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-item reveal">
+                <div class="skill-name">
+                    <span>UI/UX Design</span>
+                    <span>92%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%"></div>
+                </div>
+            </div>
+            <div class="skill-item reveal">
+                <div class="skill-name">
+                    <span>Python</span>
+                    <span>80%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item reveal" data-category="web">
+                <div class="portfolio-img">🌐</div>
+                <div class="portfolio-content">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-stack shopping platform with payment integration</p>
+                    <span class="portfolio-category">Web</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal" data-category="design">
+                <div class="portfolio-img">🎨</div>
+                <div class="portfolio-content">
+                    <h3>Brand Identity Design</h3>
+                    <p>COMPLETE E-COMMERACE COURSES SITE</p>
+                    <span class="portfolio-category">Design</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal" data-category="mobile">
+                <div class="portfolio-img">📱</div>
+                <div class="portfolio-content">
+                    <h3>Fitness Tracking App</h3>
+                    <p>Mobile app for tracking workouts and nutrition</p>
+                    <span class="portfolio-category">Mobile</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal" data-category="web">
+                <div class="portfolio-img">💼</div>
+                <div class="portfolio-content">
+                    <h3>Project Management Tool</h3>
+                    <p>Collaborative platform for team productivity</p>
+                    <span class="portfolio-category">Web</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal" data-category="design">
+                <div class="portfolio-img">✨</div>
+                <div class="portfolio-content">
+                    <h3>UI Kit Library</h3>
+                    <p>Comprehensive component library for designers</p>
+                    <span class="portfolio-category">Design</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal" data-category="mobile">
+                <div class="portfolio-img">🎵</div>
+                <div class="portfolio-content">
+                    <h3>Music Streaming App</h3>
+                    <p>Mobile application for streaming and playlist management</p>
+                    <span class="portfolio-category">Mobile</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <div class="glass-card reveal" style="text-align: center;">
+            <p style="margin-bottom: 1rem;">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+            <p><strong>Email:</strong> <span style="color: var(--accent);">example@gmail.com</span></p>
+            <p><strong>Phone:</strong> <span style="color: var(--accent);">12345678910</span></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 HireMe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = document.querySelector('.theme-icon');
+
+        toggle.addEventListener('change', () => {
+            body.classList.toggle('light-mode');
+            icon.textContent = body.classList.contains('light-mode') ? '☀️' : '🌙';
+        });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
