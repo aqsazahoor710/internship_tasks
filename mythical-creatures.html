@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mythical Archive</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-bg: #141414;
+            --accent-gold: #c5a059;
+            --text-white: #e0e0e0;
+            --text-gray: #a0a0a0;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* --- Landing Section (Fixed Main Picture) --- */
+        #home-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 10px; text-shadow: 0 0 20px rgba(0,0,0,1); }
+        .hero-subtitle { color: var(--accent-gold); text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; margin-bottom: 30px; }
+
+        .btn-explore {
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+        .btn-explore:hover { background: var(--accent-gold); color: black; box-shadow: 0 0 20px var(--accent-gold); }
+
+        /* --- Archive Section --- */
+        #archive-section {
+            display: none;
+            padding: 40px 5%;
+            min-height: 100vh;
+        }
+
+        /* --- Search Bar Style --- */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            position: relative;
+        }
+        #search-input {
+            width: 100%;
+            padding: 15px 25px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        #search-input:focus { border-color: var(--accent-gold); box-shadow: 0 0 10px rgba(197, 160, 89, 0.2); }
+
+        .creature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Cards --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            cursor: pointer;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent-gold); }
+
+        .card-img-container { width: 100%; height: 250px; overflow: hidden; background: #222; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: var(--transition); }
+        .card:hover .card-img { filter: grayscale(0%); transform: scale(1.1); }
+
+        .card-content { padding: 20px; }
+        .card-tag { color: var(--accent-gold); font-size: 0.7rem; border: 1px solid var(--accent-gold); padding: 2px 8px; margin-bottom: 10px; display: inline-block; }
+        .card-title { font-size: 1.8rem; margin-bottom: 5px; }
+
+        /* --- Progress Bar --- */
+        .progress-container {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: #111; padding: 15px 25px;
+            border-radius: 50px; display: flex;
+            align-items: center; gap: 15px;
+            border: 2px solid var(--accent-gold); z-index: 999;
+        }
+        .progress-circle {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: conic-gradient(var(--accent-gold) 0%, #333 0%);
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .progress-circle::after { content: ''; width: 30px; height: 30px; background: #111; border-radius: 50%; position: absolute; }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px;
+        }
+        .modal-content {
+            background: var(--card-bg); width: 100%; max-width: 900px;
+            display: flex; position: relative; animation: fadeIn 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
+            .modal-left, .modal-right { width: 100% !important; }
+        }
+        .modal-left { width: 45%; }
+        .modal-left img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-right { width: 55%; padding: 40px; }
+        .modal-close { position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--accent-gold); }
+        .badge { background: #411; color: #ff4444; padding: 5px 10px; font-size: 0.7rem; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <section id="home-section">
+        <p class="hero-subtitle">The Cryptozoologist's Archive</p>
+        <h1 class="hero-title">The Mythical Archive</h1>
+        <button class="btn-explore" onclick="showArchive()">Begin Exploration ></button>
+    </section>
+
+    <section id="archive-section">
+        <button class="btn-explore" style="padding: 5px 15px; font-size: 0.7rem;" onclick="showHome()">← Back</button>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for a specimen (e.g. Dragon, Phoenix)..." onkeyup="searchCreatures()">
+        </div>
+
+        <div class="creature-grid" id="creature-grid"></div>
+
+        <div class="progress-container">
+            <span style="font-family: sans-serif; font-size: 0.8rem;">DISCOVERED: <strong id="progress-text">0/16</strong></span>
+            <div class="progress-circle" id="progress-circle"></div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-left"><img id="modal-img" src="" alt=""></div>
+            <div class="modal-right">
+                <span class="card-tag" id="modal-tag"></span>
+                <h2 id="modal-title" style="font-size: 2.5rem; margin-bottom: 10px;"></h2>
+                <p id="modal-origin" style="color: var(--accent-gold); margin-bottom: 20px;"></p>
+                <hr style="border: 0.5px solid #333; margin-bottom: 20px;">
+                <p id="modal-desc" style="color: var(--text-gray); line-height: 1.6; margin-bottom: 20px;"></p>
+                <div>
+                    <h4 style="font-size: 0.7rem; color: var(--accent-gold);">THREAT LEVEL</h4>
+                    <span class="badge" id="modal-threat"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const creatures = [
+            { id: 1, name: 'Red Dragon', type: 'DRACONIS', origin: 'Ancient Volcano', img: 'https://images.stockcake.com/public/4/2/8/42832a81-7864-446c-83bc-82843defffbd_large/fiery-dragon-roar-stockcake.jpg', threat: 'EXTREME', desc: 'A massive fire-breathing reptile that hoards gold and terrorizes the skies.' },
+            { id: 2, name: 'Fire Phoenix', type: 'AVIAN', origin: 'Solar Peaks', img: 'https://images.stockcake.com/public/6/7/a/67ad66be-68e7-4d1e-916d-18f4f0b95a80_large/fiery-phoenix-rising-stockcake.jpg', threat: 'LOW', desc: 'An immortal bird that bursts into flame and is reborn from its own ashes.' },
+            { id: 3, name: 'Unicorn', type: 'EQUINE', origin: 'Enchanted Forest', img: 'https://images.stockcake.com/public/3/f/b/3fbfff97-0ba5-4f10-ba9f-01cefb89db4a_large/mystical-winged-unicorn-stockcake.jpg', threat: 'NEUTRAL', desc: 'A pure white horse with a single magical horn known for healing powers.' },
+            { id: 4, name: 'Kraken', type: 'AQUATIC', origin: 'North Sea Abyss', img: 'https://images.stockcake.com/public/5/b/1/5b1c3bc5-3548-4a77-93fa-7efcd88e28a5_large/kraken-rises-below-stockcake.jpg', threat: 'CRITICAL', desc: 'A colossal sea monster with enough tentacles to drag whole ships underwater.' },
+            { id: 5, name: 'Griffin', type: 'HYBRID', origin: 'Mountain Cliffs', img: 'https://images.stockcake.com/public/6/9/8/698e2043-321a-4cf9-8b99-ac7031c99b6a_large/mythical-griffin-guardian-stockcake.jpg', threat: 'HIGH', desc: 'A majestic hybrid with the head of an eagle and the body of a lion.' },
+            { id: 6, name: 'Cerberus', type: 'CANINE', origin: 'Underworld Gates', img: 'https://images.stockcake.com/public/5/7/4/5749c780-f344-44ae-8b4d-da5647ee0438_large/mythical-guardian-beast-stockcake.jpg', threat: 'SEVERE', desc: 'The terrifying three-headed dog that guards the entrance to the afterlife.' },
+            { id: 7, name: 'Sea Siren', type: 'MYSTIC', origin: 'Aegean Isles', img: 'https://images.stockcake.com/public/e/9/0/e90b9274-d502-4ae4-ade1-e0cfe72f2776_large/abyssal-gothic-siren-stockcake.jpg', threat: 'HIGH', desc: 'Beings that lure sailors into deadly rocks with their hypnotic voices.' },
+            { id: 8, name: 'Basilisk', type: 'REPTILIA', origin: 'Desert Caves', img: 'https://images.stockcake.com/public/b/e/3/be3f151d-5ee2-4c40-8499-fc3b9af09481_large/basilisk-water-dance-stockcake.jpg', threat: 'EXTREME', desc: 'The King of Serpents. Its gaze alone can turn a person into solid stone.' },
+            { id: 9, name: 'Minotaur', type: 'ANTHRO', origin: 'The Labyrinth', img: 'https://images.stockcake.com/public/e/0/1/e01c0344-a0a6-436d-9ec3-68171b0075be_large/armored-gothic-bull-stockcake.jpg', threat: 'SEVERE', desc: 'A powerful bull-man creature guarding the center of an ancient maze.' },
+            { id: 10, name: 'Yeti', type: 'PRIMATE', origin: 'Himalayas', img: 'https://images.stockcake.com/public/8/2/7/82703b2a-5005-4c1e-9c4c-2b76effc0533_large/tender-yeti-moment-stockcake.jpg', threat: 'HIGH', desc: 'The giant snow-beast said to inhabit the highest peaks of the world.' },
+            { id: 11, name: 'Medusa', type: 'CURSED', origin: 'Old Ruins', img: 'https://images.stockcake.com/public/6/1/d/61db1ef4-d5f2-4452-a2c2-8d6528be87bd_large/medusa-and-victims-stockcake.jpg', threat: 'CRITICAL', desc: 'A cursed woman with snakes for hair. Looking at her face kills instantly.' },
+            { id: 12, name: 'Centaur', type: 'HYBRID', origin: 'Thessaly Woods', img: 'https://images.stockcake.com/public/7/d/c/7dc913e9-3456-4b97-b5be-d74e8f8734f0_large/mystical-forest-archer-stockcake.jpg', threat: 'NEUTRAL', desc: 'Strong warriors with a horse’s lower body and a human’s upper body.' },
+            { id: 13, name: 'Sphinx', type: 'MYSTIC', origin: 'Giza Desert', img: 'https://images.stockcake.com/public/5/0/a/50a849ed-f8ee-432f-a852-2bd688c3ae36_large/sphinx-guards-pyramids-stockcake.jpg', threat: 'HIGH', desc: 'A wise but deadly guardian that forces travelers to solve riddles.' },
+            { id: 14, name: 'Chimera', type: 'HYBRID', origin: 'Greek Mountains', img: 'https://images.stockcake.com/public/b/5/8/b5853884-de25-4fef-b96b-3dcf821d9060_large/mythic-shadow-beast-stockcake.jpg', threat: 'EXTREME', desc: 'A monster with parts of a lion, goat, and snake that breathes fire.' },
+            { id: 15, name: 'Pegasus', type: 'EQUINE', origin: 'Sky Realms', img: 'https://images.stockcake.com/public/8/e/2/8e2d99b2-8901-4278-b1cc-dbc0b4845ed0_large/mythical-storm-steeds-stockcake.jpg', threat: 'LOW', desc: 'A pure white stallion with majestic wings, capable of flying to the heavens.' },
+            { id: 16, name: 'Stone Golem', type: 'CONSTRUCT', origin: 'Old Prague', img: 'https://images.stockcake.com/public/b/4/5/b45944b6-8420-4e4c-af5d-a0e8ae66ef25_large/mystical-forest-encounter-stockcake.jpg', threat: 'SEVERE', desc: 'A massive living statue made of rock, brought to life by sacred magic.' }
+        ];
+
+        let viewed = new Set();
+
+        function init() {
+            renderCreatures(creatures);
+            updateProgress();
+        }
+
+        function renderCreatures(list) {
+            const grid = document.getElementById('creature-grid');
+            grid.innerHTML = '';
+            list.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-img-container"><img src="${c.img}" class="card-img"></div>
+                    <div class="card-content">
+                        <span class="card-tag">${c.type}</span>
+                        <h3 class="card-title">${c.name}</h3>
+                    </div>
+                `;
+                card.onclick = () => openModal(c);
+                grid.appendChild(card);
+            });
+        }
+
+        function searchCreatures() {
+            const val = document.getElementById('search-input').value.toLowerCase();
+            const filtered = creatures.filter(c => c.name.toLowerCase().includes(val) || c.type.toLowerCase().includes(val));
+            renderCreatures(filtered);
+        }
+
+        function showArchive() {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('archive-section').style.display = 'block';
+        }
+
+        function showHome() {
+            document.getElementById('home-section').style.display = 'flex';
+            document.getElementById('archive-section').style.display = 'none';
+        }
+
+        function openModal(c) {
+            document.getElementById('modal-img').src = c.img;
+            document.getElementById('modal-tag').innerText = c.type;
+            document.getElementById('modal-title').innerText = c.name;
+            document.getElementById('modal-origin').innerText = 'Origin: ' + c.origin;
+            document.getElementById('modal-desc').innerText = c.desc;
+            document.getElementById('modal-threat').innerText = c.threat;
+            document.getElementById('modal-overlay').style.display = 'flex';
+            viewed.add(c.id);
+            updateProgress();
+        }
+
+        function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
+
+        function updateProgress() {
+            const count = viewed.size;
+            const total = creatures.length;
+            const percentage = (count / total) * 100;
+            document.getElementById('progress-text').innerText = `${count}/${total}`;
+            document.getElementById('progress-circle').style.background = `conic-gradient(var(--accent-gold) ${percentage}%, #333 ${percentage}%)`;
+        }
+
+        init();
+    </script>
+</body>
+</html>
