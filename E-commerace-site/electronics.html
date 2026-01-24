@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics Store | AMZ Elite</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-light: #232f3e;
+            --amazon-gold: #febd69;
+            --amazon-orange: #f08804;
+            --bg-gray: #f3f3f3;
+            --white: #ffffff;
+            --text-dark: #0f1111;
+            --accent-blue: #007185;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-gray); color: var(--text-dark); overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header { background: var(--amazon-blue); padding: 12px 5%; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: 800; color: white; text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--amazon-gold); }
+        .back-btn { color: white; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; padding: 8px 15px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; }
+        .back-btn:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+        /* --- SLEEK CATEGORY BANNER --- */
+        .category-banner {
+            background: linear-gradient(90deg, #131921 0%, #232f3e 100%);
+            color: white; padding: 25px 5%; display: flex; align-items: center;
+            justify-content: space-between; border-bottom: 3px solid var(--amazon-gold);
+            position: relative; overflow: hidden;
+        }
+        .banner-content { z-index: 1; }
+        .category-banner h1 { font-size: 1.8rem; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; color: var(--amazon-gold); }
+        .category-banner p { font-size: 0.95rem; opacity: 0.8; border-left: 3px solid var(--amazon-gold); padding-left: 15px; }
+        .stats-badge { background: rgba(255, 255, 255, 0.1); padding: 8px 15px; border-radius: 30px; font-size: 12px; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.2); display: flex; gap: 10px; }
+
+        /* --- PRODUCT GRID --- */
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+
+        /* --- PRODUCT CARD --- */
+        .product-card {
+            background: var(--white); border-radius: 12px; overflow: hidden; position: relative;
+            display: flex; flex-direction: column; border: 1px solid #e0e0e0;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0; transform: translateY(20px); animation: fadeIn 0.6s forwards ease-out;
+        }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); border-color: var(--amazon-gold); }
+
+        .badge { position: absolute; top: 12px; left: 12px; background: #cc0c39; color: white; padding: 3px 10px; font-size: 11px; font-weight: bold; border-radius: 3px; z-index: 2; }
+
+        .img-container { width: 100%; height: 220px; padding: 20px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .product-card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s ease; }
+        .product-card:hover img { transform: scale(1.08); }
+
+        .details { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+        .cat-tag { font-size: 10px; text-transform: uppercase; color: #767676; font-weight: bold; margin-bottom: 5px; }
+        .details h3 { font-size: 15px; line-height: 1.3; height: 40px; overflow: hidden; font-weight: 600; margin-bottom: 8px; color: #007185; }
+        .rating { color: #ffa41c; font-size: 13px; margin-bottom: 10px; }
+        .rating span { color: #565959; margin-left: 5px; font-size: 12px; }
+
+        .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 15px; }
+        .price { font-size: 22px; font-weight: 700; color: #B12704; }
+        .old-price { font-size: 14px; text-decoration: line-through; color: #565959; }
+
+        .action-btn { 
+            background: linear-gradient(to bottom, #f7dfa5, #f0c14b); border: 1px solid #a88734;
+            padding: 10px; border-radius: 20px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s;
+        }
+        .action-btn:hover { background: #f0c14b; border-color: #846a29; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            .category-banner { flex-direction: column; text-align: center; gap: 15px; padding: 20px; }
+            .category-banner p { border-left: none; padding-left: 0; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 5px; }
+            .img-container { height: 160px; padding: 10px; }
+            .details h3 { font-size: 13px; height: 34px; }
+            .price { font-size: 18px; }
+            .back-btn { font-size: 12px; padding: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">amz<span>elite</span></a>
+            <a href="index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="category-banner">
+        <div class="banner-content">
+            <h1>Tech Essentials</h1>
+            <p>Premium selection of the world's most advanced gadgets.</p>
+        </div>
+        <div class="stats-badge">
+            <span> 10+ New Arrivals</span>
+            <span>|</span>
+            <span> Free Shipping</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid">
+            <div class="product-card" style="animation-delay: 0.1s;">
+                <div class="badge">SALE -20%</div>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Headphones">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Audio</span>
+                    <h3>Wireless Noise Cancelling Studio Headphones</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(4.5k)</span></div>
+                    <div class="price-row"><span class="price">$199.99</span><span class="old-price">$249.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.2s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Watch">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Wearables</span>
+                    <h3>Smart Watch Series X with AMOLED Display</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(890)</span></div>
+                    <div class="price-row"><span class="price">$149.50</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.3s;">
+                <div class="badge">HOT</div>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" alt="Laptop">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Computing</span>
+                    <h3>Ultra-Slim Pro Laptop 14" - Intel i7</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(320)</span></div>
+                    <div class="price-row"><span class="price">$899.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.4s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" alt="Mouse">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Accessories</span>
+                    <h3>RGB Ergonomic Wireless Gaming Mouse</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(1.2k)</span></div>
+                    <div class="price-row"><span class="price">$49.99</span><span class="old-price">$65.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.5s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500" alt="Console">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Gaming</span>
+                    <h3>Next-Gen Gaming Console 1TB Edition</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(5.6k)</span></div>
+                    <div class="price-row"><span class="price">$499.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.6s;">
+                <div class="badge">Best Seller</div>
+                <div class="img-container">
+                    <img src="data:image/jpeg;base64,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LARvUWZ4FHA4yZlvz2RY00T10KnBGD/viPETyWQt3cpal27l755VSWGeAUc2bgo8vM+QgWpnbO2Xbe4rrrZ3IzuKBkD9pieCL5mdLsPoc7lWu9pUrjKoFB1dv1EPCpfpt/ESW+i/QDsBXrGnoyD7BCSXPjc/Ow/w9053k32x7/0vMfeo/wCivQTfYAImqsB4nB/Q6j5997D/AMfWTF0c6FV6dhfcTdcAO22ML5IOSjyE6TQ6CuhQlahQBjgAJlRMO+73qLl7RQyZmNahEzIMvpVrZ6DMqzTg8uExmQjnISrBlYMtCViELk9lIMEyR7EpzPRAqjE9AlYWBXERJHhGeBmh2z0Yqv3mTFbsMMd1WWwfs2K3B17sH3ETfxIuMvapl0+felfV+amIrrFBJJFbMzaO0nPydnxtNZ9Fuwc4DSPddsl6rDU4NTrzquxXYPME9l1+kDxn1/qNOlilXUMCMYIzOT2x0DpvXcDsEByEIDop+iG5e6U+rHx3T2vl857J2C+oJ3N2wJ8ZyxTTVedluOJ+iuSfOST0Q6El2V6VLsvLV217qJ9mpPBR9NuPIjwki7N6C1Ju+2drgnxUbHs1+qvIe/M6ymlUG6oAHlI6csvu7T9E7k8NLsLovRpRvY37G4tY53nY+JJ5/hN7ETpJJ2ituyIiSgiIgJ4ygz2IGO9HhKN2Zc8KyNDGxGJeNc83I0Le7K1WVhJUBGh4qyqIkhERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQERED//2Q==" alt="Phone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Mobile</span>
+                    <h3>Flagship Smartphone Z - 256GB Gold</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(9.2k)</span></div>
+                    <div class="price-row"><span class="price">$1,099</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.7s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500" alt="Monitor">
+                </div>
+                <div class="details">
+
+                    <span class="cat-tag">Computing</span>
+                    <h3>34" Ultra-Wide Curved Gaming Monitor</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(410)</span></div>
+                    <div class="price-row"><span class="price">$349.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.8s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500" alt="Tablet">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Mobile</span>
+                    <h3>Pro Tablet with Stylus Support - 12.9"</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(1.1k)</span></div>
+                    <div class="price-row"><span class="price">$799.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUZWcK-XOGCYjqCKAx5-jx53Baw8FsZ75ddA&s" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Gadgets</span>
+                    <h3>4K Foldable Drone with GPS & Return Home</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 1s;">
+                <div class="badge">NEW</div>
+                <div class="img-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRroeBgRg1VFToSw_x0Nw_KtWR0s3EzFVB9jA&s" alt="Earbuds">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">Audio</span>
+                    <h3>True Wireless Earbuds - Pro Sound</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(640)</span></div>
+                    <div class="price-row"><span class="price">$129.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer style="background: var(--amazon-blue); color: white; padding: 60px 20px; margin-top: 50px; border-top: 5px solid var(--amazon-gold);">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left;">
+            
+            <div>
+                <h2 style="color: var(--amazon-gold); margin-bottom: 20px; font-size: 24px;">amz<span>elite</span></h2>
+                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Your destination for premium fashion and lifestyle products. Quality guaranteed since 2026.</p>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 20px; font-size: 18px; border-left: 3px solid var(--amazon-gold); padding-left: 10px;">Quick Links</h4>
+                <ul style="list-style: none; font-size: 14px; opacity: 0.8; line-height: 2;">
+                    <li><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+                    <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
+                    <li><a href="jewelry.html" style="color: white; text-decoration: none;">Jewelry</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Track Order</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 20px; font-size: 18px; border-left: 3px solid var(--amazon-gold); padding-left: 10px;">Customer Service</h4>
+                <ul style="list-style: none; font-size: 14px; opacity: 0.8; line-height: 2;">
+                     <li><a href="info.html">Shipping Policy</a></li>
+                    <li><a href="info.html">Return & Refund</a></li>
+                    <li><a href="info.html">privacy Policy</a></li>
+                    <li><a href="info.html">Contact Us</a></li>
+                
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 20px; font-size: 18px; border-left: 3px solid var(--amazon-gold); padding-left: 10px;">Newsletter</h4>
+                <p style="font-size: 12px; margin-bottom: 10px; opacity: 0.7;">Get updates on new collections!</p>
+                <div style="display: flex;">
+                    <input type="email" placeholder="Email" style="padding: 8px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%;">
+                    <button style="background: var(--amazon-gold); border: none; padding: 8px 15px; border-radius: 0 4px 4px 0; cursor: pointer; font-weight: bold;">Join</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; opacity: 0.6;">
+            <p>&copy; 2026 AMZ Elite Fashion Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

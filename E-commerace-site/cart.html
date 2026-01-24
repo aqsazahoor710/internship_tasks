@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZ Elite | Shopping Cart</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-light: #232f3e;
+            --amazon-gold: #febd69;
+            --amazon-orange: #f08804;
+            --bg-gray: #eaeded;
+            --text-dark: #0f1111;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-gray); color: var(--text-dark); }
+
+        header { background: var(--amazon-blue); padding: 10px 20px; text-align: center; }
+        .logo { font-size: 24px; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: var(--amazon-gold); }
+
+        .cart-wrapper {
+            max-width: 1150px;
+            margin: 20px auto;
+            display: flex;
+            gap: 20px;
+            padding: 0 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Yahan ID add ki gayi hai */
+        #cart-left {
+            flex: 3;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            min-height: 300px;
+        }
+
+        #cart-left h1 { font-size: 24px; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-img { width: 120px; height: 120px; object-fit: contain; }
+        .item-details { flex: 1; }
+        .item-details h3 { font-size: 16px; margin-bottom: 5px; color: #007185; }
+        .item-details p { font-size: 12px; color: green; margin-bottom: 10px; }
+        .item-actions { display: flex; align-items: center; gap: 15px; font-size: 13px; }
+        .delete-link { color: #007185; cursor: pointer; text-decoration: none; }
+        .delete-link:hover { text-decoration: underline; }
+        .item-price { font-size: 18px; font-weight: bold; }
+
+        .cart-right {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            height: fit-content;
+        }
+
+        .subtotal { font-size: 18px; margin-bottom: 15px; }
+        /* Yahan ID add ki gayi hai */
+        #cart-total { font-weight: bold; }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--amazon-gold);
+            border: 1px solid #a88734;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .checkout-btn:hover { background: #f0c14b; }
+
+        @media (max-width: 768px) {
+            .cart-wrapper { flex-direction: column; }
+            .item-img { width: 80px; height: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">amz<span>elite</span></a>
+    </header>
+
+    <main class="cart-wrapper">
+        <div id="cart-left">
+            <h1>Shopping Cart</h1>
+            </div>
+
+        <div class="cart-right">
+            <div class="subtotal">
+                Subtotal: <span id="cart-total">$0.00</span>
+            </div>
+            <label style="font-size: 13px; display: flex; align-items: center; gap: 5px; margin-bottom: 15px;">
+                <input type="checkbox"> This order contains a gift
+            </label>
+            <a href="checkout.html" style="text-decoration: none;">
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </a>
+        </div>
+    </main>
+
+<script>
+function renderCartItems() {
+    let cart = JSON.parse(localStorage.getItem('amz_cart')) || [];
+    let cartContainer = document.getElementById('cart-left'); 
+    let totalElement = document.getElementById('cart-total'); 
+    
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `
+            <h1>Shopping Cart</h1>
+            <div style="padding: 40px; text-align: center;">
+                <img src="https://m.media-amazon.com/images/G/01/cart/empty/kettle-desaturated._CB445243794_.svg" width="150" style="margin-bottom:20px;">
+                <h2>Your AMZ Elite cart is empty.</h2>
+                <a href="index.html" style="color: #007185; text-decoration: none; font-weight: bold;">Shop today's deals</a>
+            </div>`;
+        if(totalElement) totalElement.innerText = "$0.00";
+        return;
+    }
+
+    let cartHTML = "<h1>Shopping Cart</h1>";
+    let subtotal = 0;
+
+    cart.forEach((item, index) => {
+        let itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+
+        cartHTML += `
+            <div class="cart-item">
+                <img src="${item.image}" class="item-img" alt="${item.title}">
+                <div class="item-details">
+                    <h3>${item.title}</h3>
+                    <p>In Stock</p>
+                    <div class="item-actions">
+                        <span>Qty: <b>${item.qty}</b></span>
+                        <span onclick="removeItem(${index})" class="delete-link">Delete</span>
+                        <span class="delete-link">Save for later</span>
+                    </div>
+                </div>
+                <div class="item-price">$${item.price.toFixed(2)}</div>
+            </div>
+        `;
+    });
+
+    cartContainer.innerHTML = cartHTML;
+    
+    if(totalElement) {
+        totalElement.innerText = "$" + subtotal.toFixed(2);
+    }
+}
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('amz_cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('amz_cart', JSON.stringify(cart));
+    renderCartItems();
+}
+
+document.addEventListener('DOMContentLoaded', renderCartItems);
+</script>
+
+</body>
+</html>

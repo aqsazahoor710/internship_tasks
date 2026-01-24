@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed Successfully | AMZ Elite</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-orange: #f08804;
+            --amazon-gold: #febd69;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body {
+            background-color: #f0f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .success-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 90%;
+        }
+
+        /* --- Checkmark Animation --- */
+        .checkmark-wrapper {
+            width: 100px;
+            height: 100px;
+            background: #4bb543;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .checkmark {
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        h1 { color: #111; font-size: 28px; margin-bottom: 10px; }
+        p { color: #555; font-size: 15px; margin-bottom: 30px; line-height: 1.6; }
+
+        .order-id {
+            background: #f7f7f7;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--amazon-blue);
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .btn-home {
+            background: var(--amazon-gold);
+            border: 1px solid #a88734;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #111;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-home:hover { background: #f0c14b; }
+
+        @keyframes scaleUp {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-card">
+        <div class="checkmark-wrapper">
+            <div class="checkmark">✓</div>
+        </div>
+        
+        <h1>Order Placed!</h1>
+        <p>Thank you for shopping with <strong>AMZ Elite</strong>. Your order has been received and is being processed.</p>
+        
+        <div class="order-id">Order ID: #AMZ-992847-2026</div>
+
+        <div style="margin-top: 20px;">
+            <a href="index.html" class="btn-home">Continue Shopping</a>
+        </div>
+        
+        <p style="font-size: 12px; color: #888; margin-top: 40px;">
+            A confirmation email has been sent to your registered address.
+        </p>
+    </div>
+
+</body>
+</html>

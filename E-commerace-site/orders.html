@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders | AMZ Elite</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-light: #232f3e;
+            --amazon-gold: #febd69;
+            --amazon-orange: #f08804;
+            --bg-gray: #eaeded;
+            --border: #ddd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-gray); color: #0f1111; }
+
+        /* --- MINI NAV --- */
+        header { background: var(--amazon-blue); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 22px; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: var(--amazon-gold); }
+        .nav-links a { color: white; text-decoration: none; font-size: 14px; margin-left: 15px; }
+
+        /* --- MAIN CONTENT --- */
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+        h1 { font-size: 26px; font-weight: 400; margin-bottom: 20px; }
+
+        /* --- ORDER CARD --- */
+        .order-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        /* Card Header (Grey Bar) */
+        .order-header {
+            background-color: #f0f2f2;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #565959;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-info div { display: flex; flex-direction: column; margin-right: 30px; }
+        .header-info span.label { text-transform: uppercase; }
+        .header-info span.val { font-weight: 600; color: #0f1111; font-size: 13px; }
+
+        .order-id-info { text-align: right; }
+
+        /* Card Body */
+        .order-body { padding: 15px 20px; display: flex; gap: 20px; }
+        .product-img { width: 90px; height: 90px; object-fit: contain; }
+        
+        .product-details { flex: 1; }
+        .status { font-size: 18px; font-weight: 700; color: #0f1111; margin-bottom: 5px; }
+        .product-name { color: #007185; font-size: 14px; cursor: pointer; text-decoration: none; display: block; margin-bottom: 10px; }
+        .product-name:hover { text-decoration: underline; color: #c45500; }
+
+        /* Action Buttons */
+        .order-actions { width: 200px; display: flex; flex-direction: column; gap: 8px; }
+        .btn-action {
+            width: 100%;
+            padding: 7px;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #adb1b8;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .btn-action:hover { background: #f7f8fa; }
+        .btn-track { background: var(--amazon-gold); border-color: #a88734; }
+        .btn-track:hover { background: #f0c14b; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 600px) {
+            .order-header { flex-direction: column; gap: 10px; }
+            .order-body { flex-direction: column; align-items: center; text-align: center; }
+            .order-actions { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">amz<span>elite</span></a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="signin.html">Account</a>
+    </div>
+</header>
+
+<div class="container">
+    <h1>Your Orders</h1>
+
+    <div class="order-card">
+        <div class="order-header">
+            <div style="display: flex;">
+                <div class="header-info">
+                    <span class="label">Order Placed</span>
+                    <span class="val">January 20, 2026</span>
+                </div>
+                <div class="header-info">
+                    <span class="label">Total</span>
+                    <span class="val">$398.00</span>
+                </div>
+                <div class="header-info">
+                    <span class="label">Ship To</span>
+                    <span class="val" style="color:#007185; cursor:pointer;">John Doe ▼</span>
+                </div>
+            </div>
+            <div class="order-id-info">
+                <span class="label">Order # AMZ-114-882741</span>
+                <div style="font-size:13px;"><a href="#" style="color:#007185; text-decoration:none;">View order details</a></div>
+            </div>
+        </div>
+        <div class="order-body">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" class="product-img" alt="Product">
+            <div class="product-details">
+                <div class="status" style="color: #007600;">Delivered Today</div>
+                <a href="#" class="product-name">Sony WH-1000XM5 Wireless Noise Cancelling Headphones - Silver Edition</a>
+                <button class="btn-action" style="width: auto; padding: 5px 15px;">Buy it again</button>
+            </div>
+            <div class="order-actions">
+                <div class="btn-group">
+    <button class="btn-action btn-track" onclick="toggleTracking(this)">Track package</button>
+    
+    <button class="btn-action" onclick="window.location.href='info.html'">Return or replace items</button>
+    
+    <button class="btn-action" onclick="openReviewModal()">Leave product review</button>
+</div>
+
+<div class="tracking-info" style="display:none; margin-top:15px; padding:10px; border:1px solid #ddd; background:#f9f9f9; border-radius:8px;">
+    <p style="color: green; font-weight: bold; margin-bottom:5px;">Status: Out for Delivery</p>
+    <p style="font-size: 12px; color: #555;">Your package is with the delivery agent and will arrive by 8:00 PM tonight.</p>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-card">
+        <div class="order-header">
+            <div style="display: flex;">
+                <div class="header-info">
+                    <span class="label">Order Placed</span>
+                    <span class="val">January 15, 2026</span>
+                </div>
+                <div class="header-info">
+                    <span class="label">Total</span>
+                    <span class="val">$150.00</span>
+                </div>
+                <div class="header-info">
+                    <span class="label">Ship To</span>
+                    <span class="val" style="color:#007185; cursor:pointer;">John Doe ▼</span>
+                </div>
+            </div>
+            <div class="order-id-info">
+                <span class="label">Order # AMZ-114-556622</span>
+                <div style="font-size:13px;"><a href="#" style="color:#007185; text-decoration:none;">View order details</a></div>
+            </div>
+        </div>
+        <div class="order-body">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="product-img" alt="Product">
+            <div class="product-details">
+                <div class="status">Arriving Wednesday</div>
+                <a href="#" class="product-name">Nike Air Max 270 Premium Sports Shoes - Limited Edition</a>
+            </div>
+            <div class="order-actions">
+                <button class="btn-action btn-track">Track package</button>
+                <button class="btn-action">View or edit order</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="reviewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
+    <div style="background:white; width:90%; max-width:400px; margin:100px auto; padding:20px; border-radius:10px; text-align:center;">
+        <h3>Write a Review</h3>
+        <p>How was your experience?</p>
+        <div style="font-size:30px; color:#febd69; margin-bottom:15px;">⭐⭐⭐⭐⭐</div>
+        <textarea id="reviewText" placeholder="Write your comments here..." style="width:100%; height:100px; padding:10px; border-radius:5px; border:1px solid #ddd;"></textarea>
+        <br><br>
+        <button class="btn-action btn-yellow" onclick="submitReview()" style="width:100%;">Submit Review</button>
+        <button onclick="closeReview()" style="margin-top:10px; background:none; border:none; color:blue; cursor:pointer;">Cancel</button>
+    </div>
+</div>
+
+
+
+
+<script>
+    // Tracking info ko dikhane ke liye
+    function toggleTracking(btn) {
+        // Button ke theek baad wali div (tracking-info) ko dhoondo
+        const trackingDiv = btn.parentElement.nextElementSibling;
+        
+        if (trackingDiv.style.display === "none") {
+            trackingDiv.style.display = "block";
+            btn.innerText = "Hide tracking";
+        } else {
+            trackingDiv.style.display = "none";
+            btn.innerText = "Track package";
+        }
+    }
+
+    // Review ke liye simple message
+    function showReviewAlert() {
+        alert("Thank you for your interest! Review system will be active once you receive the delivery.");
+    }
+
+
+
+    function openReviewModal() {
+    document.getElementById('reviewModal').style.display = 'block';
+}
+
+function closeReview() {
+    document.getElementById('reviewModal').style.display = 'none';
+}
+
+function submitReview() {
+    let text = document.getElementById('reviewText').value;
+    if(text.trim() === "") return alert("Please write something!");
+    
+    alert("Thank you! Your review has been submitted for moderation.");
+    closeReview();
+}
+</script>
+
+</body>
+</html>

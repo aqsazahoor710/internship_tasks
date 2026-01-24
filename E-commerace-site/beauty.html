@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> beauty Store |AMZ Elite</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-light: #232f3e;
+            --amazon-gold: #febd69;
+            --amazon-orange: #f08804;
+            --bg-gray: #f3f3f3;
+            --white: #ffffff;
+            --text-dark: #0f1111;
+            --accent-blue: #007185;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-gray); color: var(--text-dark); overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header { background: var(--amazon-blue); padding: 12px 5%; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: 800; color: white; text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--amazon-gold); }
+        .back-btn { color: white; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; padding: 8px 15px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; }
+        .back-btn:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+        /* --- SLEEK CATEGORY BANNER --- */
+        .category-banner {
+            background: linear-gradient(90deg, #131921 0%, #232f3e 100%);
+            color: white; padding: 25px 5%; display: flex; align-items: center;
+            justify-content: space-between; border-bottom: 3px solid var(--amazon-gold);
+            position: relative; overflow: hidden;
+        }
+        .banner-content { z-index: 1; }
+        .category-banner h1 { font-size: 1.8rem; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; color: var(--amazon-gold); }
+        .category-banner p { font-size: 0.95rem; opacity: 0.8; border-left: 3px solid var(--amazon-gold); padding-left: 15px; }
+        .stats-badge { background: rgba(255, 255, 255, 0.1); padding: 8px 15px; border-radius: 30px; font-size: 12px; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.2); display: flex; gap: 10px; }
+
+        /* --- PRODUCT GRID --- */
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+
+        /* --- PRODUCT CARD --- */
+        .product-card {
+            background: var(--white); border-radius: 12px; overflow: hidden; position: relative;
+            display: flex; flex-direction: column; border: 1px solid #e0e0e0;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0; transform: translateY(20px); animation: fadeIn 0.6s forwards ease-out;
+        }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); border-color: var(--amazon-gold); }
+
+        .badge { position: absolute; top: 12px; left: 12px; background: #cc0c39; color: white; padding: 3px 10px; font-size: 11px; font-weight: bold; border-radius: 3px; z-index: 2; }
+
+        .img-container { width: 100%; height: 220px; padding: 20px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .product-card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s ease; }
+        .product-card:hover img { transform: scale(1.08); }
+
+        .details { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+        .cat-tag { font-size: 10px; text-transform: uppercase; color: #767676; font-weight: bold; margin-bottom: 5px; }
+        .details h3 { font-size: 15px; line-height: 1.3; height: 40px; overflow: hidden; font-weight: 600; margin-bottom: 8px; color: #007185; }
+        .rating { color: #ffa41c; font-size: 13px; margin-bottom: 10px; }
+        .rating span { color: #565959; margin-left: 5px; font-size: 12px; }
+
+        .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 15px; }
+        .price { font-size: 22px; font-weight: 700; color: #B12704; }
+        .old-price { font-size: 14px; text-decoration: line-through; color: #565959; }
+
+        .action-btn { 
+            background: linear-gradient(to bottom, #f7dfa5, #f0c14b); border: 1px solid #a88734;
+            padding: 10px; border-radius: 20px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s;
+        }
+        .action-btn:hover { background: #f0c14b; border-color: #846a29; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            .category-banner { flex-direction: column; text-align: center; gap: 15px; padding: 20px; }
+            .category-banner p { border-left: none; padding-left: 0; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 5px; }
+            .img-container { height: 160px; padding: 10px; }
+            .details h3 { font-size: 13px; height: 34px; }
+            .price { font-size: 18px; }
+            .back-btn { font-size: 12px; padding: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">amz<span>elite</span></a>
+            <a href="index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="category-banner">
+        <div class="banner-content">
+            <h1>beauty Essentials</h1>
+            <p>Premium selection of the world's.</p>
+        </div>
+        <div class="stats-badge">
+            <span> 10+ New Arrivals</span>
+            <span>|</span>
+            <span> Free Shipping</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid">
+            <div class="product-card" style="animation-delay: 0.1s;">
+                <div class="badge">SALE -20%</div>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJlYXV0eSUyMHByb2R1Y3RzfGVufDB8fDB8fHww" alt="beauty">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(4.5k)</span></div>
+                    <div class="price-row"><span class="price">$199.99</span><span class="old-price">$249.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.2s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJlYXV0eSUyMHByb2R1Y3RzfGVufDB8fDB8fHww" alt="beauty">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(890)</span></div>
+                    <div class="price-row"><span class="price">$149.50</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.3s;">
+                <div class="badge">HOT</div>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fGJlYXV0eSUyMHByb2R1Y3RzfGVufDB8fDB8fHww" alt="Laptop">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(320)</span></div>
+                    <div class="price-row"><span class="price">$899.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.4s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1625093525885-282384697917?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE1fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Mouse">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(1.2k)</span></div>
+                    <div class="price-row"><span class="price">$49.99</span><span class="old-price">$65.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.5s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1631237535242-b6ef156c91b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMyfHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Console">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(5.6k)</span></div>
+                    <div class="price-row"><span class="price">$499.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.6s;">
+                <div class="badge">Best Seller</div>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1717376280564-0fd179a9695a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTM1fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Phone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(9.2k)</span></div>
+                    <div class="price-row"><span class="price">$1,099</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.7s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1617422275563-4cf1103e7d60?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTM2fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Monitor">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(410)</span></div>
+                    <div class="price-row"><span class="price">$349.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.8s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1617422275558-e5f616302690?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQzfHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Tablet">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(1.1k)</span></div>
+                    <div class="price-row"><span class="price">$799.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1651738811265-6c95e43ebda7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTUyfHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 1s;">
+                <div class="badge">NEW</div>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1673241073608-fae56d662d5b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY3fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Earbuds">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ <span>(640)</span></div>
+                    <div class="price-row"><span class="price">$129.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+  <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1686831889344-f8cb3a384bc0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTk1fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1726562450499-a2af14e80f3c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjY2fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1617422275560-30c9dbf0ccb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjg1fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1638131163449-70059e10de6a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzMzfHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1739980296455-3f8d6051ca20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzQ2fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+            <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1687201348477-ed9776ea1448?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDI5fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+                <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1599733589046-10c005739ef9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTc4fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+                <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1631237535386-a771aa9fe527?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzE1fHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+                <div class="product-card" style="animation-delay: 0.9s;">
+                <div class="img-container">
+                    <img src="https://plus.unsplash.com/premium_photo-1676717962720-d9a812c8f8c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjkwfHxiZWF1dHklMjBwcm9kdWN0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Drone">
+                </div>
+                <div class="details">
+                    <span class="cat-tag">beauty</span>
+                    <h3>Made to deliver visible results</h3>
+                    <div class="rating">⭐⭐⭐⭐ <span>(230)</span></div>
+                    <div class="price-row"><span class="price">$299.00</span><span class="old-price">$399.00</span></div>
+                    <button class="action-btn">Add to Cart</button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+<footer style="background: var(--amazon-blue); color: white; padding: 60px 20px; margin-top: 50px; border-top: 5px solid var(--amazon-gold);">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left;">
+            
+            <div>
+                <h2 style="color: var(--amazon-gold); margin-bottom: 20px; font-size: 24px;">amz<span>elite</span></h2>
+                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Your destination for premium fashion and lifestyle products. Quality guaranteed since 2026.</p>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 20px; font-size: 18px; border-left: 3px solid var(--amazon-gold); padding-left: 10px;">Quick Links</h4>
+                <ul style="list-style: none; font-size: 14px; opacity: 0.8; line-height: 2;">
+                    <li><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+                    <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
+                    <li><a href="jewelry.html" style="color: white; text-decoration: none;">Jewelry</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Track Order</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 20px; font-size: 18px; border-left: 3px solid var(--amazon-gold); padding-left: 10px;">Customer Service</h4>
+                <ul style="list-style: none; font-size: 14px; opacity: 0.8; line-height: 2;">
+                  <li><a href="info.html">Shipping Policy</a></li>
+                    <li><a href="info.html">Return & Refund</a></li>
+                    <li><a href="info.html">privacy Policy</a></li>
+                    <li><a href="info.html">Contact Us</a></li>
+                
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: 20px; font-size: 18px; border-left: 3px solid var(--amazon-gold); padding-left: 10px;">Newsletter</h4>
+                <p style="font-size: 12px; margin-bottom: 10px; opacity: 0.7;">Get updates on new collections!</p>
+                <div style="display: flex;">
+                    <input type="email" placeholder="Email" style="padding: 8px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%;">
+                    <button style="background: var(--amazon-gold); border: none; padding: 8px 15px; border-radius: 0 4px 4px 0; cursor: pointer; font-weight: bold;">Join</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; opacity: 0.6;">
+            <p>&copy; 2026 AMZ Elite Fashion Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

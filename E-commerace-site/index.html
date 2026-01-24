@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZ Elite | Premium Shopping</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-light: #232f3e;
+            --amazon-gold: #febd69;
+            --amazon-orange: #f08804;
+            --bg-gray: #eaeded;
+            --text: #0f1111;
+            --white: #ffffff;
+            --card-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-gray); color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- HEADER --- */
+        header { background: var(--amazon-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .nav-top { display: flex; align-items: center; padding: 8px 20px; gap: 15px; }
+        .logo { font-size: 28px; font-weight: 800; color: white; text-decoration: none; display: flex; align-items: center; transition: transform 0.3s; }
+        .logo:hover { transform: scale(1.05); }
+        .logo span { color: var(--amazon-gold); }
+        
+        .search-bar { flex: 1; display: flex; height: 45px; }
+        .search-bar select { border-radius: 4px 0 0 4px; padding: 0 12px; background: #f3f3f3; border: none; cursor: pointer; }
+        .search-bar input { flex: 1; border: none; padding: 0 15px; font-size: 16px; outline: none; }
+        .search-bar button { background: var(--amazon-gold); border: none; width: 50px; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 20px; }
+
+        .nav-right { display: flex; gap: 20px; align-items: center; }
+        
+        /* SIGN IN BUTTON */
+        .signin-btn { background: linear-gradient(to bottom, #f7dfa5, #f0c14b); border: 1px solid #a88734; padding: 8px 20px; border-radius: 3px; cursor: pointer; font-weight: 500; font-size: 13px; color: #111; transition: 0.2s; }
+        .signin-btn:hover { background: #f0c14b; border-color: #846a29; }
+
+        /* --- HERO SLIDER --- */
+        .slider-container { position: relative; width: 100%; height: 550px; overflow: hidden; }
+        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out, transform 1.2s ease-in-out; transform: scale(1.1); }
+        .slide.active { opacity: 1; transform: scale(1); }
+        .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
+        .slide-content { position: absolute; top: 25%; left: 8%; color: white; opacity: 0; animation: slideIn 0.8s forwards 0.5s; z-index: 10; }
+        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .slide-content h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .slide-content p { font-size: 1.2rem; margin-bottom: 20px; }
+        .hero-btn { background: var(--amazon-gold); border: none; padding: 12px 35px; font-weight: bold; border-radius: 25px; cursor: pointer; font-size: 1rem; }
+
+        /* --- CATEGORY NAV --- */
+        .category-nav { background: var(--amazon-light); padding: 10px 20px; display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; }
+        .category-nav::-webkit-scrollbar { display: none; }
+        .cat-tab { color: white; font-size: 14px; cursor: pointer; padding: 5px 12px; border-radius: 4px; white-space: nowrap; transition: 0.3s; }
+        .cat-tab.active, .cat-tab:hover { background: rgba(255,255,255,0.2); color: var(--amazon-gold); }
+
+        /* --- PRODUCT GRID --- */
+        .main-content { max-width: 1440px; margin: -100px auto 40px; position: relative; padding: 0 20px; z-index: 100; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        
+        .product-card { 
+            background: var(--white); padding: 20px; border-radius: 8px; 
+            display: flex; flex-direction: column; opacity: 0; transform: translateY(40px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: var(--card-shadow);
+        }
+        .product-card.visible { opacity: 1; transform: translateY(0); }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        .img-container { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+        .product-card img { max-width: 100%; max-height: 100%; transition: transform 0.5s; }
+        .product-card:hover img { transform: scale(1.08); }
+
+        .price { font-size: 24px; font-weight: 700; margin: 10px 0; color: #B12704; }
+        .add-btn { background: var(--amazon-gold); border: none; padding: 10px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: auto; transition: 0.3s; }
+        .add-btn:hover { background: #f7ca00; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--amazon-light); color: white; margin-top: 100px; }
+        .back-top { background: #37475a; padding: 15px; text-align: center; cursor: pointer; font-size: 14px; }
+        .back-top:hover { background: #485769; }
+        .footer-main { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); padding: 50px 10%; gap: 40px; }
+        .footer-col h4 { margin-bottom: 20px; font-size: 16px; }
+        .footer-col p { font-size: 14px; color: #ddd; margin-bottom: 10px; cursor: pointer; }
+        .footer-col p:hover { text-decoration: underline; }
+        .footer-bottom { background: var(--amazon-blue); padding: 40px; text-align: center; border-top: 1px solid #3a4553; }
+        .footer-logo { font-size: 24px; font-weight: bold; color: var(--amazon-gold); margin-bottom: 10px; display: block; }
+
+        .cart-bubble { position: relative; font-size: 24px; cursor: pointer; }
+        #cart-count { background: var(--amazon-orange); color: var(--amazon-blue); font-size: 12px; padding: 2px 7px; border-radius: 50%; position: absolute; top: -5px; right: -10px; font-weight: bold; }
+
+
+
+/* --- MOBILE RESPONSIVENESS UPDATES --- */
+@media (max-width: 768px) {
+    /* Header Fix */
+    .nav-top {
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .logo {
+        font-size: 22px;
+        order: 1;
+    }
+
+    .nav-right {
+        order: 2;
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .search-bar {
+        order: 3;
+        flex-basis: 100%; /* Search bar full width on mobile */
+        height: 40px;
+    }
+
+    /* Hero Slider Adjustments */
+    .slider-container {
+        height: 350px;
+    }
+    .slide-content h1 {
+        font-size: 1.8rem;
+    }
+    .slide-content p {
+        font-size: 0.9rem;
+    }
+
+    /* Product Grid: Show 2 Cards at a time */
+    .main-content {
+        margin-top: -50px; /* Adjusting the overlap */
+        padding: 0 10px;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns */
+        gap: 10px;
+    }
+
+    .product-card {
+        padding: 10px;
+    }
+
+    .img-container {
+        height: 140px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .product-card h3 {
+        font-size: 13px !important;
+        height: 32px;
+        overflow: hidden;
+    }
+
+    /* Category Nav Scroll fix */
+    .category-nav {
+        padding: 8px 10px;
+    }
+    .cat-tab {
+        font-size: 12px;
+    }
+}
+
+/* Extra small devices adjust */
+@media (max-width: 400px) {
+    .grid {
+        gap: 8px;
+    }
+    .signin-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-top">
+            <a href="#" class="logo" onclick="location.reload()">amz<span>elite</span></a>
+            <div class="search-bar">
+                <select><option>All</option></select>
+                <input type="text" id="main-search" placeholder="Search for products, electronics, and more...">
+                <button onclick="handleSearch()">🔍</button>
+            </div>
+            <div class="nav-right">
+    <a href="signin.html" style="text-decoration: none;">
+        <button class="signin-btn">Sign In</button>
+    </a>
+         <div class="nav-right">
+    <a href="orders.html" style="text-decoration: none;">
+        <button class="signin-btn">orders</button>
+    </a>
+
+   <div class="nav-link" onclick="location.href='cart.html'" style="cursor: pointer;">
+    <div class="cart-bubble">🛒<span id="cart-count">0</span></div>
+</div>
+    
+    </div>
+            </div>
+        </div>
+        
+
+<div class="category-nav">
+    <a href="admin.html" class="cat-tab active">Admin Dashboard</a>
+    <a href="index.html" class="cat-tab active">All Deals</a>
+    <a href="electronics.html" class="cat-tab">Electronics</a>
+    <a href="jewelry.html" class="cat-tab">Jewelry</a>
+    <a href="men.html" class="cat-tab">Men's Fashion</a>
+    <a href="women.html" class="cat-tab">Women's Fashion</a>
+    <!-- <a href="home_kitchen.html" class="cat-tab">Home & Kitchen</a> -->
+    <a href="beauty.html" class="cat-tab">Beauty</a>
+    <a href="toys.html" class="cat-tab">Toys</a>
+    <a href="sports.html" class="cat-tab">Sports</a>
+    <a href="books.html" class="cat-tab">Books</a>
+    <a href="automotive.html" class="cat-tab">Automotive</a>
+    <a href="groceries.html" class="cat-tab">Groceries</a>
+    <a href="pet-supplies.html" class="cat-tab">Pet Supplies</a>
+    <a href="garden.html" class="cat-tab">Garden</a>
+</div>
+
+
+    </header>
+
+    <section class="slider-container">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80" alt="Sale">
+            <div class="slide-content">
+                <h1>Big Savings Await</h1>
+                <p>Exclusive deals on electronics and home appliances.</p>
+                <button class="hero-btn">Shop Clearance</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Fashion">
+            <div class="slide-content">
+                <h1>Summer Collection</h1>
+                <p>Trending styles for men and women are here.</p>
+                <button class="hero-btn">View Fashion</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1600&q=80" alt="Tech">
+            <div class="slide-content">
+                <h1>Latest Tech Gadgets</h1>
+                <p>Smartwatches, laptops, and more at unbeatable prices.</p>
+                <button class="hero-btn">Explore Tech</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div id="product-list" class="grid">
+            </div>
+    </main>
+
+    <footer>
+        <div class="back-top" onclick="window.scrollTo(0,0)">Back to top</div>
+        <div class="footer-main">
+            <div class="footer-col">
+                <h4>Get to Know Us</h4>
+                <p>Careers</p><p>Blog</p><p>About AMZ Elite</p><p>Investor Relations</p>
+            </div>
+            <div class="footer-col">
+                <h4>Make Money with Us</h4>
+                <p>Sell on AMZ</p><p>Protect & Build Your Brand</p><p>Become an Affiliate</p><p>Advertise Your Products</p>
+            </div>
+            <div class="footer-col">
+                <h4>AMZ Payment Products</h4>
+                <p>Business Card</p><p>Shop with Points</p><p>Reload Your Balance</p><p>Currency Converter</p>
+            </div>
+            <div class="footer-col">
+                <h4>Let Us Help You</h4>
+                <p>Your Account</p><p>Your Orders</p><p>Shipping Rates</p><p>Help Center</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-logo">amzelite</span>
+            <p>© 2026 AMZ Elite Clone | Developed for Premium Experience</p>
+        </div>
+    </footer>
+
+    <script>
+        let allProducts = [];
+        let cartCount = 0;
+
+        // 1. Slider Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function rotateSlides() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(rotateSlides, 5000);
+
+        // 2. Data Fetch & Render
+        async function fetchStore() {
+            const res = await fetch('https://fakestoreapi.com/products');
+            allProducts = await res.json();
+            renderProducts(allProducts);
+        }
+
+        function renderProducts(data) {
+            const list = document.getElementById('product-list');
+            list.innerHTML = data.map(p => `
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="${p.image}" alt="${p.title}">
+                    </div>
+                    <p style="font-size:12px; color:#565959">${p.category.toUpperCase()}</p>
+                    <h3 style="font-size:16px; margin:5px 0">${p.title.substring(0, 45)}...</h3>
+                    <div style="color:#ffa41c; font-size:14px">⭐⭐⭐⭐ <span style="color:#007185">${p.rating.count}</span></div>
+                    <div class="price">$${p.price}</div>
+                    <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                </div>
+            `).join('');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+        }
+
+        // 3. Filters
+        function filterCat(cat, el) {
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
+            renderProducts(filtered);
+        }
+
+        function mockFilter(name, el) {
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            // Since API only has 4 categories, we show random items for others
+            const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
+            renderProducts(shuffled.slice(0, 8));
+        }
+
+        function handleSearch() {
+            const val = document.getElementById('main-search').value.toLowerCase();
+            const filtered = allProducts.filter(p => p.title.toLowerCase().includes(val));
+            renderProducts(filtered);
+            window.scrollTo(0, 500);
+        }
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            const bubble = document.querySelector('.cart-bubble');
+            bubble.style.transform = 'scale(1.3)';
+            setTimeout(() => bubble.style.transform = 'scale(1)', 200);
+        }
+
+        fetchStore();
+
+
+
+// index.html mein </body> se pehle ye script dalein
+function loadMainStore() {
+    let products = JSON.parse(localStorage.getItem('amz_products')) || [];
+    let grid = document.querySelector('.grid');
+
+    // Agar Admin ne products add kiye hain, toh purane static products ko hata kar naye dikhao
+    if(products.length > 0) {
+        // Sirf naye products add karne ke liye (ya aap static walon ke sath bhi dikha sakte hain)
+        products.forEach(p => {
+            grid.innerHTML += `
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="${p.image}" alt="${p.name}">
+                    </div>
+                    <div class="details">
+                        <h3>${p.name}</h3>
+                        <div class="price-row"><span class="price">$${p.price}</span></div>
+                        <button class="action-btn" onclick="addToCart('${p.name}', ${p.price}, '${p.image}')">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+}
+
+// Page load hote hi function chalayein
+window.onload = function() {
+    loadMainStore();
+    // Agar cart count ka function hai toh wo bhi yahan call karein
+};
+
+
+        
+    </script>
+</body>    
+</html>

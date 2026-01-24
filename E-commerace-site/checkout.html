@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZ Elite | Checkout</title>
+    <style>
+        :root {
+            --amazon-blue: #131921;
+            --amazon-gold: #febd69;
+            --amazon-orange: #f08804;
+            --bg-gray: #f0f2f2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-gray); padding-bottom: 50px; }
+
+        header { background: #fff; padding: 10px 0; border-bottom: 1px solid #ddd; text-align: center; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--amazon-blue); text-decoration: none; }
+        .logo span { color: var(--amazon-orange); }
+
+        .checkout-container { max-width: 900px; margin: 20px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; padding: 0 15px; }
+
+        .section-box { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px; }
+        .section-box h2 { font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; }
+        .input-group input { width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; outline: none; }
+
+        .payment-option { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; }
+
+        .order-summary { position: sticky; top: 20px; }
+        .place-order-btn { width: 100%; background: var(--amazon-gold); border: 1px solid #a88734; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+
+        @media (max-width: 768px) { .checkout-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">amz<span>elite</span> Checkout</a>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-left">
+            <div class="section-box">
+                <h2>1. Shipping Address</h2>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+                <div class="input-group">
+                    <label>Street Address</label>
+                    <input type="text" placeholder="House #, Street name">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <div class="input-group" style="flex: 1;"><label>City</label><input type="text"></div>
+                    <div class="input-group" style="flex: 1;"><label>Postal Code</label><input type="text"></div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h2>2. Payment Method</h2>
+                <div class="payment-option">
+                    <input type="radio" name="pay" checked> <label>Credit or Debit Card 💳</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="pay"> <label>Cash on Delivery (COD)</label>
+                </div>
+                <div class="input-group" style="margin-top: 15px;">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="xxxx-xxxx-xxxx-xxxx">
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-right">
+            <div class="section-box order-summary">
+               <button class="place-order-btn" onclick="location.href='success.html'">
+    Place Your Order
+</button>
+                <div style="font-size: 12px; color: #555; text-align: center; margin: 10px 0;">
+                    By placing order, you agree to terms.
+                </div>
+                <hr>
+                <h3 style="font-size: 16px; margin: 15px 0;">Order Summary</h3>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                    <span>Items:</span><span>$548.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                    <span>Shipping:</span><span style="color: green;">FREE</span>
+                </div>
+                <hr>
+                <div style="display: flex; justify-content: space-between; font-size: 18px; color: #B12704; font-weight: bold; margin-top: 10px;">
+                    <span>Order Total:</span><span>$548.00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information - FashionHub</title>
+    <style>
+        :root { --primary: #232f3e; --accent: #febd69; --text: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f4f7f6; color: var(--text); }
+        
+        /* Layout */
+        .container { max-width: 1000px; margin: 40px auto; display: grid; grid-template-columns: 280px 1fr; gap: 30px; padding: 0 20px; }
+        
+        /* Sidebar Navigation */
+        .sidebar { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content; }
+        .sidebar h3 { font-size: 1.2rem; margin-bottom: 20px; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+        .tab-btn { display: block; width: 100%; padding: 12px 15px; margin-bottom: 8px; text-align: left; background: none; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; transition: 0.3s; color: #555; }
+        .tab-btn:hover { background: #f0f2f5; color: var(--primary); }
+        .tab-btn.active { background: var(--primary); color: white; font-weight: bold; }
+
+        /* Content Area */
+        .content-box { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); min-height: 400px; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        
+        h1 { color: var(--primary); margin-top: 0; }
+        h2 { color: var(--primary); font-size: 1.3rem; margin-top: 25px; }
+        p { line-height: 1.7; color: #666; }
+
+        /* Contact Form Styles */
+        .form-group { margin-bottom: 15px; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .send-btn { background: var(--accent); color: var(--primary); border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .send-btn:hover { background: #e6ac00; transform: translateY(-2px); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { position: sticky; top: 10px; z-index: 100; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>Help Center</h3>
+        <button class="tab-btn active" onclick="openTab(event, 'shipping')">Shipping Policy</button>
+        <button class="tab-btn" onclick="openTab(event, 'returns')">Return & Refund</button>
+        <button class="tab-btn" onclick="openTab(event, 'privacy')">Privacy Policy</button>
+        <button class="tab-btn" onclick="openTab(event, 'contact')">Contact Us</button>
+        <hr>
+        <button class="tab-btn" onclick="window.location.href='index.html'">← Back to Store</button>
+    </div>
+
+    <div class="content-box">
+        
+        <div id="shipping" class="tab-content active">
+            <h1>Shipping Policy</h1>
+            <p>We provide fast and reliable shipping across the country. Our goal is to ensure your fashion finds reach you in perfect condition.</p>
+            <h2>Delivery Timeline</h2>
+            <p>Orders are typically processed within 24 hours. Standard delivery takes 3-5 business days.</p>
+            <h2>Shipping Rates</h2>
+            <p>Orders over $150 qualify for <strong>Free Shipping</strong>. For orders below $150, a flat rate of $10 applies.</p>
+        </div>
+
+        <div id="returns" class="tab-content">
+            <h1>Return & Refund</h1>
+            <p>Not happy with your purchase? No problem. We offer a hassle-free return process.</p>
+            <h2>7-Day Return Policy</h2>
+            <p>Items must be unworn, unwashed, and in their original packaging with tags attached.</p>
+            <h2>Refunds</h2>
+            <p>Once we receive your item, refunds are processed within 5 working days to your original payment method.</p>
+        </div>
+
+        <div id="privacy" class="tab-content">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is our priority. We only collect information necessary to process your orders.</p>
+            <h2>Data Protection</h2>
+            <p>We use SSL encryption to protect your personal details. We never sell your data to third parties.</p>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <h1>Contact Us</h1>
+            <p>Have questions? Our team is here to help you 24/7.</p>
+            <div class="form-group"><input type="text" placeholder="Full Name"></div>
+            <div class="form-group"><input type="email" placeholder="Email Address"></div>
+            <div class="form-group"><textarea rows="5" placeholder="Your Message..."></textarea></div>
+            <button class="send-btn">Send Message</button>
+            <div style="margin-top: 20px;">
+                <p>📧 support@fashionhub.com | 📞 +92 300 1234567</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        
+        // Hide all contents
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+
+        // Remove active class from buttons
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show current tab and add active class
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
