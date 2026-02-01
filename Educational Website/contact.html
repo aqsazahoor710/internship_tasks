@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<style>
+/* === GLOBAL === */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    background:#061021;
+    color:#e2e8f0;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    padding:80px 20px;
+}
+.header h1{
+    font-size:48px;
+    color:#00e1ff;
+}
+.header p{
+    margin-top:10px;
+    color:#94a3b8;
+    font-size:18px;
+}
+
+/* SECTION */
+section{
+    width:90%;
+    max-width:800px;
+    margin:auto;
+    margin-bottom:80px;
+    text-align:center;
+}
+
+/* GLASS FORM */
+.glass{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    border-radius:14px;
+    padding:40px 30px;
+    transition:0.3s ease;
+}
+.glass:hover{
+    transform:translateY(-6px);
+}
+
+/* FORM STYLING */
+form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+input, textarea{
+    padding:15px;
+    border-radius:8px;
+    border:none;
+    outline:none;
+    background:rgba(255,255,255,0.1);
+    color:#e2e8f0;
+    font-size:16px;
+}
+input::placeholder, textarea::placeholder{
+    color:#94a3b8;
+}
+textarea{
+    resize:none;
+}
+button{
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background:#00e1ff;
+    color:#061021;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+button:hover{
+    background:#00b8cc;
+}
+
+/* ANIMATION */
+.fade-in{
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeInUp 1s ease forwards;
+}
+@keyframes fadeInUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you! Send us a message.</p>
+</header>
+
+<!-- CONTACT FORM -->
+<section class="fade-in">
+    <div class="glass">
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<script>
+// Scroll animation
+const elements = document.querySelectorAll(".fade-in");
+
+function showElements() {
+    elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            el.style.animationPlayState = "running";
+        }
+    });
+}
+window.addEventListener("scroll", showElements);
+showElements();
+
+// Simple form submission alert
+const form = document.getElementById("contactForm");
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Thank you! Your message has been sent.");
+    form.reset();
+});
+</script>
+
+</body>
+</html>

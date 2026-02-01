@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join as an Instructor</title>
+  <style>
+    /* Global Reset */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", Arial, sans-serif;
+      background: #0A1A2F;
+      color: #E0E0E0;
+      line-height: 1.6;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 700;
+      color: #00C4CC;
+      margin: 0 0 15px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #A0AEC0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-card {
+      width: 95%;
+      max-width: 650px; /* Thoda wide kiya hai for better readability */
+      margin: 0 auto 80px;
+      background: #1F2C47;
+      padding: 40px; /* Padding increase ki hai */
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 25px; /* Har input ke beech gap */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: #00C4CC; /* Labels ko thoda highlight kiya */
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #3A4A6B; /* Border thodi thick ki hai */
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+      background: #0A1A2F;
+      color: #FFFFFF;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #00C4CC;
+      box-shadow: 0 0 8px rgba(0, 196, 204, 0.2);
+      background: #0D2137;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #64748B;
+    }
+
+    /* File Input Specific */
+    input[type="file"] {
+      padding: 10px;
+      background: #16243D;
+      cursor: pointer;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .small-text {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #8492A6;
+    }
+
+    .terms-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+
+    .terms-container input {
+      width: auto;
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .terms-container label {
+      color: #B0B0B0;
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 30px;
+      padding: 16px;
+      background: #00C4CC;
+      border: none;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+      color: #0A1A2F;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background: #00DDE6;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 196, 204, 0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 30px; }
+      .form-card { padding: 25px; }
+      .hero { padding: 40px 20px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <h1>Join as an Instructor</h1>
+    <p>Become part of our global community and inspire students with your expertise.</p>
+  </div>
+
+  <div class="form-card">
+    <form action="#" method="POST" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="e.g. John Doe" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter 10-15 digit number" pattern="[0-9]{10,15}" required>
+        <span class="small-text">Include country code without '+'</span>
+      </div>
+
+      <div class="form-group">
+        <label for="course">Primary Expertise</label>
+        <select id="course" name="course" required>
+          <option value="" disabled selected>Select your domain</option>
+          <option>Web Development</option>
+          <option>UI/UX Design</option>
+          <option>Digital Marketing</option>
+          <option>SEO Strategy</option>
+          <option>Graphic Design</option>
+          <option>Data Science</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Professional Experience</label>
+        <textarea id="experience" name="experience" placeholder="Tell us about your background and teaching style..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="resume">Resume / Portfolio (PDF/DOC)</label>
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+      </div>
+
+      <div class="form-group">
+        <label for="portfolio">Portfolio URL</label>
+        <input type="url" id="portfolio" name="portfolio" placeholder="https://linkedin.com/in/yourprofile">
+      </div>
+
+      <div class="terms-container">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I agree to the instructor terms of service and privacy policy for teaching on this platform.</label>
+      </div>
+
+      <button class="btn" type="submit">Send Application</button>
+
+    </form>
+  </div>
+
+</body>
+</html>

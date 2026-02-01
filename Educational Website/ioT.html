@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internet of Things (IoT) Developer - Roadmap & Notes</title>
+  <style>
+    :root {
+      --bg: #061021;
+      --card: #0b1220;
+      --accent: #0ea5a5;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --radius: 12px;
+      --container: 1000px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 30px;
+    }
+
+    .accordion {
+      background-color: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      padding: 15px 20px;
+      width: 100%;
+      border: none;
+      outline: none;
+      text-align: left;
+      font-size: 18px;
+      transition: background-color 0.3s;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .accordion:hover {
+      background-color: #0f1a36;
+    }
+
+    .accordion.active {
+      background-color: #0f1a36;
+    }
+
+    .panel {
+      padding: 0 20px;
+      display: none;
+      background-color: var(--card);
+      overflow: hidden;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .panel p {
+      padding: 10px 0;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .links a {
+      display: block;
+      margin: 5px 0;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Internet of Things (IoT) Developer – Course Notes & Roadmap</h1>
+
+    <h2>Course Modules</h2>
+
+    <!-- Module 1 -->
+    <button class="accordion">Module 1 – Introduction to IoT</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> What is IoT, IoT ecosystem, devices, sensors, applications in smart homes, healthcare, industries.</p>
+      <div class="links">
+        <a href="https://www.coursera.org/learn/iot" target="_blank">IoT Basics (Coursera)</a>
+        <a href="https://www.youtube.com/watch?v=QSIPNhOiMoE" target="_blank">Introduction to IoT (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Identify IoT devices in your environment.</p>
+    </div>
+
+    <!-- Module 2 -->
+    <button class="accordion">Module 2 – IoT Hardware & Sensors</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> Microcontrollers (Arduino, Raspberry Pi), sensors (temperature, motion, light), actuators.</p>
+      <div class="links">
+        <a href="https://www.arduino.cc/en/Guide/HomePage" target="_blank">Arduino Guide</a>
+        <a href="https://www.raspberrypi.org/documentation/" target="_blank">Raspberry Pi Docs</a>
+        <a href="https://www.youtube.com/watch?v=9O9NocfWz3Q" target="_blank">IoT Sensors Tutorial (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Connect a sensor to Arduino or Raspberry Pi and read data.</p>
+    </div>
+
+    <!-- Module 3 -->
+    <button class="accordion">Module 3 – IoT Communication Protocols</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> MQTT, HTTP, CoAP, LoRaWAN, Zigbee, Bluetooth, Wi-Fi communication.</p>
+      <div class="links">
+        <a href="https://www.hivemq.com/mqtt-essentials/" target="_blank">MQTT Essentials</a>
+        <a href="https://www.youtube.com/watch?v=KQ9tXgmNLMY" target="_blank">IoT Communication Protocols (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Send data from a sensor to a cloud server using MQTT.</p>
+    </div>
+
+    <!-- Module 4 -->
+    <button class="accordion">Module 4 – IoT Cloud & Platforms</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> IoT cloud platforms, data storage, processing, dashboards, analytics.</p>
+      <div class="links">
+        <a href="https://thingsboard.io/docs/" target="_blank">ThingsBoard IoT Platform</a>
+        <a href="https://www.youtube.com/watch?v=O7K-Mm5w48k" target="_blank">IoT Cloud Platforms (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Send IoT data to ThingsBoard and visualize on a dashboard.</p>
+    </div>
+
+    <!-- Module 5 -->
+    <button class="accordion">Module 5 – IoT Security & Best Practices</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> IoT security risks, authentication, encryption, firmware updates, secure cloud integration.</p>
+      <div class="links">
+        <a href="https://www.iotforall.com/iot-security-guide" target="_blank">IoT Security Guide</a>
+        <a href="https://www.youtube.com/watch?v=06gFOnCz1nI" target="_blank">IoT Security Tutorial (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Implement simple authentication and secure data transfer for your IoT device.</p>
+    </div>
+
+    <!-- Module 6 -->
+    <button class="accordion">Module 6 – IoT Projects & Applications</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> Smart home projects, industrial IoT, healthcare IoT, wearable devices, IoT dashboards.</p>
+      <div class="links">
+        <a href="https://www.instructables.com/Internet-of-Things-IoT-Projects/" target="_blank">IoT Projects Examples</a>
+        <a href="https://www.youtube.com/watch?v=O-BBq6Ff8x4" target="_blank">IoT Project Tutorials (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Build a simple IoT project like a temperature monitor or smart light system.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(acc => {
+      acc.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const panel = this.nextElementSibling;
+        panel.style.display = (panel.style.display === "block") ? "none" : "block";
+      });
+    });
+  </script>
+</body>
+</html>

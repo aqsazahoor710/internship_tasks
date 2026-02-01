@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Tutorial</title>
+
+<style>
+    :root {
+        --bg: #061021;
+        --card: #0b162b;
+        --accent: #0ea5a5;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --radius: 12px;
+        --transition: .3s ease;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Poppins", sans-serif;
+        color: var(--text);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    /* Search Bar */
+    .search-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 18px;
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 16px;
+        outline: none;
+    }
+
+    /* Accordion Category */
+    .accordion-item {
+        background: var(--card);
+        margin-bottom: 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .accordion-header {
+        padding: 16px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+        background: #0f1c35;
+        padding-left: 20px;
+    }
+
+    .accordion-content a {
+        display: block;
+        padding: 10px 0;
+        color: var(--muted);
+        text-decoration: none;
+        transition: var(--transition);
+        font-size: 15px;
+    }
+
+    .accordion-content a:hover {
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+
+    .arrow {
+        transition: var(--transition);
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>CSS Tutorial</h1>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search CSS Topics...">
+    </div>
+
+    <!-- ACCORDION START -->
+    <div id="accordion">
+
+        <!-- CSS BASICS -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS Basics
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">CSS Home</a>
+                <a href="#">CSS Introduction</a>
+                <a href="#">CSS Syntax</a>
+                <a href="#">CSS Selectors</a>
+                <a href="#">CSS How To</a>
+                <a href="#">CSS Comments</a>
+                <a href="#">CSS Errors</a>
+                <a href="#">CSS Colors</a>
+                <a href="#">CSS Backgrounds</a>
+                <a href="#">CSS Borders</a>
+                <a href="#">CSS Margins</a>
+                <a href="#">CSS Padding</a>
+                <a href="#">CSS Height/Width</a>
+                <a href="#">CSS Box Model</a>
+                <a href="#">CSS Outline</a>
+                <a href="#">CSS Text</a>
+                <a href="#">CSS Fonts</a>
+                <a href="#">CSS Icons</a>
+                <a href="#">CSS Links</a>
+                <a href="#">CSS Lists</a>
+                <a href="#">CSS Tables</a>
+                <a href="#">CSS Display</a>
+                <a href="#">CSS Max-width</a>
+                <a href="#">CSS Position</a>
+                <a href="#">CSS Z-index</a>
+                <a href="#">CSS Overflow</a>
+                <a href="#">CSS Float</a>
+                <a href="#">CSS Inline-block</a>
+                <a href="#">CSS Align</a>
+                <a href="#">CSS Combinators</a>
+                <a href="#">CSS Pseudo-classes</a>
+                <a href="#">CSS Pseudo-elements</a>
+                <a href="#">CSS Opacity</a>
+                <a href="#">CSS Navigation Bars</a>
+                <a href="#">CSS Dropdowns</a>
+                <a href="#">CSS Image Gallery</a>
+                <a href="#">CSS Image Sprites</a>
+                <a href="#">CSS Attr Selectors</a>
+                <a href="#">CSS Forms</a>
+                <a href="#">CSS Counters</a>
+                <a href="#">CSS Units</a>
+                <a href="#">CSS Inheritance</a>
+                <a href="#">CSS Specificity</a>
+                <a href="#">CSS important</a>
+                <a href="#">CSS Math Functions</a>
+                <a href="#">CSS Optimization</a>
+                <a href="#">CSS Accessibility</a>
+                <a href="#">CSS Website Layout</a>
+            </div>
+        </div>
+
+        <!-- CSS ADVANCED -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS Advanced
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">CSS Rounded Corners</a>
+                <a href="#">CSS Border Images</a>
+                <a href="#">CSS Backgrounds</a>
+                <a href="#">CSS Gradients</a>
+                <a href="#">CSS Shadows</a>
+                <a href="#">CSS Text Effects</a>
+                <a href="#">CSS Custom Fonts</a>
+                <a href="#">CSS 2D Transforms</a>
+                <a href="#">CSS 3D Transforms</a>
+                <a href="#">CSS Transitions</a>
+                <a href="#">CSS Animations</a>
+                <a href="#">CSS Tooltips</a>
+                <a href="#">CSS Image Styling</a>
+                <a href="#">CSS Image Modal</a>
+                <a href="#">CSS Image Centering</a>
+                <a href="#">CSS Image Filters</a>
+                <a href="#">CSS Image Shapes</a>
+                <a href="#">CSS object-fit</a>
+                <a href="#">CSS object-position</a>
+                <a href="#">CSS Masking</a>
+                <a href="#">CSS Buttons</a>
+                <a href="#">CSS Pagination</a>
+                <a href="#">CSS Multiple Columns</a>
+                <a href="#">CSS User Interface</a>
+                <a href="#">CSS Variables</a>
+                <a href="#">CSS property</a>
+                <a href="#">CSS Box Sizing</a>
+                <a href="#">CSS Media Queries</a>
+                <a href="#">CSS MQ Examples</a>
+            </div>
+        </div>
+
+        <!-- FLEXBOX -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS Flexbox
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Flexbox Intro</a>
+                <a href="#">Flex Container</a>
+                <a href="#">Flex Items</a>
+                <a href="#">Flex Responsive</a>
+            </div>
+        </div>
+
+        <!-- GRID -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS Grid
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Grid Intro</a>
+                <a href="#">Grid Container</a>
+                <a href="#">Grid Items</a>
+                <a href="#">Grid 12-column Layout</a>
+                <a href="#">CSS supports</a>
+            </div>
+        </div>
+
+        <!-- RESPONSIVE -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS Responsive
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">RWD Intro</a>
+                <a href="#">RWD Viewport</a>
+                <a href="#">RWD Grid View</a>
+                <a href="#">RWD Media Queries</a>
+                <a href="#">RWD Images</a>
+                <a href="#">RWD Videos</a>
+                <a href="#">RWD Frameworks</a>
+                <a href="#">RWD Templates</a>
+            </div>
+        </div>
+
+        <!-- SASS -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS SASS
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">SASS Tutorial</a>
+            </div>
+        </div>
+
+        <!-- EXAMPLES -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS Examples
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">CSS Templates</a>
+                <a href="#">CSS Examples</a>
+                <a href="#">CSS Editor</a>
+                <a href="#">CSS Snippets</a>
+                <a href="#">CSS Quiz</a>
+                <a href="#">CSS Exercises</a>
+                <a href="#">CSS Website</a>
+                <a href="#">CSS Study Plan</a>
+                <a href="#">CSS Certificate</a>
+            </div>
+        </div>
+
+        <!-- REFERENCES -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                CSS References
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">CSS Reference</a>
+                <a href="#">CSS Selectors</a>
+                <a href="#">CSS Combinators</a>
+                <a href="#">CSS Pseudo-classes</a>
+                <a href="#">CSS Pseudo-elements</a>
+                <a href="#">CSS At-rules</a>
+                <a href="#">CSS Functions</a>
+                <a href="#">CSS Aural</a>
+                <a href="#">CSS Safe Fonts</a>
+                <a href="#">CSS Animatable</a>
+                <a href="#">CSS Units</a>
+                <a href="#">CSS PX-EM Converter</a>
+                <a href="#">CSS Colors</a>
+                <a href="#">CSS Default Values</a>
+                <a href="#">CSS Browser Support</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Accordion Logic
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            let content = header.nextElementSibling;
+            let arrow = header.querySelector('.arrow');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                arrow.classList.remove("rotate");
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll('.arrow').forEach(a => a.classList.remove("rotate"));
+
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+
+    // Search Filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let links = document.querySelectorAll(".accordion-content a");
+
+        links.forEach(link => {
+            if (link.textContent.toLowerCase().includes(filter)) {
+                link.style.display = "block";
+            } else {
+                link.style.display = "none";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

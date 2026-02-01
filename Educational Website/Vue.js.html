@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue.js Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Vue.js Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Vue.js topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- Basics -->
+<div class="accordion">Vue.js Basics</div>
+<div class="panel">
+    <a href="#">What is Vue.js?</a>
+    <a href="#">Installation</a>
+    <a href="#">Creating Your First App</a>
+    <a href="#">Vue Instance</a>
+    <a href="#">Template Syntax</a>
+    <a href="#">Data Binding</a>
+    <a href="#">Directives</a>
+    <a href="#">Computed Properties</a>
+    <a href="#">Methods</a>
+    <a href="#">Watchers</a>
+</div>
+
+<!-- Components -->
+<div class="accordion">Components</div>
+<div class="panel">
+    <a href="#">Component Basics</a>
+    <a href="#">Props</a>
+    <a href="#">Emits</a>
+    <a href="#">Slots</a>
+    <a href="#">Dynamic Components</a>
+    <a href="#">Lifecycle Hooks</a>
+</div>
+
+<!-- Routing -->
+<div class="accordion">Vue Router</div>
+<div class="panel">
+    <a href="#">Routing Introduction</a>
+    <a href="#">Dynamic Routes</a>
+    <a href="#">Nested Routes</a>
+    <a href="#">Navigation Guards</a>
+    <a href="#">Programmatic Navigation</a>
+</div>
+
+<!-- State Management -->
+<div class="accordion">Vuex (State Management)</div>
+<div class="panel">
+    <a href="#">What is Vuex?</a>
+    <a href="#">State</a>
+    <a href="#">Getters</a>
+    <a href="#">Mutations</a>
+    <a href="#">Actions</a>
+    <a href="#">Modules</a>
+</div>
+
+<!-- Composition API -->
+<div class="accordion">Composition API</div>
+<div class="panel">
+    <a href="#">Setup()</a>
+    <a href="#">Reactive()</a>
+    <a href="#">Ref()</a>
+    <a href="#">Computed()</a>
+    <a href="#">Watch()</a>
+    <a href="#">Lifecycle Hooks</a>
+</div>
+
+<!-- Forms -->
+<div class="accordion">Forms</div>
+<div class="panel">
+    <a href="#">v-model</a>
+    <a href="#">Form Input Bindings</a>
+    <a href="#">Checkboxes</a>
+    <a href="#">Radio Buttons</a>
+    <a href="#">Select Dropdowns</a>
+</div>
+
+<!-- HTTP Requests -->
+<div class="accordion">HTTP & APIs</div>
+<div class="panel">
+    <a href="#">Axios Basics</a>
+    <a href="#">Fetching Data</a>
+    <a href="#">Handling Errors</a>
+    <a href="#">Posting Data</a>
+</div>
+
+<!-- Vue CLI -->
+<div class="accordion">Vue CLI & Tooling</div>
+<div class="panel">
+    <a href="#">Installing Vue CLI</a>
+    <a href="#">Project Structure</a>
+    <a href="#">Environment Variables</a>
+    <a href="#">Build & Deployment</a>
+</div>
+
+<!-- Vue 3 Features -->
+<div class="accordion">Vue 3 Features</div>
+<div class="panel">
+    <a href="#">Teleport</a>
+    <a href="#">Fragments</a>
+    <a href="#">Emits Option</a>
+    <a href="#">Suspense</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

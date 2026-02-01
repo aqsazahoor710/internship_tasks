@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Computing 12-Week Roadmap</title>
+  <style>
+    :root {
+      --bg: #061021;
+      --card: #0b1220;
+      --accent: #0ea5a5;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --radius: 12px;
+      --container: 1000px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 30px;
+    }
+
+    .accordion {
+      background-color: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      padding: 15px 20px;
+      width: 100%;
+      border: none;
+      outline: none;
+      text-align: left;
+      font-size: 18px;
+      transition: background-color 0.3s;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .accordion:hover {
+      background-color: #0f1a36;
+    }
+
+    .accordion.active {
+      background-color: #0f1a36;
+    }
+
+    .panel {
+      padding: 0 20px;
+      display: none;
+      background-color: var(--card);
+      overflow: hidden;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .panel p {
+      padding: 10px 0;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .links a {
+      display: block;
+      margin: 5px 0;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Quantum Computing Developer – 12-Week Roadmap</h1>
+
+    <h2>Weekly Learning Plan</h2>
+
+    <!-- Week 1 -->
+    <button class="accordion">Week 1 – Introduction to Quantum Computing</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Understand classical vs quantum computing, qubits, superposition, entanglement.</p>
+      <div class="links">
+        <a href="https://learning.quantum.ibm.com/course/quantum-business-foundations/quantum-computing-fundamentals" target="_blank">IBM Quantum Fundamentals</a>
+      </div>
+      <p><strong>Project:</strong> Install Qiskit & Python; simulate a simple qubit superposition.</p>
+    </div>
+
+    <!-- Week 2 -->
+    <button class="accordion">Week 2 – Mathematical Foundations I</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Learn complex numbers, linear algebra basics, vectors.</p>
+      <div class="links">
+        <a href="https://www.khanacademy.org/math/linear-algebra" target="_blank">Linear Algebra Refresher (Khan Academy)</a>
+      </div>
+      <p><strong>Project:</strong> Practice bra-ket notation exercises.</p>
+    </div>
+
+    <!-- Week 3 -->
+    <button class="accordion">Week 3 – Mathematical Foundations II</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Hermitian/unitary matrices, tensor products, inner products.</p>
+      <div class="links">
+        <a href="https://www.youtube.com/watch?v=tsbCSkvHhMo" target="_blank">Quantum Mechanics Math (YouTube)</a>
+      </div>
+      <p><strong>Project:</strong> Create simple matrix operations using Python (NumPy).</p>
+    </div>
+
+    <!-- Week 4 -->
+    <button class="accordion">Week 4 – Quantum Gates</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Pauli-X/Y/Z, Hadamard, CNOT, phase gates; learn gate composition.</p>
+      <div class="links">
+        <a href="https://qiskit.org/textbook/ch-gates/what-is-a-quantum-gate.html" target="_blank">Qiskit: Quantum Gates</a>
+      </div>
+      <p><strong>Project:</strong> Build quantum circuits with 1-2 qubits in Qiskit.</p>
+    </div>
+
+    <!-- Week 5 -->
+    <button class="accordion">Week 5 – Quantum Circuits & Measurement</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Circuit diagrams, qubit measurement, probability amplitudes.</p>
+      <div class="links">
+        <a href="https://qiskit.org/documentation/tutorials/circuits/1_getting_started_with_qiskit.html" target="_blank">Qiskit Tutorials</a>
+      </div>
+      <p><strong>Project:</strong> Measure qubits and visualize the results.</p>
+    </div>
+
+    <!-- Week 6 -->
+    <button class="accordion">Week 6 – Quantum Algorithms I</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Deutsch-Jozsa algorithm, Grover’s search algorithm.</p>
+      <div class="links">
+        <a href="https://www.youtube.com/watch?v=tsbCSkvHhMo" target="_blank">Grover’s Algorithm Tutorial</a>
+      </div>
+      <p><strong>Project:</strong> Implement Deutsch-Jozsa algorithm on a simulator.</p>
+    </div>
+
+    <!-- Week 7 -->
+    <button class="accordion">Week 7 – Quantum Algorithms II</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Shor’s factoring, Quantum Fourier Transform (QFT).</p>
+      <div class="links">
+        <a href="https://arxiv.org/abs/2311.08445" target="_blank">Shor’s Algorithm Lecture Notes</a>
+      </div>
+      <p><strong>Project:</strong> Simulate small-number factoring in Qiskit.</p>
+    </div>
+
+    <!-- Week 8 -->
+    <button class="accordion">Week 8 – Quantum Programming</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Programming quantum circuits using Qiskit & Cirq SDKs.</p>
+      <div class="links">
+        <a href="https://qiskit.org/documentation/" target="_blank">Qiskit Documentation</a>
+      </div>
+      <p><strong>Project:</strong> Build multi-gate circuits programmatically in Python.</p>
+    </div>
+
+    <!-- Week 9 -->
+    <button class="accordion">Week 9 – Quantum Hardware & Noise</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Learn about qubit types, decoherence, error correction.</p>
+      <div class="links">
+        <a href="https://quantum-computing.ibm.com/" target="_blank">IBM Quantum Experience</a>
+      </div>
+      <p><strong>Project:</strong> Run a small circuit on IBM Quantum real device.</p>
+    </div>
+
+    <!-- Week 10 -->
+    <button class="accordion">Week 10 – Quantum Applications I</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Optimization problems, cryptography, post-quantum security.</p>
+      <div class="links">
+        <a href="https://www.mytectra.com/quantum-computing-foundations-training" target="_blank">MyTectra Quantum Training</a>
+      </div>
+      <p><strong>Project:</strong> Solve a small optimization problem using VQE or Grover’s algorithm.</p>
+    </div>
+
+    <!-- Week 11 -->
+    <button class="accordion">Week 11 – Quantum Applications II</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Quantum Machine Learning, finance, chemistry.</p>
+      <div class="links">
+        <a href="https://www.youtube.com/watch?v=w_KrPZJJbEk" target="_blank">Quantum ML Tutorial (YouTube)</a>
+      </div>
+      <p><strong>Project:</strong> Apply a quantum ML library to a small dataset.</p>
+    </div>
+
+    <!-- Week 12 -->
+    <button class="accordion">Week 12 – Capstone Project</button>
+    <div class="panel">
+      <p><strong>Goals:</strong> Integrate knowledge to build a small quantum application.</p>
+      <p><strong>Project Examples:</strong> Quantum search algorithm, random number generator, or small dApp on IBM Quantum real device.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(acc => {
+      acc.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const panel = this.nextElementSibling;
+        panel.style.display = (panel.style.display === "block") ? "none" : "block";
+      });
+    });
+  </script>
+</body>
+</html>

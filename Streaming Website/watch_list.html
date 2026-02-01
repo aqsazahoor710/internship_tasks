@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist | CINEVAULT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #050507;
+            --card-bg: #121217;
+            --accent-pink: #d63384;
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        /* Navbar Style */
+        nav {
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 7, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent-pink); text-decoration: none; }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Grid */
+        .main-container { padding: 40px 6%; min-height: 80vh; }
+        .section-title { font-size: 24px; margin-bottom: 30px; border-left: 4px solid var(--accent-pink); padding-left: 15px; }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        /* Cards */
+        .card-wrapper { background: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s; }
+        .card { position: relative; aspect-ratio: 2/3; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card-overlay {
+            position: absolute; bottom: 0; width: 100%; padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        }
+
+        .card-actions { display: flex; padding: 10px; gap: 10px; }
+        
+        .action-btn {
+            flex: 1;
+            background: #16161d;
+            border: 1px solid #2a2a35;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .remove-btn:hover { background: #ff4d4d; border-color: #ff4d4d; }
+
+        .empty-msg { text-align: center; grid-column: 1/-1; padding: 50px; color: var(--text-gray); }
+        .btn-home { display: inline-block; margin-top: 20px; padding: 12px 25px; background: var(--accent-pink); color: white; text-decoration: none; border-radius: 8px; }
+
+        /* Badge for Count */
+        .count-badge {
+            background: var(--accent-pink);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">CINEVAULT</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="watchlist.html" style="color: var(--accent-pink);">
+                Watchlist <span id="watchlistCount"></span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <h1 class="section-title">My Saved Movies</h1>
+        <div class="video-grid" id="watchlistGrid"></div>
+    </main>
+
+    <script>
+        // --- 1. DATA (Yahan wahi same list paste karein jo index.html mein hai) ---
+             const movies = [
+            { t: "Inception", y: "2010", r: "4.8", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlfe5euMkBdeQViRnzw3UM4Ri79Ve-8yckqVZ4q6vujg&s", yt: "https://www.youtube.com/watch?v=YoHD9XEInc0" },
+            { t: "The Dark Knight", y: "2008", r: "4.9", img: "https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg", yt: "https://www.youtube.com/watch?v=EXeTwQWrcwY" },
+            { t: "Interstellar", y: "2014", r: "4.8", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS9maE7-yWPpULS8xay8yVKGnVZctnXkOXMg&s", yt: "https://www.youtube.com/watch?v=zSWdZVtXT7E" },
+            { t: "Joker", y: "2019", r: "4.7", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP7TzsGto_FJI2I9IibPV1GWd--ki-_NAAYQ&s", yt: "https://www.youtube.com/watch?v=zAGVQLHvwOY" },
+            { t: "The Batman", y: "2022", r: "4.6", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWBsdgRPKHREWGnktgm_fj_qQK45yr8Xy64g&s", yt: "https://www.youtube.com/watch?v=mqqft2x_Aa4" },
+            { t: "Oppenheimer", y: "2023", r: "4.9", img: "https://upload.wikimedia.org/wikipedia/en/4/4a/Oppenheimer_%28film%29.jpg", yt: "https://www.youtube.com/watch?v=uYPbbksJxIg" },
+            { t: "Avengers: Endgame", y: "2019", r: "4.8", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTShR5yZ7xZKvurA1lDEZTDBUllF_aYiggENg&s", yt: "https://www.youtube.com/watch?v=TcMBFSGVi1c" },
+            { t: "Spider-Man", y: "2021", r: "4.8", img: "https://www.venturegames.com.pk/cdn/shop/files/Marvel_sSpiderman.jpg?v=1706792764", yt: "https://www.youtube.com/watch?v=JfVOs4VSpmA" },
+            { t: "Dune", y: "2021", r: "4.7", img: "https://upload.wikimedia.org/wikipedia/en/8/85/Dune-miniseries.jpg", yt: "https://www.youtube.com/watch?v=n9xhJrPXop4" },
+            { t: "Top Gun", y: "2022", r: "4.8", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBzI-QHRx5o0AvLboA6m3_S-h396SuyHFU9g&s", yt: "https://www.youtube.com/watch?v=giXco2jaZ_4" },
+            { t: "John Wick 4", y: "2023", r: "4.9", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR8AAwBOD7t37YISNu5tHRB80XRUMnfGbf2w&s", yt: "https://www.youtube.com/watch?v=qEVUtrk8_B4" },
+            { t: "Black Panther", y: "2022", r: "4.6", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxkAp-UQJV3AeqakST2qqQGTyIRJs98CHLwQ&s", yt: "https://www.youtube.com/watch?v=_Z3QKkl1WyM" },
+            { t: "The Matrix", y: "2021", r: "4.5", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOkiMxT6lSqw_7V22yfZhkrxBzuwsxTy9YrQ&s", yt: "https://www.youtube.com/watch?v=9ix7Af70qP0" },
+            { t: "Deadpool 3", y: "2024", r: "4.7", img: "https://upload.wikimedia.org/wikipedia/en/4/4c/Deadpool_%26_Wolverine_poster.jpg", yt: "https://www.youtube.com/watch?v=73_1biulkYk" },
+            { t: "Godzilla x Kong", y: "2024", r: "4.6", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoieQMiTBLNy1ZDA8SyZ-BB20hw07vt4Ie6w&s", yt: "https://www.youtube.com/watch?v=lV1OOlGwExM" },
+            { t: "Gladiator II", y: "2024", r: "4.8", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWyjfXcFq62vcMNOrCwo7qbQNk3hAlJ-2vEQ&s", yt: "https://www.youtube.com/watch?v=4rgYUipGJNo" }
+        ];
+
+        // --- 2. RENDER WATCHLIST ---
+        function renderWatchlist() {
+            const grid = document.getElementById('watchlistGrid');
+            const savedTitles = JSON.parse(localStorage.getItem('myWatchlist')) || [];
+            
+            // Update Badge Count
+            const countDisplay = document.getElementById('watchlistCount');
+            if(countDisplay) {
+                countDisplay.innerHTML = savedTitles.length > 0 ? `<span class="count-badge">${savedTitles.length}</span>` : '';
+            }
+
+            // Filter movies based on saved titles
+            const savedMovies = movies.filter(m => savedTitles.includes(m.t));
+
+            if (savedMovies.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-msg">
+                        <i class="far fa-heart" style="font-size: 50px; margin-bottom: 20px; display:block;"></i>
+                        <p>Your watchlist is empty!</p>
+                        <a href="index.html" class="btn-home">Find Movies to Add</a>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = savedMovies.map(m => `
+                <div class="card-wrapper">
+                    <div class="card">
+                        <img src="${m.img}" alt="${m.t}">
+                        <div class="card-overlay">
+                            <h3>${m.t}</h3>
+                            <p style="font-size: 12px; color: #ccc;">${m.y} • ★ ${m.r}</p>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="${m.yt}" target="_blank" class="action-btn">
+                            <i class="fas fa-play"></i> Play
+                        </a>
+                        <button class="action-btn remove-btn" onclick="removeFromWatchlist('${m.t}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 3. REMOVE LOGIC ---
+        function removeFromWatchlist(title) {
+            let savedTitles = JSON.parse(localStorage.getItem('myWatchlist')) || [];
+            savedTitles = savedTitles.filter(t => t !== title);
+            localStorage.setItem('myWatchlist', JSON.stringify(savedTitles));
+            
+            renderWatchlist(); // Page ko refresh kiye baghair update karein
+        }
+
+        // Initialize on load
+        renderWatchlist();
+    </script>
+</body>
+</html>

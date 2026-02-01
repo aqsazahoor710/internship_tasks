@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime | CINEVAULT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-black: #050507;
+            --card-bg: #121217;
+            --accent-pink: #d63384; /* Aapka original pink color */
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-black); color: var(--text-white); overflow-x: hidden; }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(5, 5, 7, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent-pink); text-decoration: none; }
+
+        /* --- Category Bar --- */
+        .categories-container { padding: 90px 6% 10px; }
+        .categories-flex { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .categories-flex::-webkit-scrollbar { display: none; }
+        .categories-flex a { text-decoration: none; }
+        .pill { 
+            padding: 8px 20px; background: #16161d; border: 1px solid #2a2a35; 
+            border-radius: 8px; font-size: 11px; font-weight: 700; color: var(--text-gray);
+            transition: 0.3s; text-transform: uppercase; white-space: nowrap;
+        }
+        .pill.active { background: linear-gradient(45deg, #9d50bb, #6e48aa); border: none; color: white; }
+
+        /* --- Grid --- */
+        .main-container { padding: 20px 6% 60px; max-width: 1800px; margin: 0 auto; }
+        .section-title { font-size: 22px; margin-bottom: 30px; font-weight: 700; border-left: 4px solid var(--accent-pink); padding-left: 15px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+
+        /* --- Cards --- */
+        .card-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        .card { 
+            position: relative; border-radius: 15px; overflow: hidden; 
+            aspect-ratio: 2/3; background: var(--card-bg); transition: 0.4s;
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover { transform: translateY(-8px); }
+        .card:hover img { filter: brightness(0.4) scale(1.05); }
+        
+        .card::after {
+            content: '\f04b'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 35px; color: white; opacity: 0; transition: 0.3s;
+        }
+        .card:hover::after { opacity: 1; }
+
+        .card-info { padding: 5px; }
+        .card-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .card-meta { font-size: 11px; color: var(--text-gray); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">CINEVAULT</a>
+        <div style="color: var(--text-gray);"><i class="fas fa-search"></i></div>
+    </nav>
+
+    <div class="categories-container">
+        <div class="categories-flex">
+            <a href="index.html"><div class="pill">All</div></a>
+            <a href="action.html"><div class="pill">Action</div></a>
+            <a href="scifi.html"><div class="pill">Sci-Fi</div></a>
+            <a href="drama.html"><div class="pill">Drama</div></a>
+            <a href="horror.html"><div class="pill">Horror</div></a>
+            <a href="anime.html"><div class="pill active">Anime</div></a>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <div class="section-title">Anime Series</div>
+        <div class="video-grid" id="animeGrid"></div>
+    </main>
+
+    <script>
+        const animeMovies = [
+            { t: "Demon Slayer", y: "2019", img: "https://m.media-amazon.com/images/M/MV5BMWU1OGEwNmQtNGM3MS00YTYyLThmYmMtN2FjYzQzNzNmNTE0XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg", yt: "https://www.youtube.com/watch?v=VQGCKyvzIM4" },
+            { t: "Jujutsu Kaisen", y: "2020", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpNb19Dh9wj69-Z-QXywCo1rNVGXAKNCCphQ&s", yt: "https://www.youtube.com/watch?v=pkKu70O8vO8" },
+            { t: "Attack on Titan", y: "2013", img: "https://m.media-amazon.com/images/M/MV5BZjliODY5MzQtMmViZC00MTZmLWFhMWMtMjMwM2I3OGY1MTRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", yt: "https://www.youtube.com/watch?v=MGRm4IzK1SQ" },
+            { t: "Naruto Shippuden", y: "2007", img: "https://m.media-amazon.com/images/M/MV5BNTk3MDA1ZjAtNTRhYS00YzNiLTgwOGEtYWRmYTQ3NjA0NTAwXkEyXkFqcGc@._V1_.jpg", yt: "https://www.youtube.com/watch?v=1mYp_nbi_1w" },
+            { t: "One Piece", y: "1999", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj_sLNUkzCiWlBr4Srea0F4qW6787i30jpfQ&s", yt: "https://www.youtube.com/watch?v=S8_YwFLCh4U" },
+            { t: "Solo Leveling", y: "2024", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLv9uFWF6iGX_XQ7hlD_A5f2reBdxnivt1rA&s", yt: "https://www.youtube.com/watch?v=uY_f_3E88pU" },
+            { t: "Bleach: TYBW", y: "2022", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPckuX1X1Miuih0GVCtDXnyUKb1lu_Rf-Y-A&s", yt: "https://www.youtube.com/watch?v=e883_PZ3P6k" },
+            { t: "Death Note", y: "2006", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEPAdxrbabdKcjJIcivaAY5yim_QDSoWjewg&s", yt: "https://www.youtube.com/watch?v=NlJZ-YgAt-c" },
+            { t: "Spy x Family", y: "2022", img: "https://a.storyblok.com/f/178900/1064x1504/01c4ce6a11/spy-x-family-season-3-forger-family-visual.jpg/m/filters:quality(95)format(webp)", yt: "https://www.youtube.com/watch?v=O6q-guXn908" },
+            { t: "Chainsaw Man", y: "2022", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvYewwgW0fGGvU0lzTCzh7S6AkYT1rKpiYrw&s", yt: "https://www.youtube.com/watch?v=v4yLeNt-kCU" },
+            { t: "Dragon Ball Super", y: "2015", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4jE4DzDe2fEsTJg-p1j4SFBI3o1ueg9cAg&s", yt: "https://www.youtube.com/watch?v=6W_H950yWQE" },
+            { t: "Your Name", y: "2016", img: "https://m.media-amazon.com/images/M/MV5BOTkzMGIyYzAtMDQyYi00OTkxLWI2ZGMtODNmYjMyMWM3ZGY1XkEyXkFqcGc@._V1_.jpg", yt: "https://www.youtube.com/watch?v=s0wMdLBeuxw" }
+        ];
+
+        const grid = document.getElementById('animeGrid');
+        grid.innerHTML = animeMovies.map(m => `
+            <div class="card-wrapper">
+                <a href="${m.yt}" target="_blank" style="text-decoration:none; color:inherit;">
+                    <div class="card">
+                        <img src="${m.img}" alt="${m.t}">
+                    </div>
+                    <div class="card-info">
+                        <h3>${m.t}</h3>
+                        <div class="card-meta">${m.y} • Anime</div>
+                    </div>
+                </a>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

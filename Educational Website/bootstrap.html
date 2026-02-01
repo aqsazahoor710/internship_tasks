@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Bootstrap Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Bootstrap topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- Bootstrap Introduction -->
+<div class="accordion">Bootstrap Basics</div>
+<div class="panel">
+    <a href="#">What is Bootstrap?</a>
+    <a href="#">Bootstrap Installation</a>
+    <a href="#">Bootstrap Containers</a>
+    <a href="#">Bootstrap Grid System</a>
+    <a href="#">Bootstrap Breakpoints</a>
+</div>
+
+<!-- Bootstrap Layout -->
+<div class="accordion">Layout</div>
+<div class="panel">
+    <a href="#">Containers</a>
+    <a href="#">Grid Options</a>
+    <a href="#">Columns</a>
+    <a href="#">Responsive Layout</a>
+    <a href="#">Utilities</a>
+</div>
+
+<!-- Bootstrap Content -->
+<div class="accordion">Content</div>
+<div class="panel">
+    <a href="#">Typography</a>
+    <a href="#">Images</a>
+    <a href="#">Tables</a>
+    <a href="#">Figures</a>
+</div>
+
+<!-- Bootstrap Components -->
+<div class="accordion">Components</div>
+<div class="panel">
+    <a href="#">Alerts</a>
+    <a href="#">Badges</a>
+    <a href="#">Buttons</a>
+    <a href="#">Cards</a>
+    <a href="#">Carousel</a>
+    <a href="#">Collapse</a>
+    <a href="#">Dropdowns</a>
+    <a href="#">List Groups</a>
+    <a href="#">Modals</a>
+    <a href="#">Navs</a>
+    <a href="#">Navbar</a>
+    <a href="#">Offcanvas</a>
+    <a href="#">Pagination</a>
+    <a href="#">Progress</a>
+    <a href="#">Tooltips</a>
+    <a href="#">Popovers</a>
+</div>
+
+<!-- Bootstrap Forms -->
+<div class="accordion">Bootstrap Forms</div>
+<div class="panel">
+    <a href="#">Forms Overview</a>
+    <a href="#">Form Controls</a>
+    <a href="#">Input Groups</a>
+    <a href="#">Validation</a>
+    <a href="#">Selects</a>
+</div>
+
+<!-- Bootstrap Utilities -->
+<div class="accordion">Utilities</div>
+<div class="panel">
+    <a href="#">Spacing</a>
+    <a href="#">Colors</a>
+    <a href="#">Shadows</a>
+    <a href="#">Borders</a>
+    <a href="#">Flex</a>
+    <a href="#">Display</a>
+    <a href="#">Position</a>
+    <a href="#">Sizing</a>
+</div>
+
+<!-- Bootstrap Examples -->
+<div class="accordion">Examples & Projects</div>
+<div class="panel">
+    <a href="#">Templates</a>
+    <a href="#">Practice Projects</a>
+    <a href="#">Bootstrap Quiz</a>
+    <a href="#">Exercises</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

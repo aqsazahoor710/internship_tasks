@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sci-Fi Movies | CINEVAULT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-black: #050507;
+            --card-bg: #121217;
+            --accent-blue: #00d2ff; /* Sci-Fi theme ke liye blue accent */
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-black); color: var(--text-white); overflow-x: hidden; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(5, 5, 7, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent-blue); text-decoration: none; }
+
+        .categories-container { padding: 90px 6% 10px; }
+        .categories-flex { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .categories-flex::-webkit-scrollbar { display: none; }
+        .categories-flex a { text-decoration: none; }
+        .pill { 
+            padding: 8px 20px; background: #16161d; border: 1px solid #2a2a35; 
+            border-radius: 8px; font-size: 11px; font-weight: 700; color: var(--text-gray);
+            transition: 0.3s; text-transform: uppercase; white-space: nowrap;
+        }
+        .pill.active { background: linear-gradient(45deg, #00d2ff, #3a7bd5); border: none; color: white; }
+
+        .main-container { padding: 20px 6% 60px; max-width: 1800px; margin: 0 auto; }
+        .section-title { font-size: 22px; margin-bottom: 30px; font-weight: 700; border-left: 4px solid var(--accent-blue); padding-left: 15px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+
+        .card-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        .card { 
+            position: relative; border-radius: 15px; overflow: hidden; 
+            aspect-ratio: 2/3; background: var(--card-bg); transition: 0.4s;
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2); }
+        .card:hover img { filter: brightness(0.4) scale(1.05); }
+        
+        .card::after {
+            content: '\f04b'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 35px; color: white; opacity: 0; transition: 0.3s;
+        }
+        .card:hover::after { opacity: 1; }
+
+        .card-info { padding: 5px; }
+        .card-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .card-meta { font-size: 11px; color: var(--text-gray); }
+
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">CINEVAULT</a>
+        <div style="color: var(--text-gray);"><i class="fas fa-search"></i></div>
+    </nav>
+
+    <div class="categories-container">
+        <div class="categories-flex">
+            <a href="index.html"><div class="pill">All</div></a>
+            <a href="action.html"><div class="pill">Action</div></a>
+            <a href="scifi.html"><div class="pill active">Sci-Fi</div></a>
+            <a href="drama.html"><div class="pill">Drama</div></a>
+            <a href="horror.html"><div class="pill">Horror</div></a>
+            <a href="anime.html"><div class="pill">Anime</div></a>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <div class="section-title">Sci-Fi Movies</div>
+        <div class="video-grid" id="scifiGrid"></div>
+    </main>
+
+    <script>
+        const scifiMovies = [
+            { t: "Interstellar", y: "2014", img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=500", yt: "https://www.youtube.com/watch?v=zSWdZVtXT7E" },
+            { t: "Inception", y: "2010", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500", yt: "https://www.youtube.com/watch?v=YoHD9XEInc0" },
+            { t: "Dune: Part Two", y: "2024", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq8P5uwVwfPAX9FnmiLtcFECf8l28lS9FN-g&s", yt: "https://www.youtube.com/watch?v=Way9Dexny3w" },
+            { t: "Blade Runner 2049", y: "2017", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=500", yt: "https://www.youtube.com/watch?v=gCcx85zbxz4" },
+            { t: "The Matrix", y: "1999", img: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=500", yt: "https://www.youtube.com/watch?v=vKQi3bBA1y8" },
+            { t: "Avatar 2", y: "2022", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=500", yt: "https://www.youtube.com/watch?v=d9MyW72ELq0" },
+            { t: "Arrival", y: "2016", img: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=500", yt: "https://www.youtube.com/watch?v=gwqSi_ToNPs" },
+            { t: "The Martian", y: "2015", img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=500", yt: "https://www.youtube.com/watch?v=ej3ioOneTy8" },
+            { t: "Tenet", y: "2020", img: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=500", yt: "https://www.youtube.com/watch?v=LdOM0x0ASFE" },
+            { t: "The Creator", y: "2023", img: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=500", yt: "https://www.youtube.com/watch?v=ex3C1bbDkwU" },
+            { t: "Spider-Man: Across", y: "2023", img: "https://images.unsplash.com/photo-1635805737707-575885ab0820?q=80&w=500", yt: "https://www.youtube.com/watch?v=shW9i6k8cB0" },
+            { t: "Gravity", y: "2013", img: "https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=500", yt: "https://www.youtube.com/watch?v=OiTiKOy59oA" }
+        ];
+
+        const grid = document.getElementById('scifiGrid');
+        grid.innerHTML = scifiMovies.map(m => `
+            <div class="card-wrapper">
+                <a href="${m.yt}" target="_blank" style="text-decoration:none; color:inherit;">
+                    <div class="card">
+                        <img src="${m.img}" alt="${m.t}">
+                    </div>
+                    <div class="card-info">
+                        <h3>${m.t}</h3>
+                        <div class="card-meta">${m.y} • Sci-Fi</div>
+                    </div>
+                </a>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

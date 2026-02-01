@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rust Tutorial Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        color: #fff;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 25px;
+        color: #3bc3ff;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 35px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        font-size: 15px;
+        background: #0d1a2b;
+        color: #fff;
+        outline: none;
+        border: 1px solid #1f2d40;
+        transition: 0.3s;
+    }
+
+    .search-box input:focus {
+        border-color: #3bc3ff;
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .accordion-item {
+        background: #0b1625;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1c2b3c;
+    }
+
+    .accordion-header {
+        padding: 18px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #3bc3ff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-header:hover {
+        background: rgba(59,195,255,0.1);
+    }
+
+    .accordion-body {
+        display: none;
+        padding: 15px 25px;
+        font-size: 15px;
+        line-height: 28px;
+        color: #d8e3ef;
+    }
+
+    .accordion-body a {
+        display: block;
+        padding: 5px 0;
+        text-decoration: none;
+        color: #9ab7d3;
+        transition: 0.2s;
+    }
+
+    .accordion-body a:hover {
+        color: #3bc3ff;
+        margin-left: 6px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>Rust Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Rust Topics...">
+</div>
+
+<div class="accordion">
+
+    <!-- Rust Basics -->
+    <div class="accordion-item">
+        <div class="accordion-header">Rust Basics</div>
+        <div class="accordion-body">
+            <a href="#">Introduction to Rust</a>
+            <a href="#">Installation & Setup</a>
+            <a href="#">Hello World</a>
+            <a href="#">Variables & Mutability</a>
+            <a href="#">Data Types</a>
+        </div>
+    </div>
+
+    <!-- Control Flow -->
+    <div class="accordion-item">
+        <div class="accordion-header">Control Flow</div>
+        <div class="accordion-body">
+            <a href="#">if, else</a>
+            <a href="#">Loops</a>
+            <a href="#">while</a>
+            <a href="#">for</a>
+            <a href="#">match</a>
+        </div>
+    </div>
+
+    <!-- Functions & Modules -->
+    <div class="accordion-item">
+        <div class="accordion-header">Functions & Modules</div>
+        <div class="accordion-body">
+            <a href="#">Functions</a>
+            <a href="#">Parameters & Return Values</a>
+            <a href="#">Modules & use</a>
+            <a href="#">Crates & Packages</a>
+        </div>
+    </div>
+
+    <!-- Ownership & Borrowing -->
+    <div class="accordion-item">
+        <div class="accordion-header">Ownership & Borrowing</div>
+        <div class="accordion-body">
+            <a href="#">Ownership Rules</a>
+            <a href="#">References & Borrowing</a>
+            <a href="#">Mutable References</a>
+            <a href="#">Slices</a>
+        </div>
+    </div>
+
+    <!-- Structs & Enums -->
+    <div class="accordion-item">
+        <div class="accordion-header">Structs & Enums</div>
+        <div class="accordion-body">
+            <a href="#">Structs</a>
+            <a href="#">Tuple Structs</a>
+            <a href="#">Enums</a>
+            <a href="#">Pattern Matching</a>
+        </div>
+    </div>
+
+    <!-- Traits & Generics -->
+    <div class="accordion-item">
+        <div class="accordion-header">Traits & Generics</div>
+        <div class="accordion-body">
+            <a href="#">Defining Traits</a>
+            <a href="#">Implementing Traits</a>
+            <a href="#">Generics</a>
+            <a href="#">Trait Bounds</a>
+        </div>
+    </div>
+
+    <!-- Error Handling -->
+    <div class="accordion-item">
+        <div class="accordion-header">Error Handling</div>
+        <div class="accordion-body">
+            <a href="#">panic! Macro</a>
+            <a href="#">Result Enum</a>
+            <a href="#">Option Enum</a>
+        </div>
+    </div>
+
+    <!-- Advanced Topics -->
+    <div class="accordion-item">
+        <div class="accordion-header">Advanced Topics</div>
+        <div class="accordion-body">
+            <a href="#">Lifetimes</a>
+            <a href="#">Macros</a>
+            <a href="#">Concurrency</a>
+            <a href="#">Unsafe Rust</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Accordion toggle
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const body = header.nextElementSibling;
+            body.style.display = body.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll(".accordion-body a").forEach(link => {
+            link.style.display = link.textContent.toLowerCase().includes(filter) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

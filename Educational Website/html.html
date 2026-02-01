@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Course Categories</title>
+
+<style>
+    :root {
+        --bg: #061021;
+        --card: #0b162b;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #0ea5e9;
+        --radius: 14px;
+    }
+
+    body {
+        background: var(--bg);
+        font-family: "Poppins", sans-serif;
+        color: var(--text);
+        margin: 0;
+        padding: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        color: var(--accent);
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    /* Search Bar */
+    .search-box {
+        max-width: 600px;
+        margin: 0 auto 25px auto;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 15px;
+        background: var(--card);
+        border: 1px solid #1e293b;
+        border-radius: var(--radius);
+        color: var(--text);
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .search-box input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 6px var(--accent);
+    }
+
+    /* Accordion Card */
+    .card {
+        background: var(--card);
+        padding: 18px 22px;
+        border-radius: var(--radius);
+        margin-bottom: 12px;
+        cursor: pointer;
+        border: 1px solid #1e293b;
+        transition: 0.25s;
+    }
+
+    .card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--accent);
+    }
+
+    .arrow {
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+
+    /* Panel Content */
+    .panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s ease;
+        padding-left: 10px;
+    }
+
+    .panel a {
+        display: block;
+        color: var(--muted);
+        text-decoration: none;
+        padding: 8px 0;
+        font-size: 15px;
+        border-left: 2px solid transparent;
+        transition: 0.25s;
+        padding-left: 10px;
+    }
+
+    .panel a:hover {
+        color: var(--accent);
+        border-left: 2px solid var(--accent);
+        margin-left: 4px;
+    }
+</style>
+</head>
+<body>
+
+<h2>HTML Course Categories</h2>
+
+<!-- Search Bar -->
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search any HTML topic...">
+</div>
+
+
+<!-- CARD ACCORDIONS -->
+<div id="accordion">
+
+    <!-- HTML Tutorial -->
+    <div class="card">
+        <div class="card-title">
+            HTML Tutorial 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML HOME</a>
+            <a href="#">HTML Introduction</a>
+            <a href="#">HTML Editors</a>
+            <a href="#">HTML Basic</a>
+            <a href="#">HTML Elements</a>
+            <a href="#">HTML Attributes</a>
+            <a href="#">HTML Headings</a>
+            <a href="#">HTML Paragraphs</a>
+            <a href="#">HTML Styles</a>
+            <a href="#">HTML Formatting</a>
+            <a href="#">HTML Quotations</a>
+            <a href="#">HTML Comments</a>
+            <a href="#">HTML Colors</a>
+            <a href="#">HTML CSS</a>
+            <a href="#">HTML Links</a>
+            <a href="#">HTML Images</a>
+            <a href="#">HTML Favicon</a>
+            <a href="#">HTML Page Title</a>
+            <a href="#">HTML Tables</a>
+            <a href="#">HTML Lists</a>
+            <a href="#">HTML Block & Inline</a>
+            <a href="#">HTML Div</a>
+            <a href="#">HTML Classes</a>
+            <a href="#">HTML Id</a>
+            <a href="#">HTML Iframes</a>
+            <a href="#">HTML JavaScript</a>
+            <a href="#">HTML File Paths</a>
+            <a href="#">HTML Head</a>
+            <a href="#">HTML Layout</a>
+            <a href="#">HTML Responsive</a>
+            <a href="#">HTML Computercode</a>
+            <a href="#">HTML Semantics</a>
+            <a href="#">HTML Style Guide</a>
+            <a href="#">HTML Entities</a>
+            <a href="#">HTML Symbols</a>
+            <a href="#">HTML Emojis</a>
+            <a href="#">HTML Charsets</a>
+            <a href="#">HTML URL Encode</a>
+            <a href="#">HTML vs. XHTML</a>
+        </div>
+    </div>
+
+    <!-- HTML Forms -->
+    <div class="card">
+        <div class="card-title">
+            HTML Forms 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML Forms</a>
+            <a href="#">HTML Form Attributes</a>
+            <a href="#">HTML Form Elements</a>
+            <a href="#">HTML Input Types</a>
+            <a href="#">HTML Input Attributes</a>
+            <a href="#">Input Form Attributes</a>
+        </div>
+    </div>
+
+    <!-- HTML Graphics -->
+    <div class="card">
+        <div class="card-title">
+            HTML Graphics 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML Canvas</a>
+            <a href="#">HTML SVG</a>
+        </div>
+    </div>
+
+    <!-- HTML Media -->
+    <div class="card">
+        <div class="card-title">
+            HTML Media 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML Media</a>
+            <a href="#">HTML Video</a>
+            <a href="#">HTML Audio</a>
+            <a href="#">HTML Plug-ins</a>
+            <a href="#">HTML YouTube</a>
+        </div>
+    </div>
+
+    <!-- HTML APIs -->
+    <div class="card">
+        <div class="card-title">
+            HTML APIs 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML Web APIs</a>
+            <a href="#">HTML Geolocation</a>
+            <a href="#">HTML Drag and Drop</a>
+            <a href="#">HTML Web Storage</a>
+            <a href="#">HTML Web Workers</a>
+            <a href="#">HTML SSE</a>
+        </div>
+    </div>
+
+    <!-- HTML Examples -->
+    <div class="card">
+        <div class="card-title">
+            HTML Examples 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML Examples</a>
+            <a href="#">HTML Editor</a>
+            <a href="#">HTML Quiz</a>
+            <a href="#">HTML Exercises</a>
+            <a href="#">HTML Website</a>
+            <a href="#">HTML Syllabus</a>
+            <a href="#">HTML Study Plan</a>
+            <a href="#">HTML Interview Prep</a>
+            <a href="#">HTML Bootcamp</a>
+            <a href="#">HTML Certificate</a>
+            <a href="#">HTML Summary</a>
+            <a href="#">HTML Accessibility</a>
+        </div>
+    </div>
+
+    <!-- HTML References -->
+    <div class="card">
+        <div class="card-title">
+            HTML References 
+            <span class="arrow">▶</span>
+        </div>
+        <div class="panel">
+            <a href="#">HTML Tag List</a>
+            <a href="#">HTML Attributes</a>
+            <a href="#">HTML Global Attributes</a>
+            <a href="#">HTML Browser Support</a>
+            <a href="#">HTML Events</a>
+            <a href="#">HTML Colors</a>
+            <a href="#">HTML Canvas</a>
+            <a href="#">HTML Audio/Video</a>
+            <a href="#">HTML Doctypes</a>
+            <a href="#">HTML Character Sets</a>
+            <a href="#">HTML URL Encode</a>
+            <a href="#">HTML Lang Codes</a>
+            <a href="#">HTTP Messages</a>
+            <a href="#">HTTP Methods</a>
+            <a href="#">PX to EM Converter</a>
+            <a href="#">Keyboard Shortcuts</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Accordion Function
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        card.addEventListener("click", function () {
+            const panel = this.querySelector(".panel");
+            const arrow = this.querySelector(".arrow");
+
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+                arrow.classList.remove("rotate");
+            } else {
+                document.querySelectorAll(".panel").forEach(p => p.style.maxHeight = null);
+                document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate"));
+
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+
+
+    // SEARCH FUNCTION
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let allItems = document.querySelectorAll(".panel a");
+
+        allItems.forEach(item => {
+            let text = item.innerText.toLowerCase();
+            item.style.display = text.includes(filter) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

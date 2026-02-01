@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotlin Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Kotlin Course Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Kotlin topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- Kotlin Basics -->
+<div class="accordion">Kotlin Basics</div>
+<div class="panel">
+    <a href="#">Kotlin Home</a>
+    <a href="#">Introduction</a>
+    <a href="#">Installation & Setup</a>
+    <a href="#">Kotlin Syntax</a>
+    <a href="#">Variables & Constants</a>
+    <a href="#">Data Types</a>
+    <a href="#">Operators</a>
+    <a href="#">Comments</a>
+</div>
+
+<!-- Control Flow -->
+<div class="accordion">Control Flow</div>
+<div class="panel">
+    <a href="#">If / Else</a>
+    <a href="#">When Expression</a>
+    <a href="#">Loops</a>
+    <a href="#">For Loop</a>
+    <a href="#">While Loop</a>
+    <a href="#">Do-While Loop</a>
+    <a href="#">Break / Continue</a>
+</div>
+
+<!-- Functions -->
+<div class="accordion">Functions</div>
+<div class="panel">
+    <a href="#">Defining Functions</a>
+    <a href="#">Function Parameters</a>
+    <a href="#">Default Arguments</a>
+    <a href="#">Named Arguments</a>
+    <a href="#">Vararg Parameters</a>
+    <a href="#">Return Values</a>
+</div>
+
+<!-- OOP -->
+<div class="accordion">OOP in Kotlin</div>
+<div class="panel">
+    <a href="#">Classes & Objects</a>
+    <a href="#">Properties & Methods</a>
+    <a href="#">Constructors</a>
+    <a href="#">Inheritance</a>
+    <a href="#">Polymorphism</a>
+    <a href="#">Interfaces</a>
+    <a href="#">Visibility Modifiers</a>
+</div>
+
+<!-- Collections -->
+<div class="accordion">Collections</div>
+<div class="panel">
+    <a href="#">Arrays</a>
+    <a href="#">Lists</a>
+    <a href="#">Sets</a>
+    <a href="#">Maps</a>
+    <a href="#">Collection Functions</a>
+</div>
+
+<!-- Null Safety & Exceptions -->
+<div class="accordion">Null Safety & Exceptions</div>
+<div class="panel">
+    <a href="#">Nullable Types</a>
+    <a href="#">Safe Calls</a>
+    <a href="#">Elvis Operator</a>
+    <a href="#">Not-null Assertion</a>
+    <a href="#">Exception Handling</a>
+</div>
+
+<!-- Lambdas & Functional -->
+<div class="accordion">Lambdas & Functional Programming</div>
+<div class="panel">
+    <a href="#">Lambda Expressions</a>
+    <a href="#">Higher-Order Functions</a>
+    <a href="#">Map, Filter, Reduce</a>
+    <a href="#">Inline Functions</a>
+</div>
+
+<!-- Kotlin Standard Library & Advanced -->
+<div class="accordion">Standard Library & Advanced</div>
+<div class="panel">
+    <a href="#">Kotlin Standard Library</a>
+    <a href="#">Scopes Functions</a>
+    <a href="#">Extension Functions</a>
+    <a href="#">Generics</a>
+    <a href="#">Delegation</a>
+    <a href="#">Coroutines</a>
+</div>
+
+<!-- Projects & Examples -->
+<div class="accordion">Projects & Examples</div>
+<div class="panel">
+    <a href="#">Kotlin Examples</a>
+    <a href="#">Exercises</a>
+    <a href="#">Quiz</a>
+    <a href="#">Mini Projects</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

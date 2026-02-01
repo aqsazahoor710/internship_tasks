@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C Language Tutorial Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        color: #fff;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 25px;
+        color: #3bc3ff;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 35px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        font-size: 15px;
+        background: #0d1a2b;
+        color: #fff;
+        outline: none;
+        border: 1px solid #1f2d40;
+        transition: 0.3s;
+    }
+
+    .search-box input:focus {
+        border-color: #3bc3ff;
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .accordion-item {
+        background: #0b1625;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1c2b3c;
+    }
+
+    .accordion-header {
+        padding: 18px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #3bc3ff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-header:hover {
+        background: rgba(59,195,255,0.1);
+    }
+
+    .accordion-body {
+        display: none;
+        padding: 15px 25px;
+        font-size: 15px;
+        line-height: 28px;
+        color: #d8e3ef;
+    }
+
+    .accordion-body a {
+        display: block;
+        padding: 5px 0;
+        text-decoration: none;
+        color: #9ab7d3;
+        transition: 0.2s;
+    }
+
+    .accordion-body a:hover {
+        color: #3bc3ff;
+        margin-left: 6px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>C Language Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search C Language Topics...">
+</div>
+
+<div class="accordion">
+
+    <!-- C Basics -->
+    <div class="accordion-item">
+        <div class="accordion-header">C Basics</div>
+        <div class="accordion-body">
+            <a href="#">Introduction to C</a>
+            <a href="#">History of C</a>
+            <a href="#">C Environment Setup</a>
+            <a href="#">Hello World Program</a>
+            <a href="#">Variables & Data Types</a>
+        </div>
+    </div>
+
+    <!-- Operators & Expressions -->
+    <div class="accordion-item">
+        <div class="accordion-header">Operators & Expressions</div>
+        <div class="accordion-body">
+            <a href="#">Arithmetic Operators</a>
+            <a href="#">Relational Operators</a>
+            <a href="#">Logical Operators</a>
+            <a href="#">Bitwise Operators</a>
+        </div>
+    </div>
+
+    <!-- Control Flow -->
+    <div class="accordion-item">
+        <div class="accordion-header">Control Flow</div>
+        <div class="accordion-body">
+            <a href="#">if, else Statements</a>
+            <a href="#">switch Statement</a>
+            <a href="#">for Loops</a>
+            <a href="#">while & do-while Loops</a>
+        </div>
+    </div>
+
+    <!-- Functions -->
+    <div class="accordion-item">
+        <div class="accordion-header">Functions</div>
+        <div class="accordion-body">
+            <a href="#">Defining Functions</a>
+            <a href="#">Function Arguments</a>
+            <a href="#">Return Values</a>
+            <a href="#">Recursion</a>
+        </div>
+    </div>
+
+    <!-- Arrays & Strings -->
+    <div class="accordion-item">
+        <div class="accordion-header">Arrays & Strings</div>
+        <div class="accordion-body">
+            <a href="#">Arrays in C</a>
+            <a href="#">Multidimensional Arrays</a>
+            <a href="#">Strings in C</a>
+            <a href="#">String Functions</a>
+        </div>
+    </div>
+
+    <!-- Pointers -->
+    <div class="accordion-item">
+        <div class="accordion-header">Pointers</div>
+        <div class="accordion-body">
+            <a href="#">Pointer Basics</a>
+            <a href="#">Pointer Arithmetic</a>
+            <a href="#">Pointers & Functions</a>
+            <a href="#">Pointers & Arrays</a>
+        </div>
+    </div>
+
+    <!-- Structures & Unions -->
+    <div class="accordion-item">
+        <div class="accordion-header">Structures & Unions</div>
+        <div class="accordion-body">
+            <a href="#">Structures</a>
+            <a href="#">Nested Structures</a>
+            <a href="#">Unions</a>
+        </div>
+    </div>
+
+    <!-- File Handling -->
+    <div class="accordion-item">
+        <div class="accordion-header">File Handling</div>
+        <div class="accordion-body">
+            <a href="#">Opening & Closing Files</a>
+            <a href="#">Reading & Writing Files</a>
+            <a href="#">File Operations</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Accordion toggle
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const body = header.nextElementSibling;
+            body.style.display = body.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll(".accordion-body a").forEach(link => {
+            link.style.display = link.textContent.toLowerCase().includes(filter) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

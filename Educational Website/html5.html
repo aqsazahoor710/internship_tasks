@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML5 Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>HTML5 Course Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search HTML5 topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- HTML5 Basics -->
+<div class="accordion">HTML5 Basics</div>
+<div class="panel">
+    <a href="#">HTML5 Home</a>
+    <a href="#">Introduction to HTML5</a>
+    <a href="#">New Doctype</a>
+    <a href="#">New Elements</a>
+    <a href="#">HTML5 Syntax</a>
+    <a href="#">HTML5 Structure</a>
+</div>
+
+<!-- HTML5 Forms -->
+<div class="accordion">HTML5 Forms</div>
+<div class="panel">
+    <a href="#">Form Enhancements</a>
+    <a href="#">New Input Types</a>
+    <a href="#">Form Attributes</a>
+    <a href="#">Form Validation</a>
+</div>
+
+<!-- HTML5 Multimedia -->
+<div class="accordion">Multimedia</div>
+<div class="panel">
+    <a href="#">Audio Element</a>
+    <a href="#">Video Element</a>
+    <a href="#">Canvas</a>
+    <a href="#">SVG</a>
+</div>
+
+<!-- HTML5 APIs -->
+<div class="accordion">HTML5 APIs</div>
+<div class="panel">
+    <a href="#">Geolocation API</a>
+    <a href="#">Drag & Drop API</a>
+    <a href="#">Local Storage</a>
+    <a href="#">Session Storage</a>
+    <a href="#">Web Workers</a>
+    <a href="#">Web Sockets</a>
+</div>
+
+<!-- HTML5 Semantics -->
+<div class="accordion">Semantic Elements</div>
+<div class="panel">
+    <a href="#">Header</a>
+    <a href="#">Footer</a>
+    <a href="#">Article</a>
+    <a href="#">Section</a>
+    <a href="#">Nav</a>
+    <a href="#">Aside</a>
+</div>
+
+<!-- HTML5 Graphics & Media -->
+<div class="accordion">Graphics & Media</div>
+<div class="panel">
+    <a href="#">Canvas API</a>
+    <a href="#">SVG</a>
+    <a href="#">Video / Audio APIs</a>
+</div>
+
+<!-- Projects & Examples -->
+<div class="accordion">Projects & Examples</div>
+<div class="panel">
+    <a href="#">HTML5 Examples</a>
+    <a href="#">Exercises</a>
+    <a href="#">Quiz</a>
+    <a href="#">Mini Projects</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

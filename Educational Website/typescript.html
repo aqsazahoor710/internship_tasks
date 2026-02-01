@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeScript Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>TypeScript Course Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search TypeScript topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- TypeScript Basics -->
+<div class="accordion">TypeScript Basics</div>
+<div class="panel">
+    <a href="#">TypeScript Home</a>
+    <a href="#">Introduction</a>
+    <a href="#">Installation & Setup</a>
+    <a href="#">TypeScript Syntax</a>
+    <a href="#">Variables & Constants</a>
+    <a href="#">Data Types</a>
+    <a href="#">Comments</a>
+</div>
+
+<!-- Functions -->
+<div class="accordion">Functions</div>
+<div class="panel">
+    <a href="#">Defining Functions</a>
+    <a href="#">Function Parameters</a>
+    <a href="#">Optional Parameters</a>
+    <a href="#">Default Parameters</a>
+    <a href="#">Return Types</a>
+</div>
+
+<!-- OOP -->
+<div class="accordion">OOP in TypeScript</div>
+<div class="panel">
+    <a href="#">Classes & Objects</a>
+    <a href="#">Properties & Methods</a>
+    <a href="#">Constructors</a>
+    <a href="#">Inheritance</a>
+    <a href="#">Interfaces</a>
+    <a href="#">Abstract Classes</a>
+    <a href="#">Access Modifiers</a>
+    <a href="#">Polymorphism</a>
+</div>
+
+<!-- Advanced Types -->
+<div class="accordion">Advanced Types</div>
+<div class="panel">
+    <a href="#">Union Types</a>
+    <a href="#">Intersection Types</a>
+    <a href="#">Literal Types</a>
+    <a href="#">Enums</a>
+    <a href="#">Type Aliases</a>
+    <a href="#">Generics</a>
+</div>
+
+<!-- Modules & Namespaces -->
+<div class="accordion">Modules & Namespaces</div>
+<div class="panel">
+    <a href="#">Modules</a>
+    <a href="#">Import / Export</a>
+    <a href="#">Namespaces</a>
+</div>
+
+<!-- Decorators -->
+<div class="accordion">Decorators</div>
+<div class="panel">
+    <a href="#">Class Decorators</a>
+    <a href="#">Method Decorators</a>
+    <a href="#">Property Decorators</a>
+    <a href="#">Parameter Decorators</a>
+</div>
+
+<!-- Error Handling -->
+<div class="accordion">Error Handling</div>
+<div class="panel">
+    <a href="#">Try / Catch</a>
+    <a href="#">Throwing Errors</a>
+</div>
+
+<!-- Projects & Examples -->
+<div class="accordion">Projects & Examples</div>
+<div class="panel">
+    <a href="#">TypeScript Examples</a>
+    <a href="#">Exercises</a>
+    <a href="#">Quiz</a>
+    <a href="#">Mini Projects</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

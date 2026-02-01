@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Tutorial</title>
+
+<style>
+    :root {
+        --bg: #061021;
+        --card: #0b162b;
+        --accent: #0ea5a5;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --radius: 12px;
+        --transition: .3s ease;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Poppins", sans-serif;
+        color: var(--text);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    /* Search Bar */
+    .search-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 18px;
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 16px;
+        outline: none;
+    }
+
+    /* Accordion Category */
+    .accordion-item {
+        background: var(--card);
+        margin-bottom: 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .accordion-header {
+        padding: 16px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+        background: #0f1c35;
+        padding-left: 20px;
+    }
+
+    .accordion-content a {
+        display: block;
+        padding: 10px 0;
+        color: var(--muted);
+        text-decoration: none;
+        transition: var(--transition);
+        font-size: 15px;
+    }
+
+    .accordion-content a:hover {
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+
+    .arrow {
+        transition: var(--transition);
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript Tutorial</h1>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search JavaScript Topics...">
+    </div>
+
+    <div id="accordion">
+
+        <!-- JS Basics -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                JS Basics
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">JS Home</a>
+                <a href="#">JS Introduction</a>
+                <a href="#">JS Syntax</a>
+                <a href="#">JS Statements</a>
+                <a href="#">JS Comments</a>
+                <a href="#">JS Variables</a>
+                <a href="#">JS Operators</a>
+                <a href="#">JS Data Types</a>
+                <a href="#">JS Functions</a>
+                <a href="#">JS Objects</a>
+                <a href="#">JS Arrays</a>
+                <a href="#">JS Loops</a>
+                <a href="#">JS Conditional Statements</a>
+                <a href="#">JS Events</a>
+                <a href="#">JS Strings</a>
+                <a href="#">JS Numbers</a>
+                <a href="#">JS Math</a>
+                <a href="#">JS Date</a>
+            </div>
+        </div>
+
+        <!-- JS Advanced -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                JS Advanced
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">JS Scope</a>
+                <a href="#">JS Hoisting</a>
+                <a href="#">JS Closures</a>
+                <a href="#">JS Callbacks</a>
+                <a href="#">JS Promises</a>
+                <a href="#">JS Async/Await</a>
+                <a href="#">JS Classes</a>
+                <a href="#">JS Inheritance</a>
+                <a href="#">JS Error Handling</a>
+                <a href="#">JS Modules</a>
+                <a href="#">JS this Keyword</a>
+                <a href="#">JS Strict Mode</a>
+                <a href="#">JS Destructuring</a>
+                <a href="#">JS Template Literals</a>
+                <a href="#">JS Default Parameters</a>
+            </div>
+        </div>
+
+        <!-- DOM -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                JS DOM
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">DOM Introduction</a>
+                <a href="#">DOM Selecting Elements</a>
+                <a href="#">DOM Manipulation</a>
+                <a href="#">DOM Events</a>
+                <a href="#">DOM Forms</a>
+                <a href="#">DOM Style</a>
+                <a href="#">DOM Traversing</a>
+            </div>
+        </div>
+
+        <!-- BOM -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                JS BOM
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">BOM Window</a>
+                <a href="#">BOM Navigator</a>
+                <a href="#">BOM Location</a>
+                <a href="#">BOM History</a>
+                <a href="#">BOM Screen</a>
+                <a href="#">BOM Timers</a>
+            </div>
+        </div>
+
+        <!-- JS Examples -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                JS Examples
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">JS Exercises</a>
+                <a href="#">JS Quiz</a>
+                <a href="#">JS Projects</a>
+                <a href="#">JS Templates</a>
+            </div>
+        </div>
+
+        <!-- JS References -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                JS References
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">JS Reference</a>
+                <a href="#">JS Objects Reference</a>
+                <a href="#">JS Functions Reference</a>
+                <a href="#">JS Browser Support</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Accordion Logic
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            let content = header.nextElementSibling;
+            let arrow = header.querySelector('.arrow');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                arrow.classList.remove("rotate");
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll('.arrow').forEach(a => a.classList.remove("rotate"));
+
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+
+    // Search Filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let links = document.querySelectorAll(".accordion-content a");
+
+        links.forEach(link => {
+            if (link.textContent.toLowerCase().includes(filter)) {
+                link.style.display = "block";
+            } else {
+                link.style.display = "none";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

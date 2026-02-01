@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Management – Tech Hub</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #0f172a;
+    color: #f8fafc;
+}
+.header {
+    background: #0b1220;
+    color: #fff;
+    padding: 28px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    animation: slideDown 0.8s ease;
+}
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.03);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+    animation: fadeInUp 1s ease;
+}
+.badges { margin-bottom: 15px; }
+.badge {
+    display: inline-block;
+    background: #06b6d4;
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.badge:hover { background: #0891b2; }
+h2 { font-size: 30px; margin-bottom: 10px; color: #38bdf8; }
+.tagline { font-size: 18px; color: #cbd5e1; margin-bottom: 20px; line-height: 1.5; }
+.stats { display: flex; justify-content: space-around; margin-top: 30px; }
+.stat-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s;
+}
+.stat-card:hover { transform: scale(1.05); }
+.stat-card h3 { color: #38bdf8; font-size: 28px; margin:0; }
+.stat-card p { color: #cbd5e1; margin:5px 0 0; }
+.section { margin-top: 25px; animation: fadeIn 1.2s ease forwards; opacity: 0; }
+.section h3 { margin-top: 20px; margin-bottom: 12px; color: #06b6d4; font-size: 22px; }
+ul li { color: #e2e8f0; margin-bottom: 8px; }
+.price-box {
+    margin-top: 35px;
+    padding: 25px;
+    background: linear-gradient(to right, #0e7490, #0369a1);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+}
+.btn-buy {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 16px 32px;
+    background: #06b6d4;
+    color: #000;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+    animation: fadeIn 1.7s ease forwards;
+    opacity: 0;
+}
+.btn-buy:hover { background: #0891b2; transform: scale(1.05); }
+.testimonials { margin-top: 40px; }
+.testimonial-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+.testimonial-card p { font-style: italic; color: #cbd5e1; }
+.testimonial-card h4 { margin-top: 10px; color: #38bdf8; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.highlight { color: #38bdf8; font-weight: 600; }
+</style>
+</head>
+
+<body>
+<div class="header">Project Management – Tech Hub</div>
+
+<div class="container">
+    <div class="badges">
+        <span class="badge">Beginner</span>
+        <span class="badge">Live Projects</span>
+        <span class="badge">Hands-On Labs</span>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card"><h3>50+</h3><p>Hours of Content</p></div>
+        <div class="stat-card"><h3>10+</h3><p>Hands-On Projects</p></div>
+        <div class="stat-card"><h3>Industry-Ready</h3><p>Skills</p></div>
+    </div>
+
+    <h2>Project Management Course</h2>
+    <p class="tagline">
+        Master the skills of planning, executing, and leading projects efficiently.<br>
+        Includes real-world case studies, Agile, Scrum, and project management tools.
+    </p>
+
+    <div class="section">
+        <h3>What You Will Learn</h3>
+        <ul>
+            <li><span class="highlight">Project Planning:</span> Scope, Timeline, Budgeting</li>
+            <li><span class="highlight">Risk Management:</span> Identify & Mitigate Risks</li>
+            <li><span class="highlight">Team Leadership:</span> Resource & Stakeholder Management</li>
+            <li><span class="highlight">Tools:</span> MS Project, JIRA, Trello</li>
+            <li><span class="highlight">Agile & Scrum:</span> Sprints, Backlogs, Standups</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Projects Included</h3>
+        <ul>
+            <li>Project Plan Simulation</li>
+            <li>Agile Sprint Project</li>
+            <li>Risk Assessment Case Study</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Tools & Skills</h3>
+        <ul>
+            <li>MS Project, Trello, JIRA</li>
+            <li>Agile & Scrum Frameworks</li>
+            <li>Risk Management Tools</li>
+        </ul>
+    </div>
+
+    <div class="testimonials">
+        <div class="testimonial-card">
+            <p>"This course helped me lead my first project successfully!"</p>
+            <h4>- Ahmed Raza</h4>
+        </div>
+        <div class="testimonial-card">
+            <p>"Hands-on Agile projects gave me practical skills instantly."</p>
+            <h4>- Fatima Noor</h4>
+        </div>
+    </div>
+
+    <div class="price-box">
+        <strong>Duration:</strong> 3 Months<br>
+        <strong>Fees:</strong> PKR 20,000<br>
+        <strong>Level:</strong> Beginner to Advanced
+    </div>
+
+    <a href="enroll.html" class="btn-buy">Enroll Now</a>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.2 });
+sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

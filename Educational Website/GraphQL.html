@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GraphQL Tutorial Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        color: #fff;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 25px;
+        color: #3bc3ff;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 35px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        font-size: 15px;
+        background: #0d1a2b;
+        color: #fff;
+        outline: none;
+        border: 1px solid #1f2d40;
+        transition: 0.3s;
+    }
+
+    .search-box input:focus {
+        border-color: #3bc3ff;
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .accordion-item {
+        background: #0b1625;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1c2b3c;
+    }
+
+    .accordion-header {
+        padding: 18px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #3bc3ff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-header:hover {
+        background: rgba(59,195,255,0.1);
+    }
+
+    .accordion-body {
+        display: none;
+        padding: 15px 25px;
+        font-size: 15px;
+        line-height: 28px;
+        color: #d8e3ef;
+    }
+
+    .accordion-body a {
+        display: block;
+        padding: 5px 0;
+        text-decoration: none;
+        color: #9ab7d3;
+        transition: 0.2s;
+    }
+
+    .accordion-body a:hover {
+        color: #3bc3ff;
+        margin-left: 6px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>GraphQL Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search GraphQL Topics...">
+</div>
+
+<div class="accordion">
+
+    <!-- Basics -->
+    <div class="accordion-item">
+        <div class="accordion-header">GraphQL Basics</div>
+        <div class="accordion-body">
+            <a href="#">Introduction to GraphQL</a>
+            <a href="#">GraphQL vs REST</a>
+            <a href="#">Setup & Installation</a>
+            <a href="#">Schema & Types</a>
+            <a href="#">Queries & Mutations</a>
+        </div>
+    </div>
+
+    <!-- Queries -->
+    <div class="accordion-item">
+        <div class="accordion-header">Queries</div>
+        <div class="accordion-body">
+            <a href="#">Basic Queries</a>
+            <a href="#">Arguments</a>
+            <a href="#">Aliases</a>
+            <a href="#">Fragments</a>
+            <a href="#">Variables</a>
+        </div>
+    </div>
+
+    <!-- Mutations -->
+    <div class="accordion-item">
+        <div class="accordion-header">Mutations</div>
+        <div class="accordion-body">
+            <a href="#">Basic Mutations</a>
+            <a href="#">Input Types</a>
+            <a href="#">Payloads</a>
+            <a href="#">Nested Mutations</a>
+        </div>
+    </div>
+
+    <!-- Subscriptions -->
+    <div class="accordion-item">
+        <div class="accordion-header">Subscriptions</div>
+        <div class="accordion-body">
+            <a href="#">Real-time Updates</a>
+            <a href="#">WebSocket Setup</a>
+            <a href="#">Subscription Queries</a>
+        </div>
+    </div>
+
+    <!-- Advanced Features -->
+    <div class="accordion-item">
+        <div class="accordion-header">Advanced Features</div>
+        <div class="accordion-body">
+            <a href="#">Resolvers</a>
+            <a href="#">Directives</a>
+            <a href="#">Schema Stitching</a>
+            <a href="#">Error Handling</a>
+            <a href="#">Authentication & Authorization</a>
+        </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="accordion-item">
+        <div class="accordion-header">Tools</div>
+        <div class="accordion-body">
+            <a href="#">GraphiQL</a>
+            <a href="#">Apollo Client</a>
+            <a href="#">Apollo Server</a>
+            <a href="#">Relay</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Accordion toggle
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const body = header.nextElementSibling;
+            body.style.display = body.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll(".accordion-body a").forEach(link => {
+            link.style.display = link.textContent.toLowerCase().includes(filter) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

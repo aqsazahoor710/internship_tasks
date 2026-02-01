@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cloud & IT Solutions – Tech Hub</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+.header {
+    background: #0b1220;
+    color: #fff;
+    padding: 28px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    animation: slideDown 0.8s ease;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.03);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+    animation: fadeInUp 1s ease;
+}
+
+.badges { margin-bottom: 15px; }
+.badge {
+    display: inline-block;
+    background: #06b6d4;
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #38bdf8;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover { transform: scale(1.05); }
+
+.stat-card h3 { color: #38bdf8; font-size: 28px; margin:0; }
+.stat-card p { color: #cbd5e1; margin:5px 0 0; }
+
+.section {
+    margin-top: 25px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+}
+
+.section h3 {
+    margin-top: 20px;
+    margin-bottom: 12px;
+    color: #06b6d4;
+    font-size: 22px;
+}
+
+ul li {
+    color: #e2e8f0;
+    margin-bottom: 8px;
+}
+
+.price-box {
+    margin-top: 35px;
+    padding: 25px;
+    background: linear-gradient(to right, #0e7490, #0369a1);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+.btn-buy {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 16px 32px;
+    background: #06b6d4;
+    color: #000;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+    opacity: 0;
+    animation: fadeIn 1.7s ease forwards;
+}
+
+.btn-buy:hover {
+    background: #0891b2;
+    transform: scale(1.05);
+}
+
+.testimonials { margin-top: 40px; }
+
+.testimonial-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.testimonial-card p { font-style: italic; color: #cbd5e1; }
+.testimonial-card h4 { margin-top: 10px; color: #38bdf8; }
+
+.highlight {
+    color: #38bdf8;
+    font-weight: 600;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Cloud & IT Solutions – Tech Hub</div>
+
+<div class="container">
+
+    <!-- Badges -->
+    <div class="badges">
+        <span class="badge">Beginner</span>
+        <span class="badge">Lab-Based</span>
+        <span class="badge">Real Deployments</span>
+    </div>
+    
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-card">
+            <h3>40+</h3>
+            <p>Lab Sessions</p>
+        </div>
+        <div class="stat-card">
+            <h3>10+</h3>
+            <p>Deployments</p>
+        </div>
+        <div class="stat-card">
+            <h3>Job Ready</h3>
+            <p>IT Skills</p>
+        </div>
+    </div>
+
+    <h2>Cloud & IT Solutions Course</h2>
+    <p class="tagline">
+        Learn Cloud Computing, IT Infrastructure, Networking, and Server Management  
+        with real-world deployments and hands-on labs.
+    </p>
+
+    <!-- Stats -->
+    <!-- <div class="stats">
+        <div class="stat-card">
+            <h3>40+</h3>
+            <p>Lab Sessions</p>
+        </div>
+        <div class="stat-card">
+            <h3>10+</h3>
+            <p>Deployments</p>
+        </div>
+        <div class="stat-card">
+            <h3>Job Ready</h3>
+            <p>IT Skills</p>
+        </div>
+    </div> -->
+
+    <div class="section">
+        <h3> What You Will Learn</h3>
+        <ul>
+            <li><span class="highlight">Cloud Fundamentals (AWS + Azure)</span></li>
+            <li><span class="highlight">Virtual Machines & Load Balancing</span></li>
+            <li><span class="highlight">IT Infrastructure Setup</span></li>
+            <li><span class="highlight">Network Management & Firewalls</span></li>
+            <li><span class="highlight">Linux & Windows Server Administration</span></li>
+            <li><span class="highlight">Backup, Security & Monitoring</span></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3> Hands-On Projects</h3>
+        <ul>
+            <li>Deploy a full website on AWS</li>
+            <li>Create Azure storage & VM network</li>
+            <li>Set up secure server with firewall rules</li>
+            <li>Implement backup & disaster recovery plan</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3> Tools & Technologies</h3>
+        <ul>
+            <li>AWS Management Console</li>
+            <li>Microsoft Azure</li>
+            <li>Linux Server, Ubuntu</li>
+            <li>Windows Server</li>
+            <li>VPN & Network Monitoring Tools</li>
+        </ul>
+    </div>
+
+    <div class="testimonials">
+        <div class="testimonial-card">
+            <p>"This course helped me deploy my first cloud server and understand IT networks clearly."</p>
+            <h4>- Saad Iqbal</h4>
+        </div>
+
+        <div class="testimonial-card">
+            <p>"Highly practical! Lab sessions made everything easy to understand."</p>
+            <h4>- Maryam Khan</h4>
+        </div>
+    </div>
+
+    <div class="price-box">
+        <strong>Duration:</strong> 2 Months<br>
+        <strong>Fees:</strong> PKR 20,000<br>
+        <strong>Level:</strong> Beginner to Intermediate
+    </div>
+
+    <a href="enroll.html" class="btn-buy">Enroll Now</a>
+
+
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.style.opacity = 1;
+        }
+    });
+}, { threshold: 0.2 });
+
+sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

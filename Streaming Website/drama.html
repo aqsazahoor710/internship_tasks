@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drama Movies | CINEVAULT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-black: #050507;
+            --card-bg: #121217;
+            --accent-pink: #d63384;
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-black); color: var(--text-white); overflow-x: hidden; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(5, 5, 7, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent-pink); text-decoration: none; }
+
+        .categories-container { padding: 90px 6% 10px; }
+        .categories-flex { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .categories-flex::-webkit-scrollbar { display: none; }
+        .categories-flex a { text-decoration: none; }
+        .pill { 
+            padding: 8px 20px; background: #16161d; border: 1px solid #2a2a35; 
+            border-radius: 8px; font-size: 11px; font-weight: 700; color: var(--text-gray);
+            transition: 0.3s; text-transform: uppercase; white-space: nowrap;
+        }
+        .pill.active { background: linear-gradient(45deg, #9d50bb, #6e48aa); border: none; color: white; }
+
+        .main-container { padding: 20px 6% 60px; max-width: 1800px; margin: 0 auto; }
+        .section-title { font-size: 22px; margin-bottom: 30px; font-weight: 700; border-left: 4px solid var(--accent-pink); padding-left: 15px; text-transform: capitalize; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+
+        .card-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        .card { 
+            position: relative; border-radius: 15px; overflow: hidden; 
+            aspect-ratio: 2/3; background: var(--card-bg); transition: 0.4s;
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover { transform: translateY(-8px); }
+        .card:hover img { filter: brightness(0.4) scale(1.05); }
+        
+        .card::after {
+            content: '\f04b'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 35px; color: white; opacity: 0; transition: 0.3s;
+        }
+        .card:hover::after { opacity: 1; }
+
+        .card-info { padding: 5px; }
+        .card-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .card-meta { font-size: 11px; color: var(--text-gray); }
+
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">CINEVAULT</a>
+        <div style="color: var(--text-gray);"><i class="fas fa-search"></i></div>
+    </nav>
+
+    <div class="categories-container">
+        <div class="categories-flex">
+            <a href="index.html"><div class="pill">All</div></a>
+            <a href="action.html"><div class="pill">Action</div></a>
+            <a href="scifi.html"><div class="pill">Sci-Fi</div></a>
+            <a href="drama.html"><div class="pill active">Drama</div></a>
+            <a href="horror.html"><div class="pill">Horror</div></a>
+            <a href="anime.html"><div class="pill">Anime</div></a>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <div class="section-title">Drama Movies</div>
+        <div class="video-grid" id="dramaGrid"></div>
+    </main>
+
+   <script>
+    const dramaMovies = [
+        { t: "The Godfather", y: "1972", img: "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg", yt: "https://www.youtube.com/watch?v=UaVTIH8mujA" },
+        { t: "Oppenheimer", y: "2023", img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Oppenheimer_%28film%29.jpg/250px-Oppenheimer_%28film%29.jpg", yt: "https://www.youtube.com/watch?v=uYPbbksJxIg" },
+        { t: "Joker", y: "2019", img: "https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg", yt: "https://www.youtube.com/watch?v=zAGVQLHvwOY" },
+        { t: "Parasite", y: "2019", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyJYd_sWzQdj87gwIiDRpi6JtzfY6-XLG-w&s", yt: "https://www.youtube.com/watch?v=isOGD_7hNIY" },
+        { t: "The Shawshank", y: "1994", img: "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg", yt: "https://www.youtube.com/watch?v=6hB3S9bIaco" },
+        { t: "Forrest Gump", y: "1994", img: "https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg", yt: "https://www.youtube.com/watch?v=bLvqoHBptjg" },
+        { t: "Titanic", y: "1997", img: "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png", yt: "https://www.youtube.com/watch?v=CHekzSiZjrY" },
+        { t: "The Whale", y: "2022", img: "https://cdn.kobo.com/book-images/c048a2b3-0c32-45eb-acb1-ab3d47775cb4/353/569/90/False/the-whale-11.jpg", yt: "https://www.youtube.com/watch?v=nWiQoPAt36k" },
+        { t: "Green Book", y: "2018", img: "https://m.media-amazon.com/images/I/71-mC7afGoL.jpg", yt: "https://www.youtube.com/watch?v=QkZoJ5nu60E" },
+        { t: "12 Angry Men", y: "1957", img: "https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg", yt: "https://www.youtube.com/watch?v=NG3-GlvKPcg" },
+        { t: "Little Women", y: "2019", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytnCU9kFvNgYW7Lvj74m630W9MGD0s0gMLg&s", yt: "https://www.youtube.com/watch?v=AST2-AkJzEw" },
+        { t: "A Star Is Born", y: "2018", img: "https://upload.wikimedia.org/wikipedia/en/3/39/A_Star_is_Born.png", yt: "https://www.youtube.com/watch?v=nSbzyEJ8X9E" }
+    ];
+
+    const grid = document.getElementById('dramaGrid');
+    
+    // Yahan humne movies list aur grid ko connect kiya hai
+    grid.innerHTML = dramaMovies.map(m => `
+        <div class="card-wrapper">
+            <a href="${m.yt}" target="_blank" style="text-decoration:none; color:inherit;">
+                <div class="card">
+                    <img src="${m.img}" alt="${m.t}" loading="lazy">
+                </div>
+                <div class="card-info">
+                    <h3>${m.t}</h3>
+                    <div class="card-meta">${m.y} • Drama</div>
+                </div>
+            </a>
+        </div>
+    `).join('');
+</script>
+</body>
+</html>

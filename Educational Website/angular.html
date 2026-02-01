@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angular Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Angular Course Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Angular topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- Angular Basics -->
+<div class="accordion">Angular Basics</div>
+<div class="panel">
+    <a href="#">Angular Introduction</a>
+    <a href="#">Angular CLI</a>
+    <a href="#">Modules & Components</a>
+    <a href="#">Templates & Data Binding</a>
+</div>
+
+<!-- Directives -->
+<div class="accordion">Directives</div>
+<div class="panel">
+    <a href="#">Structural Directives</a>
+    <a href="#">Attribute Directives</a>
+    <a href="#">Custom Directives</a>
+</div>
+
+<!-- Services & Dependency Injection -->
+<div class="accordion">Services & DI</div>
+<div class="panel">
+    <a href="#">Creating Services</a>
+    <a href="#">Injecting Services</a>
+    <a href="#">Providers & Hierarchy</a>
+</div>
+
+<!-- Routing -->
+<div class="accordion">Routing</div>
+<div class="panel">
+    <a href="#">Angular Router</a>
+    <a href="#">Route Configuration</a>
+    <a href="#">Route Guards</a>
+    <a href="#">Lazy Loading</a>
+</div>
+
+<!-- Forms -->
+<div class="accordion">Forms</div>
+<div class="panel">
+    <a href="#">Template-driven Forms</a>
+    <a href="#">Reactive Forms</a>
+    <a href="#">Form Validation</a>
+</div>
+
+<!-- Pipes -->
+<div class="accordion">Pipes</div>
+<div class="panel">
+    <a href="#">Built-in Pipes</a>
+    <a href="#">Custom Pipes</a>
+</div>
+
+<!-- Angular HTTP & Observables -->
+<div class="accordion">HTTP & Observables</div>
+<div class="panel">
+    <a href="#">HTTPClient Module</a>
+    <a href="#">GET / POST Requests</a>
+    <a href="#">Observables & RxJS</a>
+</div>
+
+<!-- Angular Projects -->
+<div class="accordion">Projects & Examples</div>
+<div class="panel">
+    <a href="#">Angular Examples</a>
+    <a href="#">Exercises</a>
+    <a href="#">Quiz</a>
+    <a href="#">Mini Projects</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

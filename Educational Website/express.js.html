@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Express.js Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Express.js Course Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Express.js topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- Express.js Basics -->
+<div class="accordion">Express.js Basics</div>
+<div class="panel">
+    <a href="#">Introduction to Express.js</a>
+    <a href="#">Installing Express.js</a>
+    <a href="#">Hello World App</a>
+    <a href="#">Routing Basics</a>
+    <a href="#">Request & Response Objects</a>
+</div>
+
+<!-- Middleware -->
+<div class="accordion">Middleware</div>
+<div class="panel">
+    <a href="#">What is Middleware?</a>
+    <a href="#">Built-in Middleware</a>
+    <a href="#">Custom Middleware</a>
+    <a href="#">Third-Party Middleware</a>
+</div>
+
+<!-- Routing -->
+<div class="accordion">Routing</div>
+<div class="panel">
+    <a href="#">Route Methods</a>
+    <a href="#">Route Parameters</a>
+    <a href="#">Query Strings</a>
+    <a href="#">Router Module</a>
+</div>
+
+<!-- Template Engines -->
+<div class="accordion">Template Engines</div>
+<div class="panel">
+    <a href="#">EJS Overview</a>
+    <a href="#">Using Pug</a>
+    <a href="#">Dynamic Templates</a>
+</div>
+
+<!-- Express.js with Database -->
+<div class="accordion">Database Integration</div>
+<div class="panel">
+    <a href="#">MongoDB & Mongoose</a>
+    <a href="#">MySQL Integration</a>
+    <a href="#">CRUD Operations</a>
+</div>
+
+<!-- Error Handling -->
+<div class="accordion">Error Handling</div>
+<div class="panel">
+    <a href="#">Handling Errors</a>
+    <a href="#">Custom Error Pages</a>
+    <a href="#">Try-Catch in Express</a>
+</div>
+
+<!-- Projects & Examples -->
+<div class="accordion">Projects & Examples</div>
+<div class="panel">
+    <a href="#">Express.js Examples</a>
+    <a href="#">Exercises</a>
+    <a href="#">Quiz</a>
+    <a href="#">Mini Projects</a>
+</div>
+
+<script>
+    let acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    }
+
+    function searchTopics() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let links = document.querySelectorAll(".panel a");
+        links.forEach(a => {
+            a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+        });
+    }
+</script>
+
+</body>
+</html>

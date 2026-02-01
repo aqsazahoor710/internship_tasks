@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATLAB Tutorial Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        color: #fff;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 25px;
+        color: #3bc3ff;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 35px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        font-size: 15px;
+        background: #0d1a2b;
+        color: #fff;
+        outline: none;
+        border: 1px solid #1f2d40;
+        transition: 0.3s;
+    }
+
+    .search-box input:focus {
+        border-color: #3bc3ff;
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .accordion-item {
+        background: #0b1625;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1c2b3c;
+    }
+
+    .accordion-header {
+        padding: 18px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #3bc3ff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-header:hover {
+        background: rgba(59,195,255,0.1);
+    }
+
+    .accordion-body {
+        display: none;
+        padding: 15px 25px;
+        font-size: 15px;
+        line-height: 28px;
+        color: #d8e3ef;
+    }
+
+    .accordion-body a {
+        display: block;
+        padding: 5px 0;
+        text-decoration: none;
+        color: #9ab7d3;
+        transition: 0.2s;
+    }
+
+    .accordion-body a:hover {
+        color: #3bc3ff;
+        margin-left: 6px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>MATLAB Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search MATLAB Topics...">
+</div>
+
+<div class="accordion">
+
+    <!-- MATLAB Basics -->
+    <div class="accordion-item">
+        <div class="accordion-header">MATLAB Basics</div>
+        <div class="accordion-body">
+            <a href="#">Introduction to MATLAB</a>
+            <a href="#">MATLAB Environment</a>
+            <a href="#">MATLAB Syntax</a>
+            <a href="#">Variables & Data Types</a>
+            <a href="#">Scripts & Functions</a>
+        </div>
+    </div>
+
+    <!-- Control Flow -->
+    <div class="accordion-item">
+        <div class="accordion-header">Control Flow</div>
+        <div class="accordion-body">
+            <a href="#">if, else Statements</a>
+            <a href="#">switch Statements</a>
+            <a href="#">for Loops</a>
+            <a href="#">while Loops</a>
+        </div>
+    </div>
+
+    <!-- Arrays & Matrices -->
+    <div class="accordion-item">
+        <div class="accordion-header">Arrays & Matrices</div>
+        <div class="accordion-body">
+            <a href="#">Creating Arrays</a>
+            <a href="#">Matrix Operations</a>
+            <a href="#">Indexing & Slicing</a>
+            <a href="#">Array Functions</a>
+        </div>
+    </div>
+
+    <!-- Plotting & Visualization -->
+    <div class="accordion-item">
+        <div class="accordion-header">Plotting & Visualization</div>
+        <div class="accordion-body">
+            <a href="#">2D Plots</a>
+            <a href="#">3D Plots</a>
+            <a href="#">Plot Customization</a>
+            <a href="#">Graphs & Charts</a>
+        </div>
+    </div>
+
+    <!-- Functions & Scripts -->
+    <div class="accordion-item">
+        <div class="accordion-header">Functions & Scripts</div>
+        <div class="accordion-body">
+            <a href="#">Defining Functions</a>
+            <a href="#">Function Arguments</a>
+            <a href="#">Anonymous Functions</a>
+            <a href="#">Script Files</a>
+        </div>
+    </div>
+
+    <!-- Toolboxes -->
+    <div class="accordion-item">
+        <div class="accordion-header">MATLAB Toolboxes</div>
+        <div class="accordion-body">
+            <a href="#">Signal Processing Toolbox</a>
+            <a href="#">Image Processing Toolbox</a>
+            <a href="#">Statistics Toolbox</a>
+            <a href="#">Simulink</a>
+        </div>
+    </div>
+
+    <!-- File Handling -->
+    <div class="accordion-item">
+        <div class="accordion-header">File Handling</div>
+        <div class="accordion-body">
+            <a href="#">Reading & Writing Files</a>
+            <a href="#">Importing Data</a>
+            <a href="#">Exporting Data</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Accordion toggle
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const body = header.nextElementSibling;
+            body.style.display = body.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll(".accordion-body a").forEach(link => {
+            link.style.display = link.textContent.toLowerCase().includes(filter) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

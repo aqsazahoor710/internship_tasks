@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes Tutorial Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        color: #fff;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 25px;
+        color: #3bc3ff;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 35px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        font-size: 15px;
+        background: #0d1a2b;
+        color: #fff;
+        outline: none;
+        border: 1px solid #1f2d40;
+        transition: 0.3s;
+    }
+
+    .search-box input:focus {
+        border-color: #3bc3ff;
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .accordion-item {
+        background: #0b1625;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1c2b3c;
+    }
+
+    .accordion-header {
+        padding: 18px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #3bc3ff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-header:hover {
+        background: rgba(59,195,255,0.1);
+    }
+
+    .accordion-body {
+        display: none;
+        padding: 15px 25px;
+        font-size: 15px;
+        line-height: 28px;
+        color: #d8e3ef;
+    }
+
+    .accordion-body a {
+        display: block;
+        padding: 5px 0;
+        text-decoration: none;
+        color: #9ab7d3;
+        transition: 0.2s;
+    }
+
+    .accordion-body a:hover {
+        color: #3bc3ff;
+        margin-left: 6px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>Kubernetes Tutorial Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Kubernetes Topics...">
+</div>
+
+<div class="accordion">
+
+    <!-- Kubernetes Basics -->
+    <div class="accordion-item">
+        <div class="accordion-header">Kubernetes Basics</div>
+        <div class="accordion-body">
+            <a href="#">Introduction to Kubernetes</a>
+            <a href="#">Kubernetes Architecture</a>
+            <a href="#">Master & Node Components</a>
+            <a href="#">Pods, Nodes & Clusters</a>
+            <a href="#">kubectl Basics</a>
+        </div>
+    </div>
+
+    <!-- Pods & Deployments -->
+    <div class="accordion-item">
+        <div class="accordion-header">Pods & Deployments</div>
+        <div class="accordion-body">
+            <a href="#">Creating Pods</a>
+            <a href="#">ReplicaSets</a>
+            <a href="#">Deployments</a>
+            <a href="#">Rolling Updates</a>
+        </div>
+    </div>
+
+    <!-- Services & Networking -->
+    <div class="accordion-item">
+        <div class="accordion-header">Services & Networking</div>
+        <div class="accordion-body">
+            <a href="#">Service Types (ClusterIP, NodePort, LoadBalancer)</a>
+            <a href="#">Ingress & Ingress Controller</a>
+            <a href="#">Network Policies</a>
+            <a href="#">DNS in Kubernetes</a>
+        </div>
+    </div>
+
+    <!-- Config & Secrets -->
+    <div class="accordion-item">
+        <div class="accordion-header">Config & Secrets</div>
+        <div class="accordion-body">
+            <a href="#">ConfigMaps</a>
+            <a href="#">Secrets</a>
+            <a href="#">Environment Variables</a>
+            <a href="#">Volumes & Mounts</a>
+        </div>
+    </div>
+
+    <!-- Scaling & Autoscaling -->
+    <div class="accordion-item">
+        <div class="accordion-header">Scaling & Autoscaling</div>
+        <div class="accordion-body">
+            <a href="#">Horizontal Pod Autoscaling</a>
+            <a href="#">Vertical Scaling</a>
+            <a href="#">Cluster Autoscaler</a>
+        </div>
+    </div>
+
+    <!-- Helm & Package Management -->
+    <div class="accordion-item">
+        <div class="accordion-header">Helm & Package Management</div>
+        <div class="accordion-body">
+            <a href="#">Introduction to Helm</a>
+            <a href="#">Helm Charts</a>
+            <a href="#">Installing Apps with Helm</a>
+            <a href="#">Managing Releases</a>
+        </div>
+    </div>
+
+    <!-- Monitoring & Logging -->
+    <div class="accordion-item">
+        <div class="accordion-header">Monitoring & Logging</div>
+        <div class="accordion-body">
+            <a href="#">Prometheus & Grafana</a>
+            <a href="#">kubectl Logs</a>
+            <a href="#">Alerting & Metrics</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Accordion toggle
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const body = header.nextElementSibling;
+            body.style.display = body.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll(".accordion-body a").forEach(link => {
+            link.style.display = link.textContent.toLowerCase().includes(filter) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

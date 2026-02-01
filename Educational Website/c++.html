@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Tutorial</title>
+
+<style>
+    :root {
+        --bg: #061021;
+        --card: #0b162b;
+        --accent: #0ea5a5;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --radius: 12px;
+        --transition: .3s ease;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Poppins", sans-serif;
+        color: var(--text);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    /* Search Bar */
+    .search-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 18px;
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 16px;
+        outline: none;
+    }
+
+    /* Accordion */
+    .accordion-item {
+        background: var(--card);
+        margin-bottom: 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .accordion-header {
+        padding: 16px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+        background: #0f1c35;
+        padding-left: 20px;
+    }
+
+    .accordion-content a {
+        display: block;
+        padding: 10px 0;
+        color: var(--muted);
+        text-decoration: none;
+        transition: var(--transition);
+        font-size: 15px;
+    }
+
+    .accordion-content a:hover {
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+
+    .arrow {
+        transition: var(--transition);
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>C++ Tutorial</h1>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search C++ Topics...">
+    </div>
+
+    <div id="accordion">
+
+        <!-- C++ Basics -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Basics
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ Home</a>
+                <a href="#">C++ Introduction</a>
+                <a href="#">C++ Syntax</a>
+                <a href="#">C++ Variables</a>
+                <a href="#">C++ Data Types</a>
+                <a href="#">C++ Operators</a>
+                <a href="#">C++ Comments</a>
+                <a href="#">C++ User Input</a>
+                <a href="#">C++ Strings</a>
+                <a href="#">C++ Arrays</a>
+            </div>
+        </div>
+
+        <!-- C++ Control Flow -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Control Flow
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ If Statement</a>
+                <a href="#">C++ If-Else</a>
+                <a href="#">C++ Switch</a>
+                <a href="#">C++ Loops</a>
+                <a href="#">C++ For Loop</a>
+                <a href="#">C++ While Loop</a>
+                <a href="#">C++ Do-While Loop</a>
+                <a href="#">C++ Break</a>
+                <a href="#">C++ Continue</a>
+            </div>
+        </div>
+
+        <!-- C++ Functions -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Functions
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ Functions Introduction</a>
+                <a href="#">C++ Function Parameters</a>
+                <a href="#">C++ Function Overloading</a>
+                <a href="#">C++ Recursion</a>
+                <a href="#">C++ Inline Functions</a>
+            </div>
+        </div>
+
+        <!-- C++ OOP -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Object-Oriented Programming
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ Classes & Objects</a>
+                <a href="#">C++ Constructors</a>
+                <a href="#">C++ Destructors</a>
+                <a href="#">C++ Inheritance</a>
+                <a href="#">C++ Polymorphism</a>
+                <a href="#">C++ Encapsulation</a>
+                <a href="#">C++ Abstraction</a>
+            </div>
+        </div>
+
+        <!-- C++ Pointers & Memory -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Pointers & Memory
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ Pointers</a>
+                <a href="#">C++ Pointer Arithmetic</a>
+                <a href="#">C++ Dynamic Memory</a>
+                <a href="#">C++ References</a>
+                <a href="#">C++ Smart Pointers</a>
+            </div>
+        </div>
+
+        <!-- C++ File Handling -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ File Handling
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ File Input/Output</a>
+                <a href="#">C++ File Streams</a>
+                <a href="#">C++ Read/Write Files</a>
+            </div>
+        </div>
+
+        <!-- C++ STL -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Standard Template Library (STL)
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ Vectors</a>
+                <a href="#">C++ Lists</a>
+                <a href="#">C++ Maps</a>
+                <a href="#">C++ Sets</a>
+                <a href="#">C++ Queues</a>
+                <a href="#">C++ Stacks</a>
+            </div>
+        </div>
+
+        <!-- C++ Examples -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                C++ Examples & Practice
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">C++ Exercises</a>
+                <a href="#">C++ Quiz</a>
+                <a href="#">C++ Projects</a>
+                <a href="#">C++ Templates</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Accordion Logic
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            let content = header.nextElementSibling;
+            let arrow = header.querySelector('.arrow');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                arrow.classList.remove("rotate");
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll('.arrow').forEach(a => a.classList.remove("rotate"));
+
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+
+    // Search Filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let links = document.querySelectorAll(".accordion-content a");
+
+        links.forEach(link => {
+            if (link.textContent.toLowerCase().includes(filter)) {
+                link.style.display = "block";
+            } else {
+                link.style.display = "none";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

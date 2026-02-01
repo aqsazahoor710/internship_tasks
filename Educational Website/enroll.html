@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Enrollment – Tech Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            line-height: 1.5;
+        }
+
+        .header {
+            background: #0b1220;
+            padding: 30px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #38bdf8;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #f8fafc;
+        }
+
+        /* Form Layout Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .form-group { margin-bottom: 20px; }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #06b6d4;
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1);
+            outline: none;
+        }
+
+        /* Payment Section Styling */
+        .payment-box {
+            margin-top: 10px;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #1e293b;
+        }
+
+        .payment-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .method-card {
+            position: relative;
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .method-card input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .method-card:hover { border-color: #06b6d4; }
+
+        /* Highlight card when radio is checked */
+        .method-card:has(input:checked) {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: #06b6d4;
+            color: #06b6d4;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: #06b6d4;
+            color: #0f172a;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #22d3ee;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .container { padding: 25px; margin: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">Tech Hub Online</div>
+
+    <div class="container">
+        <h2>Complete Your Enrollment</h2>
+
+        <form>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="03XX-XXXXXXX" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Course</label>
+                    <select required>
+                        <option value="" disabled selected>Choose a program</option>
+                        <option>Web Development</option>
+                        <option>UI/UX Design</option>
+                        <option>Digital Marketing & SEO</option>
+                        <option>Cloud & IT Solutions</option>
+                        <option>Data Analytics & AI</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Additional Notes (optional)</label>
+                    <textarea rows="3" placeholder="Tell us about your learning goals..."></textarea>
+                </div>
+            </div>
+
+            <div class="payment-box">
+                <div class="payment-title">Payment Method</div>
+                <div class="payment-options">
+                    <label class="method-card">
+                        <input type="radio" name="payment" value="easypaisa" required>
+                        Easypaisa
+                    </label>
+                    <label class="method-card">
+                        <input type="radio" name="payment" value="jazzcash">
+                        JazzCash
+                    </label>
+                    <label class="method-card">
+                        <input type="radio" name="payment" value="bank">
+                        Bank Transfer
+                    </label>
+                    <label class="method-card">
+                        <input type="radio" name="payment" value="card">
+                        Credit Card
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Confirm & Pay Now</button>
+        </form>
+    </div>
+
+</body>
+</html>

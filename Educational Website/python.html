@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Tutorial</title>
+
+<style>
+    :root {
+        --bg: #061021;
+        --card: #0b162b;
+        --accent: #0ea5a5;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --radius: 12px;
+        --transition: .3s ease;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Poppins", sans-serif;
+        color: var(--text);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    /* Search Bar */
+    .search-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 18px;
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 16px;
+        outline: none;
+    }
+
+    /* Accordion Category */
+    .accordion-item {
+        background: var(--card);
+        margin-bottom: 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .accordion-header {
+        padding: 16px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+        background: #0f1c35;
+        padding-left: 20px;
+    }
+
+    .accordion-content a {
+        display: block;
+        padding: 10px 0;
+        color: var(--muted);
+        text-decoration: none;
+        transition: var(--transition);
+        font-size: 15px;
+    }
+
+    .accordion-content a:hover {
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+
+    .arrow {
+        transition: var(--transition);
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Python Tutorial</h1>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search Python Topics...">
+    </div>
+
+    <div id="accordion">
+
+        <!-- Python Basics -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python Basics
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Home</a>
+                <a href="#">Python Introduction</a>
+                <a href="#">Python Syntax</a>
+                <a href="#">Python Comments</a>
+                <a href="#">Python Variables</a>
+                <a href="#">Python Data Types</a>
+                <a href="#">Python Numbers</a>
+                <a href="#">Python Strings</a>
+                <a href="#">Python Lists</a>
+                <a href="#">Python Tuples</a>
+                <a href="#">Python Sets</a>
+                <a href="#">Python Dictionaries</a>
+                <a href="#">Python Booleans</a>
+                <a href="#">Python Operators</a>
+                <a href="#">Python Input/Output</a>
+            </div>
+        </div>
+
+        <!-- Python Control Flow -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python Control Flow
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python If Statements</a>
+                <a href="#">Python If...Else</a>
+                <a href="#">Python Elif</a>
+                <a href="#">Python Loops</a>
+                <a href="#">Python For Loop</a>
+                <a href="#">Python While Loop</a>
+                <a href="#">Python Break</a>
+                <a href="#">Python Continue</a>
+                <a href="#">Python Pass</a>
+            </div>
+        </div>
+
+        <!-- Python Functions -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python Functions
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Functions</a>
+                <a href="#">Python Arguments</a>
+                <a href="#">Python Return Values</a>
+                <a href="#">Python Lambda</a>
+                <a href="#">Python Scope</a>
+                <a href="#">Python Recursion</a>
+            </div>
+        </div>
+
+        <!-- Python Modules & Packages -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python Modules & Packages
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Modules</a>
+                <a href="#">Python import</a>
+                <a href="#">Python Math Module</a>
+                <a href="#">Python Random Module</a>
+                <a href="#">Python OS Module</a>
+                <a href="#">Python Sys Module</a>
+            </div>
+        </div>
+
+        <!-- Python OOP -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python OOP
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Classes/Objects</a>
+                <a href="#">Python Inheritance</a>
+                <a href="#">Python Encapsulation</a>
+                <a href="#">Python Polymorphism</a>
+                <a href="#">Python Methods</a>
+                <a href="#">Python __init__ Method</a>
+            </div>
+        </div>
+
+        <!-- Python Exceptions -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python Exceptions
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Errors</a>
+                <a href="#">Python Try/Except</a>
+                <a href="#">Python Finally</a>
+                <a href="#">Python Raise</a>
+                <a href="#">Python Custom Exceptions</a>
+            </div>
+        </div>
+
+        <!-- Python File Handling -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python File Handling
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Open/Close File</a>
+                <a href="#">Python Read File</a>
+                <a href="#">Python Write File</a>
+                <a href="#">Python File Methods</a>
+            </div>
+        </div>
+
+        <!-- Python Examples -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Python Examples
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Python Exercises</a>
+                <a href="#">Python Quiz</a>
+                <a href="#">Python Projects</a>
+                <a href="#">Python Templates</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Accordion Logic
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            let content = header.nextElementSibling;
+            let arrow = header.querySelector('.arrow');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                arrow.classList.remove("rotate");
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll('.arrow').forEach(a => a.classList.remove("rotate"));
+
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+
+    // Search Filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let links = document.querySelectorAll(".accordion-content a");
+
+        links.forEach(link => {
+            if (link.textContent.toLowerCase().includes(filter)) {
+                link.style.display = "block";
+            } else {
+                link.style.display = "none";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horror Movies | CINEVAULT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-black: #050507;
+            --card-bg: #121217;
+            --accent-red: #ff0000; /* Horror theme ke liye blood red accent */
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-black); color: var(--text-white); overflow-x: hidden; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(5, 5, 7, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent-red); text-decoration: none; letter-spacing: 2px; }
+
+        .categories-container { padding: 90px 6% 10px; }
+        .categories-flex { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .categories-flex::-webkit-scrollbar { display: none; }
+        .categories-flex a { text-decoration: none; }
+        .pill { 
+            padding: 8px 20px; background: #16161d; border: 1px solid #2a2a35; 
+            border-radius: 8px; font-size: 11px; font-weight: 700; color: var(--text-gray);
+            transition: 0.3s; text-transform: uppercase; white-space: nowrap;
+        }
+        .pill.active { background: linear-gradient(45deg, #8b0000, #ff0000); border: none; color: white; }
+
+        .main-container { padding: 20px 6% 60px; max-width: 1800px; margin: 0 auto; }
+        .section-title { font-size: 22px; margin-bottom: 30px; font-weight: 700; border-left: 4px solid var(--accent-red); padding-left: 15px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+
+        .card-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        .card { 
+            position: relative; border-radius: 12px; overflow: hidden; 
+            aspect-ratio: 2/3; background: var(--card-bg); transition: 0.4s;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+        .card:hover img { filter: grayscale(50%) brightness(0.6); }
+        
+        .card::after {
+            content: '\f04b'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 35px; color: var(--accent-red); opacity: 0; transition: 0.3s;
+        }
+        .card:hover::after { opacity: 1; }
+
+        .card-info { padding: 5px; }
+        .card-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #eee; }
+        .card-meta { font-size: 11px; color: var(--text-gray); }
+
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">CINEVAULT</a>
+        <div style="color: var(--text-gray);"><i class="fas fa-search"></i></div>
+    </nav>
+
+    <div class="categories-container">
+        <div class="categories-flex">
+            <a href="index.html"><div class="pill">All</div></a>
+            <a href="action.html"><div class="pill">Action</div></a>
+            <a href="scifi.html"><div class="pill">Sci-Fi</div></a>
+            <a href="drama.html"><div class="pill">Drama</div></a>
+            <a href="horror.html"><div class="pill active">Horror</div></a>
+            <a href="anime.html"><div class="pill">Anime</div></a>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <div class="section-title">Horror Movies</div>
+        <div class="video-grid" id="horrorGrid"></div>
+    </main>
+
+   <script>
+    const horrorMovies = [
+        { t: "The Conjuring", y: "2013", id: "k10ETZ41q5o" },
+        { t: "IT Chapter One", y: "2017", id: "FnCdOQsX5kc" },
+        { t: "A Quiet Place", y: "2018", id: "WR7cc5t7tv8" },
+        { t: "Hereditary", y: "2018", id: "V6wWKNij_1M" },
+        { t: "The Exorcist", y: "1973", id: "YDGw1MTEe9k" },
+        { t: "The Nun II", y: "2023", id: "QF-oyCwaArU" },
+        { t: "Smile", y: "2022", id: "BcDK7lkUtYk" },
+        { t: "Insidious", y: "2010", id: "zuZnRUcoWDc" },
+        { t: "Evil Dead Rise", y: "2023", id: "smTK_AeAPHs" },
+        { t: "Scream VI", y: "2023", id: "h74AXqw4Opc" },
+        { t: "Talk To Me", y: "2023", id: "aLAKJu9aUXg" },
+        { t: "Halloween", y: "1978", id: "T5ke9IPTIJQ" }
+    ];
+
+    const grid = document.getElementById('horrorGrid');
+    
+    grid.innerHTML = horrorMovies.map(m => `
+        <div class="card-wrapper">
+            <a href="https://www.youtube.com/watch?v=${m.id}" target="_blank" style="text-decoration:none; color:inherit;">
+                <div class="card">
+                    <img src="https://img.youtube.com/vi/${m.id}/hqdefault.jpg" 
+                         alt="${m.t}" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="card-info">
+                    <h3>${m.t}</h3>
+                    <div class="card-meta">${m.y} • Horror</div>
+                </div>
+            </a>
+        </div>
+    `).join('');
+</script>
+</body>
+</html>

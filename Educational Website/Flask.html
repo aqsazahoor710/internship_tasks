@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flask Tutorial Categories</title>
+
+<style>
+    body{
+        background:#061021;
+        font-family: "Poppins", sans-serif;
+        color:white;
+        margin:0;
+        padding:40px;
+    }
+    h1{
+        text-align:center;
+        margin-bottom:30px;
+    }
+    .search-box{
+        width:100%;
+        max-width:600px;
+        margin:0 auto 30px;
+    }
+    .search-box input{
+        width:100%;
+        padding:12px 16px;
+        border:none;
+        outline:none;
+        border-radius:8px;
+        background:#0b1628;
+        color:white;
+        font-size:16px;
+    }
+    .category{
+        background:#0b1628;
+        margin-bottom:12px;
+        border-radius:10px;
+        overflow:hidden;
+        transition:0.3s;
+    }
+    .category-header{
+        padding:18px;
+        font-size:20px;
+        cursor:pointer;
+        user-select:none;
+        background:#0d1a30;
+    }
+    .category-header:hover{
+        background:#112039;
+    }
+    .items{
+        display:none;
+        padding:15px 25px;
+        background:#0b1628;
+    }
+    .items a{
+        display:block;
+        text-decoration:none;
+        color:#c5d4ff;
+        margin:6px 0;
+        font-size:16px;
+        transition:0.2s;
+    }
+    .items a:hover{
+        color:white;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Flask Tutorial</h1>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Flask Topics...">
+</div>
+
+<!-- CATEGORY 1 -->
+<div class="category">
+    <div class="category-header">Flask Basics</div>
+    <div class="items">
+        <a href="#">Flask Introduction</a>
+        <a href="#">Flask Installation</a>
+        <a href="#">Flask First App</a>
+        <a href="#">Flask Project Structure</a>
+        <a href="#">Flask Routing</a>
+        <a href="#">HTTP Methods (GET, POST)</a>
+        <a href="#">Debug Mode</a>
+        <a href="#">URL Building</a>
+        <a href="#">Templates</a>
+        <a href="#">Jinja2 Syntax</a>
+        <a href="#">Static Files</a>
+    </div>
+</div>
+
+<!-- CATEGORY 2 -->
+<div class="category">
+    <div class="category-header">Templates & Forms</div>
+    <div class="items">
+        <a href="#">Jinja Conditions</a>
+        <a href="#">Jinja Loops</a>
+        <a href="#">Jinja Includes</a>
+        <a href="#">Flask Forms</a>
+        <a href="#">Handling Form Data</a>
+        <a href="#">Form Validation</a>
+        <a href="#">File Uploads</a>
+    </div>
+</div>
+
+<!-- CATEGORY 3 -->
+<div class="category">
+    <div class="category-header">Flask Advanced</div>
+    <div class="items">
+        <a href="#">Blueprints</a>
+        <a href="#">Application Factory</a>
+        <a href="#">Middleware</a>
+        <a href="#">Error Handling</a>
+        <a href="#">Logging</a>
+        <a href="#">Flask CLI</a>
+    </div>
+</div>
+
+<!-- CATEGORY 4 -->
+<div class="category">
+    <div class="category-header">Database</div>
+    <div class="items">
+        <a href="#">SQLite</a>
+        <a href="#">MySQL</a>
+        <a href="#">PostgreSQL</a>
+        <a href="#">SQLAlchemy ORM</a>
+        <a href="#">CRUD Operations</a>
+        <a href="#">Flask-Migrate</a>
+    </div>
+</div>
+
+<!-- CATEGORY 5 -->
+<div class="category">
+    <div class="category-header">Authentication</div>
+    <div class="items">
+        <a href="#">Flask Login</a>
+        <a href="#">Sessions</a>
+        <a href="#">Cookies</a>
+        <a href="#">Password Hashing</a>
+        <a href="#">Role-Based Access</a>
+    </div>
+</div>
+
+<!-- CATEGORY 6 -->
+<div class="category">
+    <div class="category-header">Flask APIs</div>
+    <div class="items">
+        <a href="#">REST APIs</a>
+        <a href="#">Request & Response</a>
+        <a href="#">JSON Handling</a>
+        <a href="#">Marshmallow</a>
+        <a href="#">JWT Authentication</a>
+        <a href="#">API Versioning</a>
+    </div>
+</div>
+
+<!-- CATEGORY 7 -->
+<div class="category">
+    <div class="category-header">Deployment</div>
+    <div class="items">
+        <a href="#">Deploy on Heroku</a>
+        <a href="#">Deploy on Render</a>
+        <a href="#">Deploy on PythonAnywhere</a>
+        <a href="#">Docker Deploy</a>
+        <a href="#">Gunicorn Server</a>
+    </div>
+</div>
+
+<script>
+    // Toggle categories
+    document.querySelectorAll(".category-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const items = header.nextElementSibling;
+            items.style.display = items.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Search filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let links = document.querySelectorAll(".items a");
+
+        links.forEach(link => {
+            link.style.display = link.innerText.toLowerCase().includes(filter)
+                ? "block"
+                : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

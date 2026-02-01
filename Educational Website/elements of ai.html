@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elements of AI - Roadmap & Notes</title>
+  <style>
+    :root {
+      --bg: #061021;
+      --card: #0b1220;
+      --accent: #0ea5a5;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --radius: 12px;
+      --container: 1000px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 30px;
+    }
+
+    .accordion {
+      background-color: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      padding: 15px 20px;
+      width: 100%;
+      border: none;
+      outline: none;
+      text-align: left;
+      font-size: 18px;
+      transition: background-color 0.3s;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .accordion:hover {
+      background-color: #0f1a36;
+    }
+
+    .accordion.active {
+      background-color: #0f1a36;
+    }
+
+    .panel {
+      padding: 0 20px;
+      display: none;
+      background-color: var(--card);
+      overflow: hidden;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .panel p {
+      padding: 10px 0;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .links a {
+      display: block;
+      margin: 5px 0;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Elements of AI – Course Notes & Roadmap</h1>
+
+    <h2>Course Modules</h2>
+
+    <!-- Module 1 -->
+    <button class="accordion">Module 1 – Introduction to AI</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> What is AI, history of AI, types of AI (narrow, general, superintelligent).</p>
+      <div class="links">
+        <a href="https://www.elementsofai.com/" target="_blank">Official Elements of AI Website</a>
+        <a href="https://www.youtube.com/watch?v=2ePf9rue1Ao" target="_blank">Introduction to AI (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Reflect on AI examples in daily life.</p>
+    </div>
+
+    <!-- Module 2 -->
+    <button class="accordion">Module 2 – Machine Learning Basics</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> Supervised, unsupervised learning; datasets, training, predictions.</p>
+      <div class="links">
+        <a href="https://www.elementsofai.com/learn/ml-basics" target="_blank">Machine Learning Basics (Website)</a>
+        <a href="https://www.youtube.com/watch?v=Gv9_4yMHFhI" target="_blank">ML Explained (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Identify examples of supervised vs unsupervised learning.</p>
+    </div>
+
+    <!-- Module 3 -->
+    <button class="accordion">Module 3 – Neural Networks & Deep Learning</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> Neurons, layers, activation functions, deep learning overview.</p>
+      <div class="links">
+        <a href="https://www.elementsofai.com/learn/deep-learning" target="_blank">Deep Learning Basics</a>
+        <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank">Neural Networks Explained (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Draw a simple neural network diagram.</p>
+    </div>
+
+    <!-- Module 4 -->
+    <button class="accordion">Module 4 – AI in Practice</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> AI applications: healthcare, finance, transportation, AI ethics.</p>
+      <div class="links">
+        <a href="https://www.elementsofai.com/learn/applications" target="_blank">AI Applications (Website)</a>
+        <a href="https://www.youtube.com/watch?v=2ePf9rue1Ao" target="_blank">AI in Practice (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Identify 3 AI applications in your daily life.</p>
+    </div>
+
+    <!-- Module 5 -->
+    <button class="accordion">Module 5 – Ethics & Future of AI</button>
+    <div class="panel">
+      <p><strong>Topics:</strong> AI ethics, bias, transparency, future trends of AI.</p>
+      <div class="links">
+        <a href="https://www.elementsofai.com/learn/ethics" target="_blank">AI Ethics (Website)</a>
+        <a href="https://www.youtube.com/watch?v=2ePf9rue1Ao" target="_blank">Ethics in AI (YouTube)</a>
+      </div>
+      <p><strong>Practice:</strong> Reflect on ethical considerations of AI systems.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(acc => {
+      acc.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const panel = this.nextElementSibling;
+        panel.style.display = (panel.style.display === "block") ? "none" : "block";
+      });
+    });
+  </script>
+</body>
+</html>

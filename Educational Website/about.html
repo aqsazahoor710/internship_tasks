@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us</title>
+<style>
+/* === GLOBAL === */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background:#061021;
+    color:#e2e8f0;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    padding:80px 20px;
+}
+.header h1{
+    font-size:48px;
+    color:#00e1ff;
+}
+.header p{
+    margin-top:10px;
+    color:#94a3b8;
+    font-size:18px;
+}
+
+/* SECTION */
+section{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    margin-bottom:80px;
+    text-align:center;
+}
+
+/* GLASS EFFECT */
+.glass{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    border-radius:14px;
+    padding:30px;
+    transition:0.3s ease;
+}
+.glass:hover{
+    transform:translateY(-6px);
+}
+
+/* TITLES */
+section h2{
+    font-size:34px;
+    margin-bottom:20px;
+    color:#00e1ff;
+}
+
+/* MISSION */
+.mission-section{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+.mission-card{
+    width:320px;
+}
+
+/* WHY CHOOSE US */
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+}
+.why-card{
+    text-align:left;
+}
+
+/* TEAM */
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+}
+.team-card{
+    text-align:center;
+}
+
+/* Fake avatars */
+.avatar{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#0f172a;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+/* ANIMATION */
+.fade-in{
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeInUp 1s ease forwards;
+}
+@keyframes fadeInUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <h1>About Us</h1>
+    <p>Empowering students with high-quality digital education</p>
+</header>
+
+<!-- WHO WE ARE -->
+<section class="about-section fade-in">
+    <h2>Who We Are</h2>
+    <p>
+        We are an online learning platform dedicated to providing
+        professional, affordable, and high-value courses in 
+        Web Development, UI/UX Design, Digital Marketing & SEO, and many more.
+    </p>
+</section>
+
+<!-- OUR MISSION -->
+<section class="mission-section fade-in">
+    <div class="mission-card glass">
+        <h3>Our Mission</h3>
+        <p>
+            To create a future where anyone can learn industry-level skills 
+            and grow professionally without boundaries.
+        </p>
+    </div>
+
+    <div class="mission-card glass">
+        <h3>Our Vision</h3>
+        <p>
+            To become the most trusted online learning platform with innovative, 
+            practical and career-focused courses.
+        </p>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section fade-in">
+    <h2>Why Choose Us?</h2>
+    <div class="why-grid">
+        <div class="why-card glass">
+            <h4>✔ Expert Instructors</h4>
+            <p>Learn from experienced industry professionals.</p>
+        </div>
+        <div class="why-card glass">
+            <h4>✔ Real-World Projects</h4>
+            <p>Build practical skills with hands-on tasks.</p>
+        </div>
+        <div class="why-card glass">
+            <h4>✔ Affordable Fees</h4>
+            <p>High-value learning at budget-friendly prices.</p>
+        </div>
+        <div class="why-card glass">
+            <h4>✔ Certificates</h4>
+            <p>Receive certificates after completing courses.</p>
+        </div>
+    </div>
+</section>
+
+<!-- OUR TEAM -->
+<section class="team-section fade-in">
+    <h2>Meet Our Team</h2>
+    <div class="team-grid">
+        <div class="team-card glass">
+            <div class="avatar"></div>
+            <h4>Aqsa</h4>
+            <p>Founder & Instructor</p>
+        </div>
+        <div class="team-card glass">
+            <div class="avatar"></div>
+            <h4>Hamza</h4>
+            <p>Web Developer & Instructor</p>
+        </div>
+        <div class="team-card glass">
+            <div class="avatar"></div>
+            <h4>Ali</h4>
+            <p>Digital Marketing Expert</p>
+        </div>
+    </div>
+</section>
+
+<script>
+// Scroll animation
+const elements = document.querySelectorAll(".fade-in");
+
+function showElements() {
+    elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            el.style.animationPlayState = "running";
+        }
+    });
+}
+
+window.addEventListener("scroll", showElements);
+showElements();
+</script>
+
+</body>
+</html>

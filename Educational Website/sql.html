@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Course Categories</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #061021;
+        padding: 30px;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 34px;
+        color: #0ea5e9;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    /* Search bar */
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+    }
+
+    /* Category container */
+    .accordion {
+        background: rgba(255,255,255,0.05);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        color: #0ea5e9;
+        transition: 0.3s;
+    }
+
+    .accordion:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    /* Items */
+    .panel {
+        display: none;
+        padding: 10px 20px 20px;
+    }
+
+    .panel a {
+        display: block;
+        padding: 6px 0;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .panel a:hover {
+        color: #0ea5e9;
+        margin-left: 6px;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>SQL Course Categories</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search SQL topics..." onkeyup="searchTopics()">
+</div>
+
+<!-- SQL Tutorial -->
+<div class="accordion">SQL Tutorial</div>
+<div class="panel">
+    <a href="#">SQL HOME</a>
+    <a href="#">SQL Introduction</a>
+    <a href="#">SQL Syntax</a>
+    <a href="#">SQL Select</a>
+    <a href="#">SQL Distinct</a>
+    <a href="#">SQL Where</a>
+    <a href="#">SQL And, Or, Not</a>
+    <a href="#">SQL Order By</a>
+    <a href="#">SQL Insert</a>
+    <a href="#">SQL Null Values</a>
+    <a href="#">SQL Update</a>
+    <a href="#">SQL Delete</a>
+    <a href="#">SQL Select Top</a>
+    <a href="#">SQL Min / Max</a>
+    <a href="#">SQL Count / Avg / Sum</a>
+    <a href="#">SQL Like</a>
+    <a href="#">SQL Wildcards</a>
+    <a href="#">SQL In</a>
+    <a href="#">SQL Between</a>
+    <a href="#">SQL Aliases</a>
+    <a href="#">SQL Joins</a>
+    <a href="#">SQL Inner Join</a>
+    <a href="#">SQL Left Join</a>
+    <a href="#">SQL Right Join</a>
+    <a href="#">SQL Full Join</a>
+    <a href="#">SQL Union</a>
+    <a href="#">SQL Group By</a>
+    <a href="#">SQL Having</a>
+    <a href="#">SQL Exists</a>
+    <a href="#">SQL Any / All</a>
+    <a href="#">SQL Case</a>
+    <a href="#">SQL Stored Procedures</a>
+</div>
+
+<!-- SQL Advanced -->
+<div class="accordion">SQL Advanced</div>
+<div class="panel">
+    <a href="#">SQL Constraints</a>
+    <a href="#">SQL Primary Key</a>
+    <a href="#">SQL Foreign Key</a>
+    <a href="#">SQL Check</a>
+    <a href="#">SQL Default</a>
+    <a href="#">SQL Create Index</a>
+    <a href="#">SQL Views</a>
+    <a href="#">SQL Temporary Tables</a>
+    <a href="#">SQL Subqueries</a>
+    <a href="#">SQL Transactions</a>
+    <a href="#">SQL CTE</a>
+    <a href="#">SQL Window Functions</a>
+    <a href="#">SQL Pivot</a>
+</div>
+
+<!-- SQL Database Operations -->
+<div class="accordion">SQL Database Operations</div>
+<div class="panel">
+    <a href="#">SQL Create Database</a>
+    <a href="#">SQL Drop Database</a>
+    <a href="#">SQL Create Table</a>
+    <a href="#">SQL Alter Table</a>
+    <a href="#">SQL Drop Table</a>
+    <a href="#">SQL Backup Database</a>
+    <a href="#">SQL Restore Database</a>
+    <a href="#">SQL Triggers</a>
+    <a href="#">SQL Events</a>
+    <a href="#">SQL Cursors</a>
+</div>
+
+<!-- SQL Data Types -->
+<div class="accordion">SQL Data Types</div>
+<div class="panel">
+    <a href="#">Numeric Data Types</a>
+    <a href="#">String Data Types</a>
+    <a href="#">Date & Time Data Types</a>
+    <a href="#">Boolean Data Types</a>
+    <a href="#">Binary Data Types</a>
+    <a href="#">JSON Data Types</a>
+</div>
+
+<!-- SQL Functions -->
+<div class="accordion">SQL Functions</div>
+<div class="panel">
+    <a href="#">Aggregate Functions</a>
+    <a href="#">String Functions</a>
+    <a href="#">Date Functions</a>
+    <a href="#">Conversion Functions</a>
+    <a href="#">System Functions</a>
+</div>
+
+<!-- SQL Examples -->
+<div class="accordion">SQL Examples</div>
+<div class="panel">
+    <a href="#">SQL Templates</a>
+    <a href="#">SQL Examples</a>
+    <a href="#">SQL Exercises</a>
+    <a href="#">SQL Quiz</a>
+    <a href="#">SQL Interview Prep</a>
+    <a href="#">SQL Certificate</a>
+</div>
+
+<!-- SQL References -->
+<div class="accordion">SQL References</div>
+<div class="panel">
+    <a href="#">SQL Reserved Words</a>
+    <a href="#">SQL Operators</a>
+    <a href="#">SQL Data Types</a>
+    <a href="#">SQL Functions List</a>
+    <a href="#">SQL Joins Reference</a>
+    <a href="#">SQL Constraints Reference</a>
+    <a href="#">SQL Syntax Guide</a>
+</div>
+
+<script>
+// Accordion toggle
+let acc = document.getElementsByClassName("accordion");
+for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        let panel = this.nextElementSibling;
+        panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+}
+
+// Search function
+function searchTopics() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let links = document.querySelectorAll(".panel a");
+
+    links.forEach(a => {
+        a.style.display = a.textContent.toLowerCase().includes(input) ? "block" : "none";
+    });
+}
+</script>
+
+</body>
+</html>

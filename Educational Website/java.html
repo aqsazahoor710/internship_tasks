@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Tutorial</title>
+
+<style>
+    :root {
+        --bg: #061021;
+        --card: #0b162b;
+        --accent: #0ea5a5;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --radius: 12px;
+        --transition: .3s ease;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Poppins", sans-serif;
+        color: var(--text);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    /* Search Bar */
+    .search-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 18px;
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 16px;
+        outline: none;
+    }
+
+    /* Accordion Category */
+    .accordion-item {
+        background: var(--card);
+        margin-bottom: 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .accordion-header {
+        padding: 16px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: var(--transition);
+        background: #0f1c35;
+        padding-left: 20px;
+    }
+
+    .accordion-content a {
+        display: block;
+        padding: 10px 0;
+        color: var(--muted);
+        text-decoration: none;
+        transition: var(--transition);
+        font-size: 15px;
+    }
+
+    .accordion-content a:hover {
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+
+    .arrow {
+        transition: var(--transition);
+    }
+
+    .rotate {
+        transform: rotate(90deg);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Java Tutorial</h1>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search Java Topics...">
+    </div>
+
+    <div id="accordion">
+
+        <!-- Java Basics -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java Basics
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java Home</a>
+                <a href="#">Java Introduction</a>
+                <a href="#">Java Syntax</a>
+                <a href="#">Java Variables</a>
+                <a href="#">Java Data Types</a>
+                <a href="#">Java Operators</a>
+                <a href="#">Java Comments</a>
+                <a href="#">Java Input/Output</a>
+                <a href="#">Java Strings</a>
+                <a href="#">Java Arrays</a>
+            </div>
+        </div>
+
+        <!-- Java Control Flow -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java Control Flow
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java If Statements</a>
+                <a href="#">Java If...Else</a>
+                <a href="#">Java Switch</a>
+                <a href="#">Java Loops</a>
+                <a href="#">Java For Loop</a>
+                <a href="#">Java While Loop</a>
+                <a href="#">Java Break</a>
+                <a href="#">Java Continue</a>
+            </div>
+        </div>
+
+        <!-- Java OOP -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java OOP
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java Classes & Objects</a>
+                <a href="#">Java Inheritance</a>
+                <a href="#">Java Polymorphism</a>
+                <a href="#">Java Abstraction</a>
+                <a href="#">Java Encapsulation</a>
+                <a href="#">Java Constructors</a>
+                <a href="#">Java Methods</a>
+            </div>
+        </div>
+
+        <!-- Java Exceptions -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java Exceptions
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java Try/Catch</a>
+                <a href="#">Java Finally</a>
+                <a href="#">Java Throw</a>
+                <a href="#">Java Throws</a>
+                <a href="#">Java Custom Exceptions</a>
+            </div>
+        </div>
+
+        <!-- Java Collections -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java Collections
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java ArrayList</a>
+                <a href="#">Java LinkedList</a>
+                <a href="#">Java HashMap</a>
+                <a href="#">Java HashSet</a>
+                <a href="#">Java TreeSet</a>
+            </div>
+        </div>
+
+        <!-- Java File Handling -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java File Handling
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java File Class</a>
+                <a href="#">Java Read/Write File</a>
+                <a href="#">Java File Streams</a>
+            </div>
+        </div>
+
+        <!-- Java Examples -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                Java Examples
+                <span class="arrow">▶</span>
+            </div>
+            <div class="accordion-content">
+                <a href="#">Java Exercises</a>
+                <a href="#">Java Quiz</a>
+                <a href="#">Java Projects</a>
+                <a href="#">Java Templates</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Accordion Logic
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            let content = header.nextElementSibling;
+            let arrow = header.querySelector('.arrow');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                arrow.classList.remove("rotate");
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll('.arrow').forEach(a => a.classList.remove("rotate"));
+
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+
+    // Search Filter
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let links = document.querySelectorAll(".accordion-content a");
+
+        links.forEach(link => {
+            if (link.textContent.toLowerCase().includes(filter)) {
+                link.style.display = "block";
+            } else {
+                link.style.display = "none";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
