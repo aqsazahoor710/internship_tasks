@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, initial-scale=0.3">
+    <title>Summit Agenda | Sapphire Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05070a;
+            --panel: #0d1117;
+            --accent: #c5a358; 
+            --text-dim: #94a3b8;
+            --border: rgba(197, 163, 88, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Inter', sans-serif;
+            width: 1280px; 
+            margin: 0 auto;
+        }
+
+        /* Header Navigation */
+        nav {
+            padding: 30px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .back-link { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--accent); }
+
+        /* Agenda Header */
+        .agenda-header {
+            padding: 80px 80px 40px;
+            border-bottom: 1px solid var(--border);
+        }
+        .event-tag { color: var(--accent); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
+        .agenda-header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-top: 10px; }
+        .event-meta { display: flex; gap: 40px; margin-top: 20px; color: var(--text-dim); font-size: 0.9rem; }
+        .event-meta span b { color: white; margin-right: 5px; }
+
+        /* Timeline Layout */
+        .agenda-section { padding: 60px 80px; }
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+        
+        /* Vertical Line */
+        .timeline::before {
+            content: ''; position: absolute; left: 120px; top: 0; bottom: 0;
+            width: 1px; background: var(--border);
+        }
+
+        .session {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .time { font-weight: 700; color: var(--accent); font-size: 1.1rem; padding-top: 5px; }
+
+        .session-content {
+            background: var(--panel);
+            padding: 30px;
+            border: 1px solid transparent;
+            transition: 0.4s;
+        }
+        .session:hover .session-content { border-color: var(--border); background: #0f141c; }
+
+        /* Indicator Dot */
+        .session::after {
+            content: ''; position: absolute; left: 116px; top: 12px;
+            width: 9px; height: 9px; background: var(--accent); border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .session-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
+        .speaker { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 15px; }
+        .description { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; }
+
+        /* RSVP Footer */
+        .rsvp-bar {
+            background: var(--panel);
+            margin: 40px 80px 100px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+        .btn-gold { 
+            padding: 15px 40px; background: var(--accent); color: black; 
+            border: none; font-weight: 700; cursor: pointer; text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--accent);">SAPPHIRE</div>
+        <a href="index.html" class="back-link">CLOSE AGENDA ✕</a>
+    </nav>
+
+    <header class="agenda-header">
+        <span class="event-tag">Executive Briefing</span>
+        <h1>Global AI & Governance Summit</h1>
+        <div class="event-meta">
+            <span><b>DATE:</b> March 15, 2026</span>
+            <span><b>LOCATION:</b> London / Digital Suite 01</span>
+            <span><b>CHAIR:</b> Dr. Aris Thorne</span>
+        </div>
+    </header>
+
+    <section class="agenda-section">
+        <div class="timeline">
+            
+            <div class="session">
+                <div class="time">09:00 AM</div>
+                <div class="session-content">
+                    <span class="speaker">Keynote Opening</span>
+                    <h3 class="session-title">The Singularity & Sovereign Governance</h3>
+                    <p class="description">An exploration of how autonomous AI systems challenge traditional legal frameworks and the emergence of algorithmic diplomacy.</p>
+                </div>
+            </div>
+
+            <div class="session">
+                <div class="time">11:30 AM</div>
+                <div class="session-content">
+                    <span class="speaker">Roundtable</span>
+                    <h3 class="session-title">Neural Ethics in Global Finance</h3>
+                    <p class="description">Discussing the implementation of ethical guardrails in high-frequency trading and predictive market modeling.</p>
+                </div>
+            </div>
+
+            <div class="session">
+                <div class="time">02:00 PM</div>
+                <div class="session-content">
+                    <span class="speaker">Technical Workshop</span>
+                    <h3 class="session-title">Zero-Knowledge Proofs in AI</h3>
+                    <p class="description">A deep dive into privacy-preserving data training and the future of encrypted machine learning architectures.</p>
+                </div>
+            </div>
+
+            <div class="session">
+                <div class="time">04:30 PM</div>
+                <div class="session-content">
+                    <span class="speaker">Closing Remarks</span>
+                    <h3 class="session-title">2030 Roadmap: Human-AI Co-evolution</h3>
+                    <p class="description">Synthesizing the day's insights into a strategic framework for executive decision-making over the next decade.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="rsvp-bar">
+        <div>
+            <h3 style="font-family: 'Playfair Display', serif;">Reserve Your Virtual Seat</h3>
+            <p style="color: var(--text-dim); font-size: 0.85rem;">Limited availability for non-institute members.</p>
+        </div>
+        <button class="btn-gold">Confirm Attendance</button>
+    </div>
+
+</body>
+</html>

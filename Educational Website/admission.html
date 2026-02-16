@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, initial-scale=0.3">
+    <title>Admission Request | Sapphire Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05070a;
+            --panel: #0d1117;
+            --accent: #c5a358; /* Champagne Gold */
+            --text-dim: #94a3b8;
+            --border: rgba(197, 163, 88, 0.2);
+            --input-bg: #0f141c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Inter', sans-serif;
+            width: 1280px; 
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Navigation Header */
+        header {
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { font-family: 'Playfair Display', serif; color: var(--accent); font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; }
+
+        /* Admission Hero */
+        .admission-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: radial-gradient(circle at top, #111827 0%, #05070a 100%);
+        }
+        .admission-hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 3.5rem; 
+            margin-bottom: 10px; 
+        }
+        .label { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 700; }
+
+        /* Form Container */
+        .form-container {
+            max-width: 900px;
+            margin: -60px auto 100px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 60px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .form-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .full-width { grid-column: span 2; }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid #222;
+            padding: 15px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #161b22;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 20px;
+            background: var(--accent);
+            color: black;
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background: #d4b87a;
+            transform: translateY(-2px);
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-align: center;
+        }
+
+        /* Footer Mini */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border);
+            color: #333;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">SAPPHIRE</a>
+        <a href="index.html" style="color: var(--text-dim); text-decoration: none; font-size: 0.8rem;">← BACK TO PORTAL</a>
+    </header>
+
+    <div class="admission-hero">
+        <span class="label">Candidate Screening</span>
+        <h1>Request Admission</h1>
+        <p style="color: var(--text-dim); max-width: 600px; margin: 20px auto;">Admission to Sapphire is highly selective. Please provide your corporate credentials to begin the evaluation process.</p>
+    </div>
+
+    <div class="form-container">
+        <form action="#">
+            <div class="form-section">
+                <div>
+                    <label>Full Legal Name</label>
+                    <input type="text" placeholder="e.g. Alexander Thorne" required>
+                </div>
+                <div>
+                    <label>Corporate Email</label>
+                    <input type="email" placeholder="name@company.com" required>
+                </div>
+
+                <div>
+                    <label>Current Organization</label>
+                    <input type="text" placeholder="Fortune 500 or Startup" required>
+                </div>
+                <div>
+                    <label>Designation</label>
+                    <select>
+                        <option>Executive / C-Suite</option>
+                        <option>Senior Management</option>
+                        <option>Technical Lead</option>
+                        <option>Independent Researcher</option>
+                    </select>
+                </div>
+
+                <div class="full-width">
+                    <label>Intended Program of Study</label>
+                    <select style="background: var(--input-bg);">
+                        <option>Applied Artificial Intelligence</option>
+                        <option>Advanced Cyber Defense</option>
+                        <option>Executive Data Science</option>
+                        <option>Cloud Infrastructure & Ops</option>
+                        <option>Quantum Computing (Research Track)</option>
+                    </select>
+                </div>
+
+                <div class="full-width">
+                    <label>Professional Objective (Short Statement)</label>
+                    <textarea rows="4" placeholder="Briefly describe your goals for joining the Sapphire Institute..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Application for Review</button>
+            
+            <p class="disclaimer">
+                By submitting, you agree to our Executive Non-Disclosure Agreement and Privacy Terms.<br>
+                Response time is typically 3-5 business days.
+            </p>
+        </form>
+    </div>
+
+    <footer>
+        © 2026 SAPPHIRE EXECUTIVE EDUCATION. REGISTRY OFFICE.
+    </footer>
+
+</body>
+</html>

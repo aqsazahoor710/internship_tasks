@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200"> 
+    <title>FinanceOS| Advanced Asset Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        :root { --sidebar-width: 260px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: auto; min-width: 1200px; background-color: #0b0f1a; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-item.active { background-color: rgba(30, 41, 59, 0.7); color: #ffffff; border-radius: 12px; }
+        .nav-item.active i { color: #6366f1; }
+    </style>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { panel: '#0f172a', surface: '#1e293b' } } } }
+    </script>
+</head>
+<body class="text-slate-200 antialiased">
+
+    <aside class="fixed left-0 top-0 h-full bg-panel w-[260px] border-r border-slate-800 z-50 flex flex-col p-6">
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="bg-indigo-500 h-10 w-10 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                <i data-lucide="component" class="text-white"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-white">FinanceOS<span class="text-indigo-500">.</span></span>
+        </div>
+
+        <nav class="space-y-2 flex-1">
+            <a href="#" onclick="switchPage('dashboard', this)" class="nav-item active flex items-center gap-3 px-4 py-3 text-slate-400 transition-all font-medium">
+                <i data-lucide="layout-grid" class="w-5 h-5"></i> Dashboard
+            </a>
+            <a href="#" onclick="switchPage('transactions', this)" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 transition-all font-medium">
+                <i data-lucide="arrow-up-right" class="w-5 h-5"></i> Transactions
+            </a>
+            <a href="#" onclick="switchPage('budgets', this)" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 transition-all font-medium">
+                <i data-lucide="pie-chart" class="w-5 h-5"></i> Budgets
+            </a>
+            <a href="#" onclick="switchPage('reports', this)" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 transition-all font-medium">
+                <i data-lucide="layers" class="w-5 h-5"></i> Reports
+            </a>
+            <a href="#" onclick="switchPage('settings', this)" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-400 transition-all font-medium">
+                <i data-lucide="settings" class="w-5 h-5"></i> Settings
+            </a>
+        </nav>
+    </aside>
+
+    <main class="ml-[260px] p-8">
+        <div id="dashboard" class="page-section active">
+            <header class="flex justify-between items-center mb-10">
+                <div><h1 class="text-3xl font-bold text-white">Executive Overview</h1><p class="text-slate-500">Track your assets in real-time.</p></div>
+                <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-xl font-bold transition flex items-center gap-2">
+                    <i data-lucide="plus" class="w-5 h-5"></i> Add Record
+                </button>
+            </header>
+            <div class="grid grid-cols-4 gap-6 mb-8">
+                <div class="bg-surface p-6 rounded-2xl border border-slate-800 shadow-xl"><p class="text-slate-500 text-sm font-medium">Net Worth</p><h2 class="text-2xl font-bold text-white mt-1">$142,350.00</h2></div>
+                <div class="bg-surface p-6 rounded-2xl border border-slate-800 shadow-xl"><p class="text-slate-500 text-sm">Income</p><h2 class="text-2xl font-bold text-emerald-500">$8,400.00</h2></div>
+                <div class="bg-surface p-6 rounded-2xl border border-slate-800 shadow-xl"><p class="text-slate-500 text-sm">Expenses</p><h2 class="text-2xl font-bold text-rose-500">$2,150.40</h2></div>
+                <div class="bg-surface p-6 rounded-2xl border border-slate-800 shadow-xl"><p class="text-slate-500 text-sm">Savings Rate</p><h2 class="text-2xl font-bold text-indigo-400">74.2%</h2></div>
+            </div>
+            <div class="grid grid-cols-3 gap-8 mb-8">
+                <div class="col-span-2 bg-surface p-8 rounded-3xl border border-slate-800"><canvas id="mainChart" height="120"></canvas></div>
+                <div class="bg-surface p-8 rounded-3xl border border-slate-800"><canvas id="categoryChart"></canvas></div>
+            </div>
+            <section class="bg-surface rounded-3xl border border-slate-800 overflow-hidden shadow-2xl">
+                <div class="p-8 border-b border-slate-800"><h3 class="text-xl font-bold">Recent Activity</h3></div>
+                <table class="w-full text-left">
+                    <thead class="bg-panel/50 text-slate-500 uppercase text-[11px] tracking-widest"><tr><th class="px-8 py-4">Transaction</th><th class="px-8 py-4">Category</th><th class="px-8 py-4 text-right">Amount</th></tr></thead>
+                    <tbody id="dashboardTxBody" class="divide-y divide-slate-800"></tbody>
+                </table>
+            </section>
+        </div>
+
+        <div id="transactions" class="page-section">
+            <h1 class="text-3xl font-bold text-white mb-8">Ledger</h1>
+            <div class="bg-surface rounded-3xl border border-slate-800 overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-panel/50 text-slate-500 uppercase text-[11px] tracking-widest"><tr><th class="px-8 py-4">Description</th><th class="px-8 py-4 text-right">Amount</th></tr></thead>
+                    <tbody id="fullTxBody" class="divide-y divide-slate-800 text-white"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="reports" class="page-section">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold text-white">Performance Reports</h1>
+                <button onclick="exportToPDF()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-xl font-bold transition flex items-center gap-2">
+                    <i data-lucide="download" class="w-5 h-5"></i> Export PDF
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-8">
+                <div class="bg-surface p-8 rounded-3xl border border-slate-800">
+                    <h3 class="text-xl font-bold mb-6 text-indigo-400">Annual Growth Projection</h3>
+                    <canvas id="reportGrowthChart" height="80"></canvas>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="bg-indigo-500/10 border border-indigo-500/20 p-6 rounded-2xl">
+                        <p class="text-slate-400 text-sm">Quarterly Profit</p>
+                        <h4 class="text-2xl font-bold text-indigo-400">+$18,200</h4>
+                    </div>
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-2xl">
+                        <p class="text-slate-400 text-sm">Tax Estimate</p>
+                        <h4 class="text-2xl font-bold text-emerald-400">-$1,450</h4>
+                    </div>
+                    <div class="bg-rose-500/10 border border-rose-500/20 p-6 rounded-2xl">
+                        <p class="text-slate-400 text-sm">Risk Score</p>
+                        <h4 class="text-2xl font-bold text-rose-400">Low</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="budgets" class="page-section">
+            <h1 class="text-3xl font-bold text-white mb-8">Limits</h1>
+            <div class="bg-surface p-8 rounded-3xl border border-slate-800">
+                <p class="text-slate-400 mb-2">Food Budget (62%)</p>
+                <div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden"><div class="bg-indigo-500 h-full w-[62%]"></div></div>
+            </div>
+        </div>
+
+        <div id="settings" class="page-section">
+            <h1 class="text-3xl font-bold text-white mb-8">Settings</h1>
+            <div class="bg-surface p-8 rounded-3xl border border-slate-800 max-w-md">
+                <p class="text-slate-500">FinanceOS Pro v1.0.4</p>
+                <button onclick="localStorage.clear(); location.reload();" class="mt-4 text-rose-500 font-bold underline">Reset All Data</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-surface border border-slate-700 w-full max-w-md rounded-3xl p-8 shadow-2xl">
+            <form id="txForm" class="space-y-4">
+                <input type="text" id="desc" placeholder="Label" required class="w-full bg-panel border border-slate-700 rounded-xl px-4 py-3 text-white">
+                <input type="number" id="amt" placeholder="Amount" required class="w-full bg-panel border border-slate-700 rounded-xl px-4 py-3 text-white">
+                <select id="type" class="w-full bg-panel border border-slate-700 rounded-xl px-4 py-3 text-white">
+                    <option value="expense">Expense</option><option value="income">Income</option>
+                </select>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeModal()" class="flex-1 py-3 bg-slate-800 rounded-xl text-white font-bold">Cancel</button>
+                    <button type="submit" class="flex-1 py-3 bg-indigo-600 rounded-xl text-white font-bold">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function switchPage(pageId, el) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            el.classList.add('active');
+            if(pageId === 'reports') initReportChart();
+        }
+
+        let transactions = JSON.parse(localStorage.getItem('pro_transactions')) || [
+            { id: 1, desc: 'Stock Portfolio', cat: 'Investment', amt: 12500.00 },
+            { id: 2, desc: 'Cloud Server', cat: 'Business', amt: -150.00 }
+        ];
+
+        function renderData() {
+            const dash = document.getElementById('dashboardTxBody');
+            const full = document.getElementById('fullTxBody');
+            const html = transactions.map(tx => `
+                <tr class="hover:bg-slate-800/40 transition">
+                    <td class="px-8 py-5 font-semibold text-white">${tx.desc}</td>
+                    <td class="px-8 py-5 text-right font-bold ${tx.amt > 0 ? 'text-emerald-500' : 'text-white'}">
+                        $${Math.abs(tx.amt).toLocaleString()}
+                    </td>
+                </tr>
+            `).join('');
+            dash.innerHTML = html; full.innerHTML = html;
+        }
+
+        // Charts
+        const mainCtx = document.getElementById('mainChart').getContext('2d');
+        new Chart(mainCtx, { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr'], datasets: [{ label: 'Wealth', data: [120000, 135000, 128000, 142350], borderColor: '#6366f1', tension: 0.4 }] }, options: { plugins: { legend: { display: false } } } });
+
+        const catCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(catCtx, { type: 'doughnut', data: { datasets: [{ data: [60, 20, 20], backgroundColor: ['#6366f1', '#10b981', '#f43f5e'], borderWidth: 0 }] } });
+
+        function initReportChart() {
+            const ctx = document.getElementById('reportGrowthChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ label: 'Projected Growth', data: [4500, 7800, 12000, 15500], backgroundColor: '#6366f1', borderRadius: 10 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#1e293b' } } } }
+            });
+        }
+
+        // PDF Export Function
+        async function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.text("FinanceOS Pro - Financial Statement", 14, 22);
+            doc.setFontSize(10);
+            doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 30);
+
+            const tableData = transactions.map(tx => [tx.desc, tx.cat || 'General', tx.amt > 0 ? `+$${tx.amt}` : `-$${Math.abs(tx.amt)}`]);
+            
+            doc.autoTable({
+                head: [['Description', 'Category', 'Amount']],
+                body: tableData,
+                startY: 40,
+                theme: 'grid',
+                headStyles: { fillStyle: '#6366f1' }
+            });
+
+            doc.save("Finance_Report.pdf");
+        }
+
+        function openModal() { document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('flex'); }
+        function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+
+        document.getElementById('txForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const amt = parseFloat(document.getElementById('amt').value);
+            transactions.unshift({ id: Date.now(), desc: document.getElementById('desc').value, amt: document.getElementById('type').value === 'expense' ? -amt : amt });
+            localStorage.setItem('pro_transactions', JSON.stringify(transactions));
+            renderData(); closeModal(); e.target.reset();
+        });
+
+        renderData();
+    </script>
+</body>
+</html>
