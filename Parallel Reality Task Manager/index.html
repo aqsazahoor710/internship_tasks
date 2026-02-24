@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Reality Task Manager</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Creepster&display=swap');
+
+        :root {
+            --primary: #3b82f6; --bg: #f8fafc; --text: #1e293b; --card: #ffffff;
+        }
+
+        body {
+            margin: 0; font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg); color: var(--text);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+        }
+
+        /* --- Reality Modes --- */
+        body.optimistic { --primary: #10b981; --bg: #ecfdf5; --text: #064e3b; }
+        body.disaster { --primary: #ef4444; --bg: #1a0505; --text: #fee2e2; --card: #2d0a0a; }
+        
+        body.disaster h1 { font-family: 'Creepster', cursive; animation: glitch 0.3s infinite; }
+        body.disaster .task-card { color: #ff7d7d; border-color: #ef4444; }
+
+        @keyframes glitch {
+            0% { transform: translate(2px, 0); }
+            50% { transform: translate(-2px, 2px); }
+            100% { transform: translate(0); }
+        }
+
+        .container { max-width: 650px; margin: 50px auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 40px; }
+
+        .btn-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        button { 
+            padding: 12px 24px; border-radius: 50px; border: none; cursor: pointer;
+            font-weight: bold; font-family: inherit; transition: 0.3s;
+        }
+
+        .btn-warp { background: var(--text); color: var(--bg); }
+        .btn-undo { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+
+        .input-box { display: flex; gap: 10px; margin-bottom: 30px; }
+        input[type="text"] {
+            flex: 1; padding: 15px; border: 3px solid var(--primary);
+            border-radius: 15px; background: var(--card); color: var(--text); outline: none;
+        }
+
+        #task-list { display: flex; flex-direction: column; gap: 15px; }
+        .task-card {
+            background: var(--card); padding: 20px; border-radius: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            border-left: 10px solid var(--primary);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        .completed { text-decoration: line-through; opacity: 0.4; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 id="mode-title">Standard Reality</h1>
+        <p id="mode-desc">Status: Timeline Stable</p>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-warp" onclick="warpReality()">🌀 Warp Reality</button>
+        <button class="btn-undo" onclick="undo()">⟲ Undo Last Shift</button>
+    </div>
+
+    <div class="input-box">
+        <input type="text" id="task-input" placeholder="Fracture a task into the multiverse...">
+        <button class="btn-warp" onclick="addTask()">ADD</button>
+    </div>
+
+    <div id="task-list"></div>
+</div>
+
+<script>
+    // --- Advanced Logic State ---
+    let tasks = JSON.parse(localStorage.getItem('parallel_tasks')) || [];
+    let snapshots = []; // Snapshot history for Undo
+    let currentReality = 'realistic';
+
+    const realityConfig = {
+        optimistic: { label: "Golden Timeline", desc: "✨ Probability: 100% Success", class: "optimistic" },
+        realistic: { label: "Standard Reality", desc: "⚙️ Status: Timeline Stable", class: "realistic" },
+        disaster: { label: "Entropy Protocol", desc: "💀 WARNING: ENTROPY INCREASING", class: "disaster" }
+    };
+
+    function save() {
+        localStorage.setItem('parallel_tasks', JSON.stringify(tasks));
+    }
+
+    function takeSnapshot() {
+        snapshots.push(JSON.stringify(tasks));
+        if (snapshots.length > 20) snapshots.shift();
+    }
+
+    function undo() {
+        if (snapshots.length === 0) return;
+        tasks = JSON.parse(snapshots.pop());
+        save();
+        render();
+    }
+
+    function warpReality() {
+        const modes = ['optimistic', 'realistic', 'disaster'];
+        let next;
+        do { next = modes[Math.floor(Math.random() * 3)]; } while (next === currentReality);
+        currentReality = next;
+        
+        // Auto-completion logic in Optimistic mode
+        if (currentReality === 'optimistic') {
+            tasks.forEach(t => { if(Math.random() > 0.8) t.done = true; });
+        }
+        
+        render();
+    }
+
+    function addTask() {
+        const input = document.getElementById('task-input');
+        if (!input.value.trim()) return;
+
+        takeSnapshot();
+        const newTask = {
+            id: Date.now(),
+            done: false,
+            versions: {
+                optimistic: "✨ " + input.value + " (Done effortlessly!)",
+                realistic: input.value,
+                disaster: "💀 FAILED: " + input.value.toUpperCase()
+            }
+        };
+
+        tasks.unshift(newTask);
+        input.value = '';
+        save();
+        render();
+    }
+
+    function toggleTask(id) {
+        takeSnapshot();
+        tasks = tasks.map(t => t.id === id ? {...t, done: !t.done} : t);
+        save();
+        render();
+    }
+
+    function render() {
+        const list = document.getElementById('task-list');
+        const config = realityConfig[currentReality];
+
+        document.body.className = config.class;
+        document.getElementById('mode-title').innerText = config.label;
+        document.getElementById('mode-desc').innerText = config.desc;
+
+        list.innerHTML = '';
+        tasks.forEach(task => {
+            const card = document.createElement('div');
+            card.className = 'task-card';
+            const content = task.versions[currentReality];
+            
+            card.innerHTML = `
+                <span class="${task.done ? 'completed' : ''}" style="font-weight:bold; font-size:1.1rem;">${content}</span>
+                <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask(${task.id})" style="width:25px; height:25px; cursor:pointer;">
+            `;
+            list.appendChild(card);
+        });
+    }
+
+    render();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>CHRONOS | High-Density Temporal Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #00f2ff; --bg: #050505; }
+        
+        body { 
+            width: 1280px; min-width: 1280px; background: var(--bg); color: #fff;
+            margin: 0 auto; overflow-x: auto; transition: all 0.6s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Optimized Font Sizes */
+        .mode-PAST { --bg: #151512; --accent: #d4af37; font-family: 'Space Mono', monospace; }
+        .mode-PRESENT { --bg: #050505; --accent: #00f2ff; }
+        .mode-FUTURE { --bg: #020617; --accent: #8b5cf6; }
+
+        /* Corruption & Glitch */
+        .glitch-active { animation: glitch 0.2s infinite; filter: hue-rotate(90deg); }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            50% { transform: translate(-2px, 2px); }
+            100% { transform: translate(2px, -2px); }
+        }
+
+        .quantum-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            padding: 16px; /* Reduced padding */
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .quantum-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.06); }
+
+        /* Dense Typography */
+        h1 { font-size: 3.5rem !important; } /* Pehle se chota */
+        h4 { font-size: 1.1rem !important; font-weight: 600; }
+        .subtask-text { font-size: 0.75rem; opacity: 0.5; }
+        .git-node-text { font-size: 0.7rem; }
+
+        /* Timer Dilation UI */
+        .timer-track { height: 2px; background: rgba(255,255,255,0.05); width: 100%; margin-top: 12px; }
+        .timer-fill { height: 100%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+    </style>
+</head>
+<body class="mode-PRESENT">
+
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-[260px] border-r border-white/10 p-5 flex flex-col bg-black/40">
+            <div class="flex items-center gap-2 mb-8 opacity-50">
+                <i data-lucide="git-branch" class="w-4 h-4"></i>
+                <span class="text-[9px] font-black tracking-widest uppercase">Temporal_Registry</span>
+            </div>
+            <div id="git-tree" class="flex-grow overflow-y-auto space-y-3"></div>
+        </aside>
+
+        <main id="viewport" class="flex-grow p-10 overflow-y-auto relative">
+            <div class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 id="main-brand" class="font-black tracking-tighter italic">CHRONOS<span class="text-[var(--accent)]">.</span></h1>
+                    <div class="flex gap-4 mt-1">
+                        <span id="entropy-val" class="text-[10px] font-mono text-[var(--accent)] opacity-80 uppercase tracking-widest">Entropy: 0.00%</span>
+                        <span id="mode-val" class="text-[10px] font-mono text-white/40 uppercase tracking-widest">Reality: Stable</span>
+                    </div>
+                </div>
+                <button onclick="Engine.triggerLoop()" class="px-6 py-3 border border-[var(--accent)] text-[var(--accent)] text-[10px] font-black uppercase tracking-widest hover:bg-[var(--accent)] hover:text-black transition-all">
+                    Initialize Shift
+                </button>
+            </div>
+
+            <div class="max-w-2xl mb-12">
+                <input type="text" id="taskInput" placeholder="Command input..." 
+                       class="w-full bg-transparent text-2xl border-b border-white/10 py-3 outline-none focus:border-[var(--accent)] transition-all font-light">
+            </div>
+
+            <div class="grid grid-cols-3 gap-8">
+                <div class="col">
+                    <div class="text-[10px] font-bold opacity-20 mb-5 uppercase tracking-tighter">/ Past_Arch (Regrets)</div>
+                    <div id="tasks-PAST" class="space-y-4"></div>
+                </div>
+                <div class="col">
+                    <div class="text-[10px] font-bold opacity-20 mb-5 uppercase tracking-tighter">/ Present_Ops (Live)</div>
+                    <div id="tasks-PRESENT" class="space-y-4"></div>
+                </div>
+                <div class="col">
+                    <div class="text-[10px] font-bold opacity-20 mb-5 uppercase tracking-tighter">/ Future_Prob (Predicted)</div>
+                    <div id="tasks-FUTURE" class="space-y-4"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const Engine = {
+            state: {
+                mode: 'PRESENT',
+                tasks: JSON.parse(localStorage.getItem('chronos_v6')) || [],
+                history: [],
+                entropy: 0
+            },
+
+            init() {
+                lucide.createIcons();
+                this.commit("System_Boot");
+                setInterval(() => this.processEntropy(), 2000);
+                setInterval(() => this.updatePhysics(), 100);
+            },
+
+            processEntropy() {
+                this.state.entropy += 0.08;
+                document.getElementById('entropy-val').innerText = `Entropy: ${this.state.entropy.toFixed(2)}%`;
+                if (this.state.entropy > 10) {
+                    document.getElementById('main-brand').classList.add('glitch-active');
+                }
+            },
+
+            updatePhysics() {
+                this.state.tasks.forEach(t => {
+                    if (t.completed) return;
+                    let delta = 0.05;
+                    if (this.state.mode === 'PAST') delta = -0.15; // Time Reversal
+                    if (this.state.mode === 'FUTURE') delta = Math.random() * 0.4;
+                    t.progress = Math.min(Math.max(t.progress + delta, 0), 100);
+                    
+                    const el = document.getElementById(`bar-${t.id}`);
+                    if (el) el.style.width = t.progress + '%';
+                });
+            },
+
+            triggerLoop() {
+                this.state.entropy = 0;
+                document.getElementById('main-brand').classList.remove('glitch-active');
+                
+                const modes = ['PAST', 'PRESENT', 'FUTURE'];
+                this.state.mode = modes[Math.floor(Math.random() * modes.length)];
+                
+                this.state.tasks = this.state.tasks.map(t => {
+                    // Step 6: Quantum DNA Change
+                    if (this.state.mode === 'PAST' && t.completed) {
+                        return { ...t, title: `↺ ${t.title}`, completed: false, timeline: 'PAST' };
+                    }
+                    if (this.state.mode === 'FUTURE' && t.subtasks.length === 0) {
+                        return { ...t, subtasks: ['Simulate', 'Branch', 'Finalize'], timeline: 'FUTURE' };
+                    }
+                    return { ...t, timeline: 'PRESENT' };
+                });
+
+                this.commit(`SHIFT_${this.state.mode}`);
+            },
+
+            addTask() {
+                const input = document.getElementById('taskInput');
+                if (!input.value) return;
+                this.state.tasks.push({
+                    id: Math.random().toString(36).substr(2, 4).toUpperCase(),
+                    title: input.value,
+                    completed: false,
+                    timeline: 'PRESENT',
+                    progress: 0,
+                    subtasks: []
+                });
+                input.value = '';
+                this.commit("ENTRY_LOGGED");
+            },
+
+            commit(label) {
+                this.state.history.unshift({ label, time: new Date().toLocaleTimeString(), mode: this.state.mode });
+                localStorage.setItem('chronos_v6', JSON.stringify(this.state.tasks));
+                this.render();
+            },
+
+            render() {
+                document.body.className = `mode-${this.state.mode}`;
+                document.getElementById('mode-val').innerText = `Reality: ${this.state.mode}`;
+                
+                const cols = { PAST: document.getElementById('tasks-PAST'), PRESENT: document.getElementById('tasks-PRESENT'), FUTURE: document.getElementById('tasks-FUTURE') };
+                Object.values(cols).forEach(c => c.innerHTML = '');
+
+                this.state.tasks.forEach(t => {
+                    const card = `
+                        <div class="quantum-card" onclick="Engine.toggle('${t.id}')">
+                            <div class="flex justify-between items-start opacity-30 text-[8px] mb-2">
+                                <span>ID_${t.id}</span>
+                                <span>${t.completed ? 'RESOLVED' : 'PENDING'}</span>
+                            </div>
+                            <h4 class="${t.completed ? 'line-through opacity-20' : ''}">${t.title}</h4>
+                            <div class="mt-2">
+                                ${t.subtasks.map(s => `<div class="subtask-text">>> ${s}</div>`).join('')}
+                            </div>
+                            <div class="timer-track"><div id="bar-${t.id}" class="timer-fill" style="width: ${t.progress}%"></div></div>
+                        </div>
+                    `;
+                    cols[t.timeline].innerHTML += card;
+                });
+
+                document.getElementById('git-tree').innerHTML = this.state.history.map(h => `
+                    <div class="border-l border-white/10 pl-3 py-1">
+                        <div class="git-node-text font-bold text-[var(--accent)] uppercase">${h.label}</div>
+                        <div class="text-[8px] opacity-20">${h.time}</div>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+            },
+
+            toggle(id) {
+                this.state.tasks = this.state.tasks.map(t => t.id === id ? {...t, completed: !t.completed} : t);
+                this.commit("ST_UPDATED");
+            }
+        };
+
+        document.getElementById('taskInput').addEventListener('keydown', e => { if(e.key === 'Enter') Engine.addTask(); });
+        window.onload = () => Engine.init();
+    </script>
+</body>
+</html>
